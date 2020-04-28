@@ -15,4 +15,4 @@ const foods = [
   { foodName: 'sponges', category: 'cleaning products' },
 ];
 
-export default foods;
+module.exports = foods;
