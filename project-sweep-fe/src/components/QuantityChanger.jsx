@@ -33,29 +33,13 @@ export class QuantityChanger extends Component {
 
   incrementQuantity = (number) => {
     const { quantity, foodName } = this.props;
-    if (number === -1 && quantity === 1) {
+    const { quantityChange } = this.state;
+    if (number === -1 && quantity + quantityChange === 1) {
       this.props.deleteListItem(foodName);
     }
     this.setState((currentState) => {
       return { quantityChange: currentState.quantityChange + number };
     });
-    // this.setState(
-    //   (currentState) => {
-    //     return { quantityChange: currentState.quantityChange + number };
-    //   },
-    //   () => {
-    //     console.log(this.state.quantityChange);
-    //   }
-    // );
-    // this.setState(
-    //   (currentState) => {
-    //     currentState.item.quantity += currentState.quantityChange;
-    //     return { item: { ...currentState.item } };
-    //   },
-    //   () => {
-    //     console.log(this.state.item);
-    //   }
-    // );
   };
 }
 

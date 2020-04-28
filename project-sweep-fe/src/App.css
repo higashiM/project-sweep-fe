@@ -6,13 +6,24 @@
   height: 40vmin;
   pointer-events: none;
 }
+.new-item-form {
+  width: 20%;
+  margin: auto;
+}
 
+li {
+  list-style-type: none;
+}
 .item-card {
   display: flex;
   align-items: center;
   text-decoration: none;
   justify-content: center;
 }
+.quantity-changer-container {
+  display: flex;
+}
+
 .unsorted-list-container {
   border: solid;
   width: 70%;
