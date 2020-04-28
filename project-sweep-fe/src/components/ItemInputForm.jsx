@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import foods from '../staticData/foods';
 
 export class ItemInputForm extends Component {
   state = {
@@ -37,8 +38,27 @@ export class ItemInputForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { newItem } = this.state;
-    this.props.updateListItems(newItem);
-    this.setState({ newItem: { foodName: '', quantity: 1, category: '' } });
+    let foodMatch = foods.find((food) => {
+      return food.foodName === newItem.foodName;
+    });
+    if (foodMatch !== undefined) {
+      this.setState(
+        (currentState) => {
+          currentState.newItem.category = foodMatch.category;
+          return { newItem: currentState.newItem };
+        },
+        () => {
+          this.props.updateListItems(newItem);
+          this.setState({
+            newItem: { foodName: '', quantity: 1, category: '' },
+          });
+          console.log(this.state.newItem);
+        }
+      );
+    } else {
+      this.props.updateListItems(newItem);
+      this.setState({ newItem: { foodName: '', quantity: 1, category: '' } });
+    }
   };
 }
 
