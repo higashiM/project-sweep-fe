@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ItemInputForm from './ItemInputForm';
+import ItemCard from './ItemCard';
 
 export class UnsortedItemList extends Component {
   state = {
@@ -13,25 +14,34 @@ export class UnsortedItemList extends Component {
 
         <ul>
           <li>
-            <ItemInputForm updateListItems={this.updateListItems} />
+            <ItemInputForm addListItem={this.addListItem} />
           </li>{' '}
-          {listItems.map((item) => {
+          {listItems.map((item, index) => {
             return (
-              <li>
-                {item.foodName}{' '}
-                <span className="item-category">{item.category} </span>
-                <span className="item-quantity">{item.quantity}</span>
-              </li>
+              <ItemCard
+                item={item}
+                key={item + index}
+                deleteListItem={this.deleteListItem}
+              />
             );
           })}
         </ul>
       </main>
     );
   }
-  updateListItems = (newItem) => {
+  addListItem = (newItem) => {
     this.setState((currentState) => {
       return { listItems: [...currentState.listItems, newItem] };
     });
+  };
+
+  deleteListItem = (itemName) => {
+    console.log(this.state.listItems);
+    const filteredFoodList = this.state.listItems.filter((item) => {
+      return item.foodName !== itemName;
+    });
+    this.setState({ listItems: filteredFoodList });
+    console.log(filteredFoodList);
   };
 }
 

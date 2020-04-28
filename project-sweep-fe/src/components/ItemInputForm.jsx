@@ -9,6 +9,7 @@ export class ItemInputForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="add-item-input">Add Item</label>
+
         <input
           id="add-item-input"
           type="text"
@@ -48,7 +49,7 @@ export class ItemInputForm extends Component {
           return { newItem: currentState.newItem };
         },
         () => {
-          this.props.updateListItems(newItem);
+          this.props.addListItem(newItem);
           this.setState({
             newItem: { foodName: '', quantity: 1, category: '' },
           });
@@ -56,7 +57,7 @@ export class ItemInputForm extends Component {
         }
       );
     } else {
-      this.props.updateListItems(newItem);
+      this.props.addListItem(newItem);
       this.setState({ newItem: { foodName: '', quantity: 1, category: '' } });
     }
   };
