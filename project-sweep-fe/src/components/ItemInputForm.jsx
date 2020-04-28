@@ -16,15 +16,9 @@ export class ItemInputForm extends Component {
           name="foodName"
           value={this.state.newItem.foodName}
           onChange={this.handleChange}
+          required
         />
-        <input
-          id="item-quantity-input"
-          type="number"
-          name="quantity"
-          step="1"
-          value={this.state.newItem.quantity}
-          onChange={this.handleChange}
-        />
+
         <button type="submit">Add</button>
       </form>
     );

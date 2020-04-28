@@ -7,6 +7,12 @@
   pointer-events: none;
 }
 
+.item-card {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+}
 .unsorted-list-container {
   border: solid;
   width: 70%;
