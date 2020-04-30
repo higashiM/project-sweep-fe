@@ -1,27 +1,173 @@
 .App {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.app-title {
+    background-color: #99b7d3;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    border: 2px solid #7f97ae;
+    box-shadow: 5px 5px 5px gray;
+    font-weight: 900;
 }
-.new-item-form {
-    width: 20%;
-    margin: auto;
+
+body {
+    background-color: #98c3cb;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+.item-input-form {
+    background-color: white;
+    width: 100%;
+}
+
+.sortListText {
+    margin: 0;
+}
+
+.sortListButton {
+    margin: 0;
+}
+
+.addItemButton {
+    padding: 10px;
+    background-color: white;
+    border: 1px solid rgb(169, 169, 169);
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.notepad {
+    width: 380px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff4b3;
+    align-items: center;
+    border: 20px solid #fff4b3;
+    box-shadow: gray 5px 5px 5px;
+}
+
+.notepad::before {
+    content: '';
+    position: relative;
+    top: -21px;
+    left: -192px;
+    border-width: 40px 40px 0 0;
+    border-style: solid;
+    border-color: #98c3cb #ebe1a6;
+    box-shadow: gray 4px 4px 4px;
+    transition: all 0.5s;
+}
+
+.notepad:hover::before {
+    transform: scale(1.3);
+    top: -14px;
+    left: -184px;
+}
+
+.inputArea {
+    display: flex;
+    align-items: center;
 }
 
 li {
     list-style-type: none;
 }
-.item-card {
+
+ul {
+    padding: 0;
+}
+
+.list-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    text-decoration: none;
-    justify-content: center;
+}
+
+.item-card {
+    border-bottom: 1px solid gray;
+    display: grid;
+}
+
+.foodName {
+    grid-area: name;
+    border-left: 2px solid #f1af88;
+    text-align: left;
+    padding: 5px;
+}
+.removeButton {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    grid-area: but;
+    background-color: #fff4b3;
+    align-self: center;
+    color: rgb(80, 80, 80);
+    font-size: 16px;
+    font-weight: 900;
+    justify-self: flex-end;
+    border: 0;
 }
 .quantity-changer-container {
+    grid-area: quan;
+}
+.item-card-category {
+    grid-area: cat;
+    border-left: 2px solid #f1af88;
+    text-align: left;
+    padding: 5px;
+    margin: 0;
+    color: rgb(172, 171, 171);
+    cursor: pointer;
+}
+
+.dot {
+    grid-area: dot;
+    height: 25px;
+    width: 25px;
+    background-color: #98c3cb;
+    border-radius: 50%;
+    align-self: center;
+    box-shadow: inset 0 0 4px #000000;
+}
+
+.item-card {
+    display: grid;
+    grid-template-columns: 40px 85px 180px 80px;
+    grid-template-rows: 30px;
+    grid-template-areas:
+        'dot quan name but'
+        'dot quan cat but';
+}
+
+.quantity-changer-container {
     display: flex;
+    align-items: center;
+}
+
+.food-name {
+    padding: 0 10px;
+}
+
+.quantity {
+    margin: 0;
+    padding: 5px;
+    font-weight: 700;
 }
 
 .unsorted-list-container {
@@ -31,32 +177,38 @@ li {
     margin: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.increment-button {
+    font-size: 20px;
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+.increment-button.up {
+    border-radius: 0 5px 5px 0;
+}
+
+.increment-button.down {
+    border-radius: 5px 0 0 5px;
+}
+
+.listTitle {
+    margin: 10px;
+}
+
+.sortListButton {
+    margin: 10px;
+}
+
+.item-card-category.dropdown {
+    padding: 0 0 10px 5px;
+    margin: 0;
+}
+
+.shoppingListCompleteButton {
+    background-color: #99b7d3;
+    padding: 8px 15px;
+    margin-top: 20px;
+    border-radius: 10px;
     color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    border: 2px solid #7f97ae;
+    font-size: 20px;
+    font-weight: 900;
 }

@@ -1,45 +1,32 @@
 import React, { Component } from 'react'
 
 export class QuantityChanger extends Component {
-    state = {
-        quantityChange: 0,
-    }
-
     render() {
-        const { quantityChange } = this.state
+        const { foodName, quantity } = this.props
         return (
             <section className="quantity-changer-container">
                 <button
-                    name=""
-                    className="increment-up-button"
+                    className="increment-button down"
                     onClick={() => {
-                        this.incrementQuantity(1)
+                        this.props.incrementQuantity(-1, foodName)
+                        if (quantity === 1) {
+                            this.props.deleteListItem(foodName)
+                        }
                     }}
                 >
-                    More
+                    -
                 </button>
-                <p>{this.props.quantity + quantityChange}</p>
                 <button
-                    className="increment-down-button"
+                    className="increment-button up"
                     onClick={() => {
-                        this.incrementQuantity(-1)
+                        this.props.incrementQuantity(1, foodName)
                     }}
                 >
-                    Less
+                    +
                 </button>
+                <p className="quantity">{quantity}</p>
             </section>
         )
-    }
-
-    incrementQuantity = (number) => {
-        const { quantity, foodName } = this.props
-        const { quantityChange } = this.state
-        if (number === -1 && quantity + quantityChange === 1) {
-            this.props.deleteListItem(foodName)
-        }
-        this.setState((currentState) => {
-            return { quantityChange: currentState.quantityChange + number }
-        })
     }
 }
 
