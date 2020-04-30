@@ -1,26 +1,53 @@
 import React, { Component } from 'react'
 import QuantityChanger from './QuantityChanger'
+import CategoryDropdown from './CategoryDropdown'
 
 export class ItemCard extends Component {
     render() {
-        const { item } = this.props
+        const {
+            foodName,
+            quantity,
+            category,
+            index,
+            handleCategoryChange,
+        } = this.props
         return (
-            <li className="item-card">
-                <button onClick={this.handleClick}>Remove</button>
-                <span className="food-name">{item.foodName} /</span>{' '}
-                <span className="item-category">{item.category} </span>
+            <div className="item-card">
+                {index % 4 === 1 ? (
+                    <span className="dot"></span>
+                ) : (
+                    <span></span>
+                )}
                 <QuantityChanger
-                    quantity={this.props.item.quantity}
+                    quantity={quantity}
                     deleteListItem={this.props.deleteListItem}
-                    foodName={item.foodName}
+                    foodName={foodName}
+                    incrementQuantity={this.props.incrementQuantity}
                 />
-            </li>
+                <span className="foodName">{foodName}</span>
+                <button className="removeButton" onClick={this.handleClick}>
+                    X
+                </button>
+                {category === 'none' ? (
+                    <CategoryDropdown
+                        foodName={foodName}
+                        handleCategoryChange={handleCategoryChange}
+                    />
+                ) : (
+                    <p
+                        className="item-card-category"
+                        onClick={() => handleCategoryChange(foodName, 'none')}
+                    >
+                        {category}
+                    </p>
+                )}
+            </div>
         )
     }
 
     handleClick = () => {
-        const { item } = this.props
-        this.props.deleteListItem(item.foodName)
+        const { foodName } = this.props
+        this.props.deleteListItem(foodName)
     }
 }
 

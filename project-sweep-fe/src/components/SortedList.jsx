@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import sortListItems from '../utils/sortListItems'
-const foods = require('../staticData/foods')
+// const foods = require('../staticData/foods')
 
 export class SortedList extends Component {
     state = {
@@ -8,7 +8,6 @@ export class SortedList extends Component {
     }
     render() {
         const { sortedItems } = this.state
-        console.log(sortedItems)
         return (
             <main className="sorted-list">
                 {sortedItems.map((category, index) => {

@@ -9,33 +9,43 @@ export class ItemInputForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="new-item-form">
-                <Autocomplete
-                    id="auto-complete-input"
-                    options={foods}
-                    getOptionLabel={(option) => option.foodName}
-                    style={{ width: 150 }}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Add Items"
-                            variant="outlined"
-                            onKeyUp={this.handleKeyUp}
-                            value={this.state.newItem.foodName}
-                            name="foodName"
-                            required
-                        />
-                    )}
-                />
-                <button type="submit">Add</button>
-            </form>
+            <div className="inputArea">
+                <form onSubmit={this.handleSubmit} className="item-input-form">
+                    <Autocomplete
+                        id="auto-complete-input"
+                        options={foods}
+                        getOptionLabel={(option) => option.foodName}
+                        onChange={this.handleKeyUp}
+                        inputValue={this.state.newItem.foodName}
+                        openOnFocus={false}
+                        disableClearable
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Add items"
+                                variant="outlined"
+                                onChange={this.handleKeyUp}
+                                name="foodName"
+                            />
+                        )}
+                    />
+                </form>
+                <button
+                    type="submit"
+                    onClick={this.handleSubmit}
+                    className="addItemButton"
+                >
+                    Add
+                </button>
+            </div>
         )
     }
-    handleKeyUp = (event) => {
-        console.log(event.target.value)
-        const { name, value } = event.target
+    handleKeyUp = (event, changeValue) => {
+        const { value } = event.target
         this.setState((currentState) => {
-            currentState.newItem[name] = value
+            currentState.newItem.foodName = changeValue
+                ? changeValue.foodName
+                : value
             return { newItem: currentState.newItem }
         })
     }
@@ -45,7 +55,12 @@ export class ItemInputForm extends Component {
         let foodMatch = foods.find((food) => {
             return food.foodName === newItem.foodName
         })
-        if (foodMatch !== undefined) {
+        if (foodMatch === undefined) {
+            this.props.addListItem({ ...newItem, category: 'none' })
+            this.setState({
+                newItem: { foodName: '', quantity: 1, category: '' },
+            })
+        } else {
             this.setState(
                 (currentState) => {
                     currentState.newItem.category = foodMatch.category
@@ -56,14 +71,8 @@ export class ItemInputForm extends Component {
                     this.setState({
                         newItem: { foodName: '', quantity: 1, category: '' },
                     })
-                    console.log(this.state.newItem)
                 }
             )
-        } else {
-            this.props.addListItem(newItem)
-            this.setState({
-                newItem: { foodName: '', quantity: 1, category: '' },
-            })
         }
     }
 }
