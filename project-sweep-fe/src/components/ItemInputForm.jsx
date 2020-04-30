@@ -5,15 +5,23 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 
 export class ItemInputForm extends Component {
     state = {
-        newItem: { foodName: '', quantity: 1, category: '' },
+        newItem: {
+            foodName: '',
+            quantity: 1,
+            category: {
+                name: '',
+            },
+        },
     }
+
     render() {
+        const { products } = this.props
+
         return (
             <div className="inputArea">
                 <form onSubmit={this.handleSubmit} className="item-input-form">
                     <Autocomplete
-                        id="auto-complete-input"
-                        options={foods}
+                        options={products}
                         getOptionLabel={(option) => option.foodName}
                         onChange={this.handleKeyUp}
                         inputValue={this.state.newItem.foodName}
@@ -52,24 +60,38 @@ export class ItemInputForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         const { newItem } = this.state
-        let foodMatch = foods.find((food) => {
+        const { products } = this.props
+        console.log(newItem)
+        let foodMatch = products.find((food) => {
             return food.foodName === newItem.foodName
         })
         if (foodMatch === undefined) {
-            this.props.addListItem({ ...newItem, category: 'none' })
+            this.props.addListItem(newItem)
             this.setState({
-                newItem: { foodName: '', quantity: 1, category: '' },
+                newItem: {
+                    foodName: '',
+                    quantity: 1,
+                    category: {
+                        name: '',
+                    },
+                },
             })
         } else {
             this.setState(
                 (currentState) => {
-                    currentState.newItem.category = foodMatch.category
+                    currentState.newItem.category.name = foodMatch.category.name
                     return { newItem: currentState.newItem }
                 },
                 () => {
                     this.props.addListItem(newItem)
                     this.setState({
-                        newItem: { foodName: '', quantity: 1, category: '' },
+                        newItem: {
+                            foodName: '',
+                            quantity: 1,
+                            category: {
+                                name: '',
+                            },
+                        },
                     })
                 }
             )

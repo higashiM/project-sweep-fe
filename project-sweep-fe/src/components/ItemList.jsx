@@ -4,24 +4,28 @@ import ItemCard from './ItemCard'
 import SortedList from './SortedList'
 import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { Link } from '@reach/router'
 
 export class UnsortedItemList extends Component {
     state = {
-        listItems: [
-            { foodName: 'Yoghurt', category: 'Dairy', quantity: 9 },
-            { foodName: 'Beef burger', category: 'Meat', quantity: 5 },
-            { foodName: 'Chocolate', category: 'Confectionary', quantity: 17 },
-        ],
         sortedList: false,
     }
     render() {
-        const { listItems, sortedList } = this.state
+        const { sortedList } = this.state
+        const {
+            listItems,
+            addListItem,
+            deleteListItem,
+            handleCategoryChange,
+            incrementQuantity,
+            products,
+        } = this.props
         return (
             <main className="notepad">
                 <h2 className="listTitle">My Shopping List</h2>
                 <FormControlLabel
                     control={<Switch />}
-                    label={sortedList ? 'Change View' : 'Change View'}
+                    label="Change View"
                     onClick={this.handleClick}
                 />
 
@@ -29,7 +33,10 @@ export class UnsortedItemList extends Component {
                     <SortedList listItems={listItems} />
                 ) : (
                     <div>
-                        <ItemInputForm addListItem={this.addListItem} />
+                        <ItemInputForm
+                            addListItem={addListItem}
+                            products={products}
+                        />
                         <ul>
                             {listItems.map((item, index) => {
                                 return (
@@ -39,12 +46,10 @@ export class UnsortedItemList extends Component {
                                         category={item.category}
                                         key={item + index}
                                         index={index}
-                                        deleteListItem={this.deleteListItem}
-                                        incrementQuantity={
-                                            this.incrementQuantity
-                                        }
+                                        deleteListItem={deleteListItem}
+                                        incrementQuantity={incrementQuantity}
                                         handleCategoryChange={
-                                            this.handleCategoryChange
+                                            handleCategoryChange
                                         }
                                     />
                                 )
@@ -52,9 +57,12 @@ export class UnsortedItemList extends Component {
                         </ul>
                     </div>
                 )}
-                <button className="shoppingListCompleteButton">
+                <Link
+                    to="/supermarketlist"
+                    className="shoppingListCompleteButton"
+                >
                     Go shop...
-                </button>
+                </Link>
             </main>
         )
     }
@@ -62,56 +70,6 @@ export class UnsortedItemList extends Component {
     handleClick = () => {
         this.setState((currentState) => {
             return { sortedList: !currentState.sortedList }
-        })
-    }
-
-    addListItem = (newItem) => {
-        this.setState((currentState) => {
-            return { listItems: [newItem, ...currentState.listItems] }
-        })
-    }
-
-    deleteListItem = (itemName) => {
-        this.setState((currentState) => {
-            const filteredFoodList = currentState.listItems.filter((item) => {
-                return item.foodName !== itemName
-            })
-
-            return { listItems: filteredFoodList }
-        })
-    }
-
-    handleCategoryChange = (foodname, newCat) => {
-        this.setState((currentState) => {
-            const newList = currentState.listItems.map((item) => {
-                if (item.foodName === foodname) {
-                    return {
-                        ...item,
-                        category: newCat,
-                    }
-                } else {
-                    return item
-                }
-            })
-            return { listItems: newList }
-        })
-    }
-
-    incrementQuantity = (number, foodname) => {
-        this.setState((currentState) => {
-            const newList = currentState.listItems.map((item) => {
-                if (item.foodName === foodname) {
-                    const quantity = item.quantity + number
-                    return {
-                        foodName: item.foodName,
-                        category: item.category,
-                        quantity,
-                    }
-                } else {
-                    return item
-                }
-            })
-            return { listItems: newList }
         })
     }
 }

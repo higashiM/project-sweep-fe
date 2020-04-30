@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CategoryDropdown(props) {
     const classes = useStyles()
     // const [catergory] = React.useState('')
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = React.useState(true)
 
     const handleChange = (event) => {
         const { foodName, handleCategoryChange } = props
@@ -46,7 +46,7 @@ export default function CategoryDropdown(props) {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    // value={catergory}
+                    value={''}
                     onChange={handleChange}
                 >
                     <MenuItem value="">

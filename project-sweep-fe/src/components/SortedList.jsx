@@ -13,7 +13,7 @@ export class SortedList extends Component {
                 {sortedItems.map((category, index) => {
                     return (
                         <section key={category + index}>
-                            <h3>{category.categoryName}</h3>
+                            <h3>{category.categoryName.name}</h3>
                             <ul>
                                 {category.items.map((item, index) => {
                                     return <li key={item + index}>{item}</li>
