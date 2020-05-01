@@ -99,7 +99,7 @@ class App extends Component {
                         products={products}
                     />
                     <SupermarketList path="/supermarketlist" />
-                    <ShopMap path="/shopmap" />
+                    <ShopMap listItems={listItems} path="/shopmap" />
                 </Router>
             </div>
         )

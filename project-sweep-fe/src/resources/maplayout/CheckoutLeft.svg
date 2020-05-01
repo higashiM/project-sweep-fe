@@ -1,0 +1,20 @@
+
+<svg width="80px" height="200px" viewBox="0 0 80 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <title>Checkout left</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#AC7A3A" offset="0.0923775338%"></stop>
+            <stop stop-color="#BA925C" offset="48.7832559%"></stop>
+            <stop stop-color="#AB7A3A" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Checkout-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="20" height="160"></rect>
+        <rect id="Rectangle" fill="#D1995A" x="20" y="-10" width="10" height="170"></rect>
+        <rect id="Rectangle" fill="#AA7942" x="60" y="20" width="20" height="120"></rect>
+        <path d="M60,140 C60,140 63.3333333,143.333333 70,150 L70,140 C63.3333333,140 60,140 60,140 Z" id="Path" fill="#D1995A"></path>
+        <rect id="Rectangle" fill="#D1995A" x="70" y="140" width="10" height="10"></rect>
+    
+    <circle cx="45" cy="155" r="10" fill="red" />
+    </g>
+</svg>
