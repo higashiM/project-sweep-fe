@@ -47,6 +47,7 @@ class App extends Component {
                 _id: '5eaaf6f1bc226579e0f41fde',
                 foodName: 'ovaltine',
                 quantity: 4,
+
                 category: {
                     _id: '5eaaf6f0bc226579e0f41f81',
                     name: 'coffee, tea & hot chocolate',

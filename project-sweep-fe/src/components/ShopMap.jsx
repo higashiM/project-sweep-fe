@@ -21,6 +21,8 @@ import {
 import { paths, drawWayPoint, showAisle } from '../resources/maplayout/paths'
 import { topPaths } from '../resources/maplayout/topPaths'
 
+const shoppingList = this.props.listItems
+
 const ShopMap = () => {
     const [aisles, setAisle] = useState('')
     const [arrayAisles, setArrayAisles] = useState([1, 3, 8, 15, 4])
