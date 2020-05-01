@@ -28,7 +28,7 @@ export class ItemCard extends Component {
                 <button className="removeButton" onClick={this.handleClick}>
                     X
                 </button>
-                {category === 'none' ? (
+                {category.name === '' ? (
                     <CategoryDropdown
                         foodName={foodName}
                         handleCategoryChange={handleCategoryChange}
@@ -36,9 +36,9 @@ export class ItemCard extends Component {
                 ) : (
                     <p
                         className="item-card-category"
-                        onClick={() => handleCategoryChange(foodName, 'none')}
+                        onClick={() => handleCategoryChange(foodName, '')}
                     >
-                        {category}
+                        {category.name}
                     </p>
                 )}
             </div>
