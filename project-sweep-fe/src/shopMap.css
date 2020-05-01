@@ -1,0 +1,11 @@
+.shopMap {
+    width: 600px;
+
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff4b3;
+    align-items: center;
+    border: 20px solid #fff4b3;
+    box-shadow: gray -5px 5px 5px;
+}
