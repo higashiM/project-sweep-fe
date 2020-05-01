@@ -28,7 +28,7 @@ class CategoryDropdown extends Component {
     // classes = this.useStyles()
 
     componentDidMount() {
-        api.getCategories().then((categories) => {
+        api.getCategories().then(({ categories }) => {
             const newCats = categories.sort((a, b) => {
                 return a.name > b.name ? 1 : -1
             })
