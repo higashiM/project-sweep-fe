@@ -52,9 +52,6 @@ class CategoryDropdown extends Component {
 
     render() {
         const { open, categories } = this.state
-        {
-            console.log(categories)
-        }
 
         return (
             <div className="item-card-category dropdown">

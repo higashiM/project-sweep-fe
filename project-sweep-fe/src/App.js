@@ -6,6 +6,7 @@ import { Router } from '@reach/router'
 import ShopMap from './components/ShopMap'
 import SupermarketList from './components/SupermarketList'
 import * as api from './utils/api'
+import AisleList from './components/AisleList'
 
 class App extends Component {
     state = {
@@ -26,6 +27,16 @@ class App extends Component {
             {
                 _id: '5eaaf6f1bc226579e0f41fdc',
                 foodName: 'laphroig',
+                quantity: 7,
+                category: {
+                    _id: '5eaaf6f0bc226579e0f41f7f',
+                    name: 'spirits & ready to drink',
+                },
+                __v: 0,
+            },
+            {
+                _id: '5eaaf6f1bc226579e0f41fdc',
+                foodName: 'wine',
                 quantity: 7,
                 category: {
                     _id: '5eaaf6f0bc226579e0f41f7f',
@@ -99,7 +110,8 @@ class App extends Component {
                         products={products}
                     />
                     <SupermarketList path="/supermarketlist" />
-                    <ShopMap listItems={listItems} path="/shopmap" />
+                    <ShopMap path="/shopmap" />
+                    <AisleList path="/aisleList" />
                 </Router>
             </div>
         )
