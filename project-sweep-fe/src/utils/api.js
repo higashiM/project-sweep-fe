@@ -9,3 +9,9 @@ export const getProducts = () => {
         return data.products
     })
 }
+
+export const getCategories = () => {
+    return request.get('/category').then(({ data }) => {
+        return data
+    })
+}
