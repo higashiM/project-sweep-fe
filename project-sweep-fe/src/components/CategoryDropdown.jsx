@@ -28,7 +28,7 @@ class CategoryDropdown extends Component {
     // classes = this.useStyles()
 
     componentDidMount() {
-        api.getCategories().then((categories) => {
+        api.getCategories().then(({ categories }) => {
             const newCats = categories.sort((a, b) => {
                 return a.name > b.name ? 1 : -1
             })
@@ -52,6 +52,9 @@ class CategoryDropdown extends Component {
 
     render() {
         const { open, categories } = this.state
+        {
+            console.log(categories)
+        }
 
         return (
             <div className="item-card-category dropdown">
