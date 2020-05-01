@@ -5,7 +5,7 @@ const ShopMap = () => {
     return (
         <div className="notepad">
             <h2>Shop Map</h2>
-            <Link to="/" className="shoppingListCompleteButton">
+            <Link to="/aislelist" className="shoppingListCompleteButton">
                 Get Started...
             </Link>
         </div>
