@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from '@reach/router'
-
-//when state updates
-/* const handleClick = () => {
-    const input = aisles.split(',')
-    setArrayAisles(input)
-} */
+import * as genMap from '../utils/genMap'
 import {
     TopLeft,
     TopMiddle,
@@ -17,13 +12,16 @@ import {
     CheckoutMiddle,
     CheckoutRight,
 } from '../resources/maplayout/index'
-
-import { paths, drawWayPoint, showAisle } from '../resources/maplayout/paths'
-import { topPaths } from '../resources/maplayout/topPaths'
+import { drawWayPoint, showAisle } from '../resources/maplayout/paths'
+//when state updates
+/* const handleClick = () => {
+    const input = aisles.split(',')
+    setArrayAisles(input)
+} */
 
 const ShopMap = () => {
     const [aisles, setAisle] = useState('')
-    const [arrayAisles, setArrayAisles] = useState([1, 3, 8, 15, 4])
+    const [arrayAisles, setArrayAisles] = useState([1, 7, 9, 11])
 
     const [aislePlans, setAislePlans] = useState({
         tl: <TopLeft />,
@@ -64,164 +62,23 @@ const ShopMap = () => {
         [13, 14, 15, 16, 17, 18],
     ]
 
-    const genPath = (
-        aislesToVisit,
-        start = [0, layout.length, 'start'],
-        maxRow = layout.length,
-        maxColumn = layout[0].length
-    ) => {
-        const columnsToTraverse = {} //lookup object for colums containg aisles to visit
-        const aisleTickOff = {} //object to count off which aisles have been visited
-
-        aislesToVisit.forEach((aisle) => {
-            const x = ai[aisle].x
-            const y = ai[aisle].y
-            if (!columnsToTraverse[x]) columnsToTraverse[x] = {}
-            columnsToTraverse[x] = 'visit'
-            const ref = 'xy'.concat(x, y)
-            aisleTickOff[ref] = aisle
-        })
-
-        const aislePath = [start]
-
-        const addVertical = (x, y) => {
-            const ref = 'xy'.concat(x, y)
-
-            if (aisleTickOff[ref]) {
-                aislePath.push([x, y, 'waypoint'])
-                delete aisleTickOff[ref]
-            } else aislePath.push([x, y, ''])
-        }
-
-        const addHorizontal = (x, goingUp, y) => {
-            if (goingUp) aislePath.push([x, maxRow - 1, ''])
-            if (!goingUp) aislePath.push([x, 0, ''])
-        }
-
-        const addFinish = (checkout, x, y) => {
-            if (checkout) {
-                aislePath.push([x, maxRow, 'finish'])
-            } else aislePath.push([x, y - 1, 'finish'])
-        }
-        //variable to record vertical direction
-        let goingUp = true
-
-        //cycles through map from bottom left to rop right starting at (x = 0, maxRow)
-        //if column has an aisle to visit it traverses in alternative directions otherwise moves horizontally
-
-        for (let x = 0; x < maxColumn; x++) {
-            if (columnsToTraverse[x]) {
-                if (goingUp) {
-                    for (let y = maxRow - 1; y >= 0; y--) {
-                        addVertical(x, y)
-                        if (Object.keys(aisleTickOff).length === 0) {
-                            addFinish(false, x, y)
-                            return aislePath
-                        }
-                    }
-                    goingUp = false
-                } else {
-                    for (let y = 0; y < maxRow; y++) {
-                        addVertical(x, y)
-                        goingUp = true
-                    }
-                }
-            } else {
-                addHorizontal(x, goingUp)
-            }
-            if (Object.keys(aisleTickOff).length === 0) {
-                if (goingUp) {
-                    addFinish(true, x)
-                }
-                return aislePath
-            }
-        }
-
-        return aislePath
-    }
-
-    const assignSVGtoPath = (aislePath, maxRow = layout.length - 1) => {
-        console.log(aislePath)
-        //object look up constructed for rendering
-        const aislestoVisit = {}
-
-        for (let index = 1; index < aislePath.length - 1; index++) {
-            const curr = aislePath[index]
-            const prev = aislePath[index - 1]
-            const next = aislePath[index + 1]
-
-            const prevX = prev[0]
-            const prevY = prev[1]
-            const currX = curr[0]
-            const currY = curr[1]
-            const nextX = next[0]
-            const nextY = next[1]
-            const prevPos = prev[2]
-            const nextPos = next[2]
-            const pathLookup = [
-                ['TopL', 'TopM', 'TopR'],
-                ['TopL', 'Mid', 'TopR'],
-                ['BotL', 'BotM', 'BotR'],
-            ]
-            const turningUpLookup = [
-                ['TopL', 'TopM', 'TopR'],
-                ['BotL', 'Mid', 'BotR'],
-                ['BotL', 'BotM', 'BotR'],
-            ]
-
-            const traversingBottom = [
-                ['BotL', 'TopM', 'BotR'],
-                ['BotL', 'Mid', 'BotR'],
-                ['BotL', 'BotM', 'BotR'],
-            ]
-
-            let ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
-            let exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
-
-            //traverses along bottom from start
-            if (prevPos === 'start' && nextX > currX) {
-                ent = traversingBottom[prevY - currY + 1][prevX - currX + 1]
-                exit = traversingBottom[nextY - currY + 1][nextX - currX + 1]
-            }
-
-            //traverses along bottom other
-            if (prevY === currY && currY === maxRow) {
-                ent = traversingBottom[prevY - currY + 1][prevX - currX + 1]
-                exit = traversingBottom[nextY - currY + 1][nextX - currX + 1]
-            }
-            //execute turns at cottom end of column
-            if (
-                (currX < nextX && prevY < currY) |
-                (currX > prevX && nextY < currY)
-            ) {
-                ent = turningUpLookup[prevY - currY + 1][prevX - currX + 1]
-                exit = turningUpLookup[nextY - currY + 1][nextX - currX + 1]
-            }
-            //constructname of svgto use
-            let path = ent.concat('to', exit)
-            //adds end point to path
-            if (nextPos === 'finish') {
-                path = path.concat('End')
-            }
-
-            const ref = 'xy'.concat(currX.toString(), currY.toString())
-            let newPath = paths[path]
-            if (currY === 0) newPath = topPaths[path]
-
-            aislestoVisit[ref] = {
-                path: newPath,
-                shopping: curr[2],
-                pathText: path,
-            }
-        }
-        return aislestoVisit
-    }
-
     const height = { mm: 160, mr: 160, ml: 160 }
-    const output = genPath(arrayAisles)
+    const start = [0, layout.length, 'start']
+    const maxRow = layout.length - 1
+    const maxColumn = layout[0].length
 
-    const aislesToVisit = assignSVGtoPath(output)
-    const createMap = () => {
+    const pathOfAisles = genMap.genPath(
+        arrayAisles,
+        start,
+        maxRow,
+        maxColumn,
+        layout,
+        ai
+    )
+
+    const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
+
+    const createMap = (layout, ai, aislePlans, aislesToVisit) => {
         return (
             <>
                 {layout.map((row, index) => {
@@ -273,7 +130,7 @@ const ShopMap = () => {
     return (
         <div className="shopMap">
             <h2>Shop Map</h2>
-            {createMap()}
+            {createMap(layout, ai, aislePlans, aislesToVisit)}
             <Link to="/aisleList" className="shoppingListCompleteButton">
                 Get Started...
             </Link>
