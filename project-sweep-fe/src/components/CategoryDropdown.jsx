@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+// import { makeStyles } from '@material-ui/core/styles'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 // import Button from '@material-ui/core/Button'
 // import catergories from '../staticData/categories'
-import * as api from '../utils/api'
+// import * as api from '../utils/api'
 
 class CategoryDropdown extends Component {
     state = {
@@ -27,16 +27,6 @@ class CategoryDropdown extends Component {
 
     // classes = this.useStyles()
 
-    componentDidMount() {
-        api.getCategories().then(({ categories }) => {
-            const newCats = categories.sort((a, b) => {
-                return a.name > b.name ? 1 : -1
-            })
-
-            this.setState({ categories: newCats })
-        })
-    }
-
     handleChange = (event) => {
         const { foodName, handleCategoryChange } = this.props
         handleCategoryChange(foodName, event.target.value)
@@ -51,7 +41,8 @@ class CategoryDropdown extends Component {
     }
 
     render() {
-        const { open, categories } = this.state
+        const { open } = this.state
+        const { categories } = this.props
 
         return (
             <div className="item-card-category dropdown">

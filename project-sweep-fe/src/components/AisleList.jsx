@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import sortListItems from '../utils/sortListItems'
+import getCategoriesArray from '../utils/getCategoriesArray'
+import { Link } from '@reach/router'
 
 class AisleList extends Component {
     state = {
-        number: 6,
-        catergories: ['spirits & ready to drink', 'wine, prosecco & champagne'],
+        number: 12,
         products: [
             {
                 _id: '5eaaf6f1bc226579e0f41fdc',
@@ -36,22 +37,49 @@ class AisleList extends Component {
                 },
                 __v: 0,
             },
+            {
+                _id: '5eaaf6f1bc226579e0f41fdd',
+                foodName: 'White Zinfandel Rose Wine',
+                quantity: 1,
+                category: {
+                    _id: '5eaaf6f0bc226579e0f41f80',
+                    name: 'bread',
+                },
+                __v: 0,
+            },
+            {
+                _id: '5eaaf6f1bc226579e0f41fdd',
+                foodName: 'White Zinfandel Rose Wine',
+                quantity: 1,
+                category: {
+                    _id: '5eaaf6f0bc226579e0f41f80',
+                    name: 'baby stuff',
+                },
+                __v: 0,
+            },
         ],
     }
 
+    signItems = sortListItems(this.state.products)
+
     render() {
-        const { catergories, products } = this.state
+        const { products } = this.state
+        getCategoriesArray(this.signItems)
+
         return (
-            <div className="notepad">
+            <div className="aisleList">
                 <section className="aisleSign">
                     <div className="aisleNumber">
                         <p>Aisle</p>
-                        <p>{this.state.number}</p>
+                        <p className="aisleNumberInd">{this.state.number}</p>
                     </div>
-                    {catergories.map((category, i) => {
+
+                    {this.signItems.map((category, i) => {
                         return (
-                            <div className={`aisleCatergory${i}`}>
-                                {category}
+                            <div
+                                className={`aisleCatergory aisleCatergory${i}`}
+                            >
+                                {category.name}
                             </div>
                         )
                     })}
@@ -60,7 +88,7 @@ class AisleList extends Component {
                     {sortListItems(products).map((category, index) => {
                         return (
                             <section key={category + index}>
-                                <h3>{category.categoryName.name}</h3>
+                                <h3>{category.name}</h3>
                                 <ul>
                                     {category.items.map((item, index) => {
                                         return (
@@ -72,6 +100,9 @@ class AisleList extends Component {
                         )
                     })}
                 </main>
+                <Link to="/aisleMap" className="shoppingListCompleteButton">
+                    Next aisle...
+                </Link>
             </div>
         )
     }

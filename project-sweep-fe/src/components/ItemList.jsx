@@ -5,13 +5,26 @@ import SortedList from './SortedList'
 import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Link } from '@reach/router'
+import * as api from '../utils/api'
 
-export class UnsortedItemList extends Component {
+export class ItemList extends Component {
     state = {
         sortedList: false,
+        categories: [],
     }
+
+    componentDidMount() {
+        api.getCategories().then(({ categories }) => {
+            const newCats = categories.sort((a, b) => {
+                return a.name > b.name ? 1 : -1
+            })
+
+            this.setState({ categories: newCats })
+        })
+    }
+
     render() {
-        const { sortedList } = this.state
+        const { sortedList, categories } = this.state
         const {
             listItems,
             addListItem,
@@ -51,6 +64,7 @@ export class UnsortedItemList extends Component {
                                         handleCategoryChange={
                                             handleCategoryChange
                                         }
+                                        categories={categories}
                                     />
                                 )
                             })}
@@ -74,4 +88,4 @@ export class UnsortedItemList extends Component {
     }
 }
 
-export default UnsortedItemList
+export default ItemList
