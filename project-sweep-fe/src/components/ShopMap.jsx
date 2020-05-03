@@ -63,18 +63,8 @@ const ShopMap = () => {
     ]
 
     const height = { mm: 160, mr: 160, ml: 160 }
-    const start = [0, layout.length, 'start']
-    const maxRow = layout.length - 1
-    const maxColumn = layout[0].length
 
-    const pathOfAisles = genMap.genPath(
-        arrayAisles,
-        start,
-        maxRow,
-        maxColumn,
-        layout,
-        ai
-    )
+    const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
 
     const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
 
@@ -105,7 +95,7 @@ const ShopMap = () => {
                                                 ? aislesToVisit[xy].path
                                                 : null}
                                             {aislesToVisit[xy]
-                                                ? aislesToVisit[xy].shopping
+                                                ? aislesToVisit[xy].waypoint
                                                     ? drawWayPoint(
                                                           height[aisle.type] ||
                                                               200

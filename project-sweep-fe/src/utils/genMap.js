@@ -1,14 +1,11 @@
 import { paths, drawWayPoint, showAisle } from '../resources/maplayout/paths'
 import { topPaths } from '../resources/maplayout/topPaths'
 
-export const genPath = (
-    aislesToVisit,
-    start,
-    maxRow,
-    maxColumn,
-    layout,
-    ai
-) => {
+export const genPath = (aislesToVisit, layout, ai) => {
+    const start = [0, layout.length, 'start']
+    const maxRow = layout.length - 1
+    const maxColumn = layout[0].length
+
     const columnsToTraverse = {} //lookup object for colums containg aisles to visit
     const aisleTickOff = {} //object to count off which aisles have been visited
 
@@ -34,14 +31,12 @@ export const genPath = (
 
     columnsToTraverse.MaxX = MaxX
     columnsToTraverse.MinX = MinX
-    console.log(columnsToTraverse)
 
     //cycles through map from bottom left to rop right starting at (x = 0, maxRow)
     //if column has an aisle to visit it traverses in alternative directions otherwise moves horizontally
 
     const aislePath = [start]
-    console.log(aislePath)
-
+    // console.log(aisleTickOff)
     const goForaWalk = (
         x,
         y,
@@ -51,11 +46,11 @@ export const genPath = (
         aislePath
     ) => {
         const ref = 'xy'.concat(x, y)
-        console.log(goingUp, x, y, aislePath, columnsToTraverse, aisleTickOff)
+        //console.log(goingUp, x, y, aislePath, columnsToTraverse, aisleTickOff)
 
         //add current location to the path - if aisle need to visit delete from checklist
         if (aisleTickOff[ref]) {
-            aislePath.push([x, y, 'waypoint'])
+            aislePath.push([x, y, aisleTickOff[ref]])
             delete aisleTickOff[ref]
         } else aislePath.push([x, y, ''])
         //if no items left add finish block
@@ -186,7 +181,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
             BotM: 'TopM',
             TopM: 'BotM',
         }
-        const waypoint = {
+        const waypointLookUp = {
             TopLtoTopR: 'BotR',
             TopLtoTopM: 'BotM',
             TopRtoTopL: 'BotL',
@@ -231,9 +226,9 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         //constructname of svgto use
         let path = ent.concat('to', exit)
 
-        //overwrite if waypoint
-        if (currPos && waypoint[path]) {
-            exit = waypoint[path]
+        //overwrite if waypointLookUp
+        if (currPos && waypointLookUp[path]) {
+            exit = waypointLookUp[path]
             path = ent.concat('to', exit)
         }
 
@@ -246,16 +241,21 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         let newPath = paths[path]
         if (currY === 0) newPath = topPaths[path]
 
+        const waypoint = currPos ? currPos : null
         //constructs onject for renderingsvg
-
         aislestoVisit[ref] = {
+            waypoint,
             path: newPath,
-            shopping: curr[2],
             pathText: path,
             ent,
             exit,
         }
+        //add array of waypoints in order for testing/passing to next screens
+        if (!aislestoVisit.waypoints) aislestoVisit.waypoints = []
+
+        if (waypoint) aislestoVisit.waypoints.push(waypoint)
     }
     console.log(aislestoVisit)
+
     return aislestoVisit
 }
