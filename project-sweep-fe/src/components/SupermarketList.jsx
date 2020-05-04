@@ -1,28 +1,30 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
-import supermarkets from '../staticData/supermarkets'
+// import supermarkets from '../staticData/supermarkets'
 import * as api from '../utils/api'
 
 export default class SupermarketList extends Component {
-    state = { isLoading: true }
+    state = { isLoading: true, supermarkets: [] }
 
-    /*    componentDidMount() {
-        api.getSupermarkets().then((data) => {
-            this.setState({ supermarkets: data, isLoading: false })
-        })
-    } */
+    componentDidMount() {
+        api.getSupermarkets().then(({ supermarkets }) =>
+            this.setState({ supermarkets })
+        )
+    }
 
     render() {
+        const { supermarkets } = this.state
         return (
             <div className="notepad">
                 <h2>Supermarket List</h2>
                 {supermarkets.map((supermarket) => {
                     return (
                         <Link
+                            key={supermarket._id}
                             to="/shopmap"
                             className="shoppingListCompleteButton"
                         >
-                            {supermarket.name}
+                            {supermarket.name} -{supermarket._id}
                         </Link>
                     )
                 })}

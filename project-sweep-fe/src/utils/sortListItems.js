@@ -1,4 +1,4 @@
-const foods = require('../staticData/foods')
+// const foods = require('../staticData/foods')
 
 const sortListItems = (unsortedList) => {
     const foodCategoryArr = []
@@ -6,20 +6,19 @@ const sortListItems = (unsortedList) => {
     unsortedList.forEach((item) => {
         let foodCategoryObj = {}
         let categoryMatch = foodCategoryArr.find((category) => {
-            return category.categoryName === item.category
+            return category.name === item.category.name
         })
 
-        if (categoryMatch) {
-            categoryMatch.items.push(`${item.quantity} ${item.foodName}`)
-        } else {
-            foodCategoryObj.categoryName = item.category
+        if (!categoryMatch) {
+            foodCategoryObj.name = item.category.name
             foodCategoryObj.items = [`${item.quantity} ${item.foodName}`]
             foodCategoryArr.push(foodCategoryObj)
+        } else {
+            categoryMatch.items.push(`${item.quantity} ${item.foodName}`)
         }
     })
+
     return foodCategoryArr
 }
-
-sortListItems(foods)
 
 module.exports = sortListItems

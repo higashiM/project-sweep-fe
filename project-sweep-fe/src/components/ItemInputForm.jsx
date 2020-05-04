@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import foods from '../staticData/foods'
+// import foods from '../staticData/foods'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 

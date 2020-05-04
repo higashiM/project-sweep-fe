@@ -10,6 +10,7 @@ export class ItemCard extends Component {
             category,
             index,
             handleCategoryChange,
+            categories,
         } = this.props
         return (
             <div className="item-card">
@@ -32,6 +33,7 @@ export class ItemCard extends Component {
                     <CategoryDropdown
                         foodName={foodName}
                         handleCategoryChange={handleCategoryChange}
+                        categories={categories}
                     />
                 ) : (
                     <p

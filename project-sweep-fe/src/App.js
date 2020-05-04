@@ -2,88 +2,89 @@ import React, { Component } from 'react'
 import './App.css'
 import Header from './components/Header'
 import ItemList from './components/ItemList'
-import { Router } from '@reach/router'
-import ShopMap from './components/ShopMap'
 import SupermarketList from './components/SupermarketList'
-import * as api from './utils/api'
+import ShopMap from './components/ShopMap'
 import AisleList from './components/AisleList'
+import AisleMap from './components/AisleMap'
+import { Router } from '@reach/router'
+import * as api from './utils/api'
 
 class App extends Component {
     state = {
-        products: [
-            {
-                _id: '5eaac3727bb97500175a8693',
-                name: 'strawberries',
-                foodName: 'strawberries',
-                quantity: 1,
-                category: {
-                    _id: '5eaac3727bb97500175a8634',
-                    name: 'fruit',
-                },
-                __v: 0,
-            },
-        ],
+        products: [],
         listItems: [
             {
-                _id: '5eaaf6f1bc226579e0f41fdc',
-                foodName: 'laphroig',
-                quantity: 7,
+                _id: '5eac3027f1a6f8b162de7d7a',
+                foodName: 'mature cheddar',
+                quantity: 2,
                 category: {
-                    _id: '5eaaf6f0bc226579e0f41f7f',
-                    name: 'spirits & ready to drink',
+                    _id: '5eac3027f1a6f8b162de7d1b',
+                    name: 'cheese',
                 },
-                __v: 0,
             },
             {
-                _id: '5eaaf6f1bc226579e0f41fdc',
-                foodName: 'wine',
-                quantity: 7,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f7f',
-                    name: 'spirits & ready to drink',
-                },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fdd',
-                foodName: 'yellow tail shiraz',
                 quantity: 1,
+                _id: '5eac3027f1a6f8b162de7d73',
+                foodName: 'strawberries',
                 category: {
-                    _id: '5eaaf6f0bc226579e0f41f80',
+                    _id: '5eac3027f1a6f8b162de7d14',
+                    name: 'fruit',
+                },
+            },
+            {
+                _id: '5eac3027f1a6f8b162de7d78',
+                foodName: 'hot cross buns',
+                quantity: 6,
+                category: {
+                    _id: '5eac3027f1a6f8b162de7d19',
+                    name: 'bakery',
+                },
+                __v: 0,
+            },
+            {
+                quantity: 8,
+                _id: '5eac3027f1a6f8b162de7d9f',
+                foodName: 'brooklyn lager',
+                category: {
+                    _id: '5eac3027f1a6f8b162de7d42',
+                    name: 'beer, cider & ales',
+                },
+            },
+            {
+                _id: '5eac3027f1a6f8b162de7d8a',
+                quantity: 1,
+                foodName: 'jaffa cakes',
+                category: {
+                    _id: '5eac3027f1a6f8b162de7d2b',
+                    name: 'biscuits, chocolate & sweets',
+                },
+            },
+            {
+                _id: '5eac3027f1a6f8b162de7d8a',
+                quantity: 1,
+                foodName: 'custard creams',
+                category: {
+                    _id: '5eac3027f1a6f8b162de7d24',
+                    name: 'biscuits, chocolate & sweets',
+                },
+            },
+            {
+                _id: '5eac3027f1a6f8b162de7d8a',
+                quantity: 1,
+                foodName: 'malted milks',
+                category: {
+                    _id: '5eac3027f1a6f8b162de7d24',
+                    name: 'biscuits, chocolate & sweets',
+                },
+            },
+            {
+                quantity: 2,
+                _id: '5eac3027f1a6f8b162de7da1',
+                foodName: 'yellow tail shiraz',
+                category: {
+                    _id: '5eac3027f1a6f8b162de7d44',
                     name: 'wine, prosecco & champagne',
                 },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fde',
-                foodName: 'ovaltine',
-                quantity: 4,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f81',
-                    name: 'coffee, tea & hot chocolate',
-                },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fc0',
-                foodName: 'basmati rice',
-                quantity: 4,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f61',
-                    name: 'rice, pasta & noodles',
-                },
-                __v: 0,
-            },
-
-            {
-                _id: '5eaaf6f1bc226579e0f41fd4',
-                foodName: 'chicken samosas',
-                quantity: 8,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f75',
-                    name: 'frozen world foods',
-                },
-                __v: 0,
             },
         ],
     }
@@ -112,6 +113,7 @@ class App extends Component {
                     <SupermarketList path="/supermarketlist" />
                     <ShopMap path="/shopmap" />
                     <AisleList path="/aisleList" />
+                    <AisleMap path="/aisleMap" />
                 </Router>
             </div>
         )

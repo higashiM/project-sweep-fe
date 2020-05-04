@@ -1,0 +1,95 @@
+.aisleList {
+    background-color: cornsilk;
+    border: 20px solid cornsilk;
+    max-width: 500px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: gray -5px 5px 5px;
+}
+
+.aisleCatergory {
+    border: rgba(0, 0, 0, 0.28) 2px solid;
+    border-bottom: 0;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.aisleCategory0 {
+    grid-area: 0;
+}
+
+.aisleCategory1 {
+    grid-area: 1;
+}
+.aisleCategory2 {
+    grid-area: 2;
+}
+.aisleCategory3 {
+    grid-area: 3;
+}
+.aisleCategory4 {
+    grid-area: 4;
+}
+.aisleCategory5 {
+    grid-area: 5;
+}
+.aisleNumber {
+    font-weight: 700;
+    grid-area: num;
+    font-size: 1.8em;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: rgba(0, 0, 0, 0.28) 1px solid;
+}
+
+.aisleNumber p {
+    margin: 0px;
+}
+
+.aisleNumberInd {
+    font-size: 50px;
+}
+
+.aisleSign {
+    border: rgb(32, 57, 8) 1px solid;
+    background-color: rgb(41, 150, 175);
+    color: white;
+    display: grid;
+    grid-template-columns: 35% 30% 35%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        '0 num 1'
+        '2 num 3'
+        '4 num 5';
+    align-content: center;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px gray;
+}
+
+.aisleNumber::before {
+    content: '|';
+    color: black;
+    position: relative;
+    font-size: 25px;
+    left: -95px;
+    top: -29px;
+    font-weight: 900;
+}
+
+.aisleNumber::after {
+    content: '|';
+    color: black;
+    position: relative;
+    font-size: 25px;
+    left: 95px;
+    top: -151px;
+    font-weight: 900;
+}
