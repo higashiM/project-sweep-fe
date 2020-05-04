@@ -8,6 +8,7 @@ import AisleList from './components/AisleList'
 import AisleMap from './components/AisleMap'
 import { Router } from '@reach/router'
 import * as api from './utils/api'
+import Loader from './components/Loader'
 
 class App extends Component {
     state = {
