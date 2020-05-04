@@ -12,6 +12,7 @@ import Loader from './components/Loader'
 
 class App extends Component {
     state = {
+        aislesToVisitInfopath: { pathMaps: {}, categories: {}, path: {} },
         ismaploading: true,
         supermarket: '',
         products: [],
@@ -108,7 +109,13 @@ class App extends Component {
     }
 
     render() {
-        const { listItems, products, supermarket, ismaploading } = this.state
+        const {
+            listItems,
+            products,
+            supermarket,
+            ismaploading,
+            aislesToVisitInfo,
+        } = this.state
         return (
             <div className="App">
                 <Header />
@@ -134,7 +141,7 @@ class App extends Component {
                         path="/shopmap"
                     />
                     <AisleList path="/aisleList" />
-                    <AisleMap path="/aisleMap" />
+                    <AisleMap pathMaps={aislesToVisitInfo} path="/aisleMap" />
                 </Router>
             </div>
         )
