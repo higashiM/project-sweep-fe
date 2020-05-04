@@ -15,3 +15,8 @@ export const getCategories = () => {
         return data
     })
 }
+export const getSupermarkets = () => {
+    return request.get('/supermarkets').then(({ data }) => {
+        return data
+    })
+}
