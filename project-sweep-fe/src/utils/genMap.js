@@ -8,14 +8,16 @@ export const getAisleList = (listItems, categoryLookup) => {
     for (const item in listItems) {
         const element = listItems[item]
 
-        const aisleNo = categoryLookup[element.category.name]
+        if (categoryLookup[element.category.name]) {
+            const aisleNo = categoryLookup[element.category.name]
 
-        if (!catAndFood[aisleNo]) catAndFood[aisleNo] = []
-        if (!catAndFood[aisleNo].includes(element.category.name)) {
-            catAndFood[aisleNo].push(element.category.name)
-        }
-        if (!aisleList.includes(aisleNo)) {
-            aisleList.push(aisleNo)
+            if (!catAndFood[aisleNo]) catAndFood[aisleNo] = []
+            if (!catAndFood[aisleNo].includes(element.category.name)) {
+                catAndFood[aisleNo].push(element.category.name)
+            }
+            if (!aisleList.includes(aisleNo)) {
+                aisleList.push(aisleNo)
+            }
         }
     }
     return { aisleList, catAndFood }
