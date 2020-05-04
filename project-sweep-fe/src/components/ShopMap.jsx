@@ -46,9 +46,10 @@ const ShopMap = (props) => {
     const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
 
     const handleClick = () => {
-        console.log('clicked')
         const categories = aisleListCat.catAndFood
         const path = pathOfAisles
+            .map((point) => point[2])
+            .filter((point) => Number.isInteger(point))
         props.setAisletoVisitInfo({ categories, path })
     }
     const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
