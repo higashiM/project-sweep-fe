@@ -1,12 +1,15 @@
 
-<svg width="80px" height="160px" viewBox="0 0 80 160" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+<svg width="80px" height="160px" x={this.props.x} y={this.props.y} viewBox="0 0 80 160" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
     <title>Middle middle</title>
-    <g id="Middle-middle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle" fill="#AA7942" x="1.77635684e-15" y="20" width="20" height="120"></rect>
-        <rect id="Rectangle" fill="#AA7942" x="60" y="20" width="20" height="120"></rect>
-        <rect id="Rectangle" fill="#D1995A" x="20" y="20" width="10" height="120"></rect>
-        <rect id="Rectangle" fill="#D1995A" x="1.77635684e-15" y="140" width="30" height="10"></rect>
-        <path d="M60,140 C60,140 63.3333333,143.333333 70,150 L70,140 C63.3333333,140 60,140 60,140 Z" id="Path" fill="#D1995A"></path>
-        <rect id="Rectangle" fill="#D1995A" x="70" y="140" width="10" height="10"></rect>
+    <g id="middleMiddle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Middle-middle">
+            <rect id="Rectangle" fill="#AA7942" x="1.77635684e-15" y="20" width="20" height="120"></rect>
+            <rect id="Rectangle" fill="#AA7942" x="60" y="20" width="20" height="120"></rect>
+            <rect id="Rectangle" fill="#D1995A" x="20" y="30" width="10" height="110"></rect>
+            <rect id="Rectangle" fill="#D1995A" x="1.77635684e-15" y="140" width="30" height="10"></rect>
+            <path d="M60,140 C60,140 63.3333333,143.333333 70,150 L70,140 C63.3333333,140 60,140 60,140 Z" id="Path" fill="#D1995A"></path>
+            <path d="M20,20 C20,20 23.3333333,23.3333333 30,30 L30,20 C23.3333333,20 20,20 20,20 Z" id="Path" fill="#D1995A" transform="translate(25.000000, 25.000000) scale(-1, -1) translate(-25.000000, -25.000000) "></path>
+            <rect id="Rectangle" fill="#D1995A" x="70" y="140" width="10" height="10"></rect>
+        </g>
     </g>
 </svg>

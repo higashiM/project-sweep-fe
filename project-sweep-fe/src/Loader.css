@@ -1,0 +1,63 @@
+#topleg1 {
+    animation: topleg1 2s linear 0s infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes topleg1 {
+    0% {
+    }
+    50% {
+        transform: rotate(-32deg) translate(45px, 25px);
+    }
+    100% {
+    }
+}
+
+#bottomleg1 {
+    animation: bottomleg1 2s linear 0s infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes bottomleg1 {
+    0% {
+    }
+    50% {
+        transform: translate(165px, 0px) rotate(-55deg);
+    }
+    100% {
+    }
+}
+
+#topleg2 {
+    animation: topleg2 2s linear 0s infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes topleg2 {
+    0% {
+    }
+    50% {
+        transform: rotate(32deg) translate(-45px, 25px);
+    }
+    100% {
+    }
+}
+
+#bottomleg2 {
+    animation: bottomleg2 2s linear 0s infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+@keyframes bottomleg2 {
+    0% {
+    }
+    50% {
+        transform: translate(-180px) rotate(65deg);
+    }
+    100% {
+    }
+}
