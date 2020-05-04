@@ -7,9 +7,13 @@ export default class SupermarketList extends Component {
     state = { isLoading: true, supermarkets: [] }
 
     componentDidMount() {
-        api.getSupermarkets().then(({ supermarkets }) =>
+        api.getSupermarkets().then(({ supermarkets }) => {
             this.setState({ supermarkets })
-        )
+        })
+    }
+
+    handleClick = (supermarket) => {
+        this.props.setSupermarket(supermarket)
     }
 
     render() {
@@ -20,6 +24,7 @@ export default class SupermarketList extends Component {
                 {supermarkets.map((supermarket) => {
                     return (
                         <Link
+                            onClick={() => this.handleClick(supermarket)}
                             key={supermarket._id}
                             to="/shopmap"
                             className="shoppingListCompleteButton"

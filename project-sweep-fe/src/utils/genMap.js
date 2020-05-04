@@ -1,6 +1,26 @@
 import { paths, drawWayPoint, showAisle } from '../resources/maplayout/paths'
 import { topPaths } from '../resources/maplayout/topPaths'
 
+export const getAisleList = (listItems, categoryLookup) => {
+    const aisleList = []
+    const catAndFood = {}
+
+    for (const item in listItems) {
+        const element = listItems[item]
+
+        const aisleNo = categoryLookup[element.category.name]
+
+        if (!catAndFood[aisleNo]) catAndFood[aisleNo] = []
+        if (!catAndFood[aisleNo].includes(element.category.name)) {
+            catAndFood[aisleNo].push(element.category.name)
+        }
+        if (!aisleList.includes(aisleNo)) {
+            aisleList.push(aisleNo)
+        }
+    }
+    return { aisleList, catAndFood }
+}
+
 export const genPath = (aislesToVisit, layout, ai) => {
     const start = [0, layout.length, 'start']
     const maxRow = layout.length - 1
@@ -69,15 +89,18 @@ export const genPath = (aislesToVisit, layout, ai) => {
         const somethingToGet =
             (columnsToTraverse[x] && y > columnsToTraverse[x].minY && goingUp) |
             (columnsToTraverse[x] && y < columnsToTraverse[x].maxY && !goingUp)
+
         const reachedFinalObject =
             (columnsToTraverse[x] &&
                 y <= columnsToTraverse[x].minY &&
                 goingUp) |
             (columnsToTraverse[x] && y >= columnsToTraverse[x].maxY && !goingUp)
+
         const readyToTurnForNextColumn =
             columnsToTraverse[x + 1] &&
             (columnsToTraverse[x + 1].minY >= y && goingUp) |
                 (columnsToTraverse[x + 1].maxY <= y && !goingUp)
+
         const nothingToGetThisColumn = !columnsToTraverse[x]
         const nothingToGetNextColumn = !columnsToTraverse[x + 1]
 
@@ -255,7 +278,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
 
         if (waypoint) aislestoVisit.waypoints.push(waypoint)
     }
-    console.log(aislestoVisit)
+    //console.log(aislestoVisit)
 
     return aislestoVisit
 }
