@@ -11,6 +11,8 @@ import * as api from './utils/api'
 
 class App extends Component {
     state = {
+        ismaploading: true,
+        supermarket: '',
         products: [],
         listItems: [
             {
@@ -95,8 +97,17 @@ class App extends Component {
         })
     }
 
+    setSupermarket = (supermarket) => {
+        this.setState({ supermarket, ismaploading: false })
+    }
+
+    setAisletoVisitInfo = (aislesToVisitInfo) => {
+        console.log(aislesToVisitInfo)
+        this.setState({ aislesToVisitInfo })
+    }
+
     render() {
-        const { listItems, products } = this.state
+        const { listItems, products, supermarket, ismaploading } = this.state
         return (
             <div className="App">
                 <Header />
@@ -110,8 +121,17 @@ class App extends Component {
                         incrementQuantity={this.incrementQuantity}
                         products={products}
                     />
-                    <SupermarketList path="/supermarketlist" />
-                    <ShopMap path="/shopmap" />
+                    <SupermarketList
+                        setSupermarket={this.setSupermarket}
+                        path="/supermarketlist"
+                    />
+                    <ShopMap
+                        setAisletoVisitInfo={this.setAisletoVisitInfo}
+                        ismaploading={ismaploading}
+                        listItems={listItems}
+                        supermarket={supermarket}
+                        path="/shopmap"
+                    />
                     <AisleList path="/aisleList" />
                     <AisleMap path="/aisleMap" />
                 </Router>
