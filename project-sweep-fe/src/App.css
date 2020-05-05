@@ -183,6 +183,7 @@ ul {
 
 .sorted-list {
     text-align: left;
+    min-width: 300px;
 }
 
 .unsorted-list-container {

@@ -4,9 +4,11 @@ import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
 import { paths } from '../resources/maplayout/paths'
 import Loader from './Loader'
+import Checkbox from '@material-ui/core/Checkbox'
 
 class AisleList extends Component {
     state = {
+        checkedItems: [],
         isLoading: true,
         number: 12,
         products: [
@@ -69,16 +71,30 @@ class AisleList extends Component {
                 </section>
                 <main className="sorted-list">
                     {sortListItems(products).map((category, index) => {
+                        console.log(category)
                         return (
                             <section key={category + index}>
                                 <h3>{category.name}</h3>
-                                <ul>
+                                <div>
                                     {category.items.map((item, index) => {
                                         return (
-                                            <li key={item + index}>{item}</li>
+                                            <div className="aisleListItem">
+                                                <li
+                                                    key={item + index}
+                                                >{`${item[0]} ${item[1]}`}</li>
+                                                <Checkbox
+                                                    onClick={() =>
+                                                        this.handleCheckBox(
+                                                            item[1]
+                                                        )
+                                                    }
+                                                    name="checkedB"
+                                                    color="primary"
+                                                />
+                                            </div>
                                         )
                                     })}
-                                </ul>
+                                </div>
                             </section>
                         )
                     })}
@@ -94,6 +110,20 @@ class AisleList extends Component {
                 </Link>
             </div>
         )
+    }
+    handleCheckBox = (item) => {
+        console.log(item)
+        this.setState((currState) => {
+            if (currState.checkedItems.indexOf(item) === -1) {
+                return { checkedItems: [...currState.checkedItems, item] }
+            } else {
+                return {
+                    checkedItems: currState.checkedItems.filter((curItem) => {
+                        return curItem !== item
+                    }),
+                }
+            }
+        })
     }
 }
 

@@ -11,10 +11,10 @@ const sortListItems = (unsortedList) => {
 
         if (!categoryMatch) {
             foodCategoryObj.name = item.category.name
-            foodCategoryObj.items = [`${item.quantity} ${item.foodName}`]
+            foodCategoryObj.items = [[item.quantity, item.foodName]]
             foodCategoryArr.push(foodCategoryObj)
         } else {
-            categoryMatch.items.push(`${item.quantity} ${item.foodName}`)
+            categoryMatch.items.push([item.quantity, item.foodName])
         }
     })
 

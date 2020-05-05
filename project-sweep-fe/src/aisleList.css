@@ -76,6 +76,12 @@
     box-shadow: 0px 5px 15px gray;
 }
 
+.aisleListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* .aisleNumber::before {
     content: '|';
     color: black;
