@@ -6,6 +6,12 @@ const request = axios.create({
 
 export const getProducts = () => {
     return request.get('/products').then(({ data }) => {
+        data.products.forEach(
+            (product) =>
+                (product.foodName =
+                    product.foodName.charAt(0).toUpperCase() +
+                    product.foodName.substring(1))
+        )
         return data.products
     })
 }
