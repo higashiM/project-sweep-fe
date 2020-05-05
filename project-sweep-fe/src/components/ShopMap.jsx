@@ -180,9 +180,9 @@ const ShopMap = (props) => {
         return (
             <svg
                 className="shopMapSVG"
-                width={`${100 * rowWidth}`}
+                width={`${160 * Math.ceil(rowWidth / 2)}`}
                 height="600"
-                viewBox={`${200 * rowStart} 0 ${100 * rowWidth} 600`}
+                viewBox={`${200 * rowStart} 0 100% 100%`}
             >
                 {createMap(layout, ai, aislePlans, aislesToVisit)}
             </svg>
