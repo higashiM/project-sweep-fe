@@ -12,6 +12,11 @@ import Loader from './components/Loader'
 
 class App extends Component {
     state = {
+        aislesToVisitInfo: {
+            path: [0],
+            categories: [''],
+        },
+        aisleCount: 0,
         ismaploading: true,
         supermarket: '',
         products: [],
@@ -103,12 +108,19 @@ class App extends Component {
     }
 
     setAisletoVisitInfo = (aislesToVisitInfo) => {
-        console.log(aislesToVisitInfo)
         this.setState({ aislesToVisitInfo })
     }
 
     render() {
-        const { listItems, products, supermarket, ismaploading } = this.state
+        const {
+            listItems,
+            products,
+            supermarket,
+            ismaploading,
+            aislesToVisitInfo: { path, categories },
+            aisleCount,
+        } = this.state
+
         return (
             <div className="App">
                 <Header />
@@ -133,7 +145,15 @@ class App extends Component {
                         supermarket={supermarket}
                         path="/shopmap"
                     />
-                    <AisleList path="/aisleList" />
+                    <AisleList
+                        path="/aisleList"
+                        number={path[aisleCount]}
+                        listItems={listItems}
+                        aisleCount={aisleCount}
+                        categories={categories}
+                        aisleOrder={path}
+                        increaseAisleCount={this.increaseAisleCount}
+                    />
                     <AisleMap path="/aisleMap" />
                 </Router>
             </div>
@@ -187,6 +207,18 @@ class App extends Component {
                 }
             })
             return { listItems: newList }
+        })
+    }
+
+    increaseAisleCount = () => {
+        this.setState((currentState) => {
+            return {
+                aisleCount:
+                    currentState.aisleCount ===
+                    currentState.aislesToVisitInfo.path.length - 1
+                        ? 0
+                        : currentState.aisleCount + 1,
+            }
         })
     }
 }
