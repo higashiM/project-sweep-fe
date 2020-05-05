@@ -294,10 +294,10 @@ class Map extends React.Component {
                         stroke="red"
                         strokeWidth="10"
                         fill="none"
-                        strokeDashoffset={`${pathPlotter(aislePath)[1]}`}
-                        strokeDasharray={`${pathPlotter(aislePath)[1]} ${
-                            pathPlotter(aislePath)[1]
-                        }`}
+                        // strokeDashoffset={`${pathPlotter(aislePath)[1]}`}
+                        //strokeDasharray={`${pathPlotter(aislePath)[1]} ${
+                        //    pathPlotter(aislePath)[1]
+                        //}`}
                         strokeLinecap="round"
                     />
                 </svg>

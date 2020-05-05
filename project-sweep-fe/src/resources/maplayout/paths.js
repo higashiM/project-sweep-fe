@@ -48,7 +48,7 @@ const horizontalPathSection = (id, width, x, y) => {
 const endPoint = (id, cy) => {
     return <circle id={id} cx="45" cy={cy} r="10" fill="red" />
 }
-const endPointBot = endPoint('endPointBot', 149)
+const endPointBot = endPoint('endPointBot', 155)
 const endPointTop = endPoint('endPointBot', 9)
 const fullVertical = verticalPathSection('fullVertical', 160, 0)
 const topFullTraverse = horizontalPathSection('topFullTraverse', 80, 0, 8)

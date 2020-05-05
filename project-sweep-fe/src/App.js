@@ -12,9 +12,11 @@ import Loader from './components/Loader'
 
 class App extends Component {
     state = {
+
         aislesToVisitInfo: {
             path: [0],
             categories: [''],
+              pathMaps:{},
         },
         aisleCount: 0,
         ismaploading: true,
@@ -117,9 +119,11 @@ class App extends Component {
             products,
             supermarket,
             ismaploading,
-            aislesToVisitInfo: { path, categories },
+
+            aislesToVisitInfo: { path, categories, pathMaps },
             aisleCount,
         } = this.state
+
 
         return (
             <div className="App">
@@ -145,6 +149,7 @@ class App extends Component {
                         supermarket={supermarket}
                         path="/shopmap"
                     />
+
                     <AisleList
                         path="/aisleList"
                         number={path[aisleCount]}
@@ -154,7 +159,8 @@ class App extends Component {
                         aisleOrder={path}
                         increaseAisleCount={this.increaseAisleCount}
                     />
-                    <AisleMap path="/aisleMap" />
+                <AisleMap pathMaps={aislesToVisitInfo} path="/aisleMap" />
+
                 </Router>
             </div>
         )
