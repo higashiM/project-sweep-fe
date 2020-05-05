@@ -1,14 +1,16 @@
 import React from 'react'
 
-const Loader = () => {
+const LoaderPath = (props) => {
+    let aisleCount = props.aisleCount
+
     return (
-        <div className="loaderContainer">
+        <div className="loaderPathContainer">
             <svg
                 viewBox="0 0 1024 1024"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
-                className="loader"
+                className="loaderPath"
             >
                 <title>Mobile</title>
                 <g
@@ -19,6 +21,21 @@ const Loader = () => {
                     fill-rule="evenodd"
                 >
                     <g id="Mobile">
+                        <path
+                            id="redLine1"
+                            d="M0 990 h900 l 100 -100 h-900 z "
+                            stroke="red"
+                            fill="red"
+                        ></path>
+
+                        <path
+                            id="shopSquare"
+                            d={`M600 790 h 200 v${aisleCount * -75} h-200
+                            } z `}
+                            stroke="red"
+                            fill="red"
+                        ></path>
+
                         <circle
                             id="Oval"
                             fill="#666A74"
@@ -196,4 +213,4 @@ const Loader = () => {
     )
 }
 
-export default Loader
+export default LoaderPath

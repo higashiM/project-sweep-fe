@@ -9,7 +9,7 @@
 
 #topleg1 {
     animation: topleg1 2s linear 0s infinite;
-    transform-origin: center;
+    transform-origin: left;
     transform-box: fill-box;
 }
 
