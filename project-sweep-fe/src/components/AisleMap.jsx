@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
+import Loader from '../components/Loader'
 
 class AisleMap extends Component {
     render() {
-        const { aisleCount, aisleOrder, pathMaps } = this.props
+        const { aisleCount, aisleOrder, pathMaps, ismaploading } = this.props
         const thisAisle = aisleOrder[aisleCount - 1]
         const nextAisle = aisleOrder[aisleCount]
 
         const map = pathMaps[thisAisle]
 
+        if (ismaploading) return <Loader />
         return (
             <div className="aisleMap">
                 <h2>

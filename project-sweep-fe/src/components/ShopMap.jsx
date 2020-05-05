@@ -161,28 +161,42 @@ const ShopMap = (props) => {
     const handleClick = () => {
         const pathMaps = {}
 
-        pathOfAisles.forEach((path, index) => {
-            if (Number.isInteger(path[2])) {
-                const rowStart = path[0]
-                let rowWidth = layout[0].length
-                if (pathOfAisles[index + 1])
-                    rowWidth = pathOfAisles[index + 1][0] - path[0]
-                pathMaps[path[2]] = pathMapSVG(rowStart, rowWidth)
+        const pathOfWayPoints = pathOfAisles.filter((point) =>
+            Number.isInteger(point[2])
+        )
+
+        pathOfWayPoints.forEach((path, index) => {
+            const xStart = path[0]
+            const yStart = path[1]
+            let width = layout[0].length
+            let height = layout.length
+            if (pathOfWayPoints[index + 1]) {
+                width = pathOfWayPoints[index + 1][0] - path[0]
+                height = pathOfWayPoints[index + 1][1] - path[1]
+                console.log(pathOfWayPoints, path)
             }
+            pathMaps[path[2]] = pathMapSVG(xStart, yStart, width, height)
         })
         const categories = aisleListCat.catAndFood
-        const path = pathOfAisles
+        const path = pathOfWayPoints
             .map((point) => point[2])
             .filter((point) => Number.isInteger(point))
         props.setAisletoVisitInfo({ categories, path, pathMaps })
+        console.log(categories, path, pathMaps)
     }
-    const pathMapSVG = (rowStart, rowWidth) => {
+    const pathMapSVG = (xStart, yStart, width, height) => {
         return (
             <svg
                 className="shopMapSVG"
-                width={`${160 * Math.ceil(rowWidth / 2)}`}
-                height="600"
-                viewBox={`${200 * rowStart} 0 100% 100%`}
+                width={layout[0].length * 80}
+                height={200 + (layout.length - 2) * 160 + 200}
+                viewBox={`${xStart * 80} ${yStart * 80} ${Math.min(
+                    layout[0].length * 80,
+                    width * 80 + 80
+                )} ${Math.min(
+                    200 + (layout.length - 2) * 160 + 200,
+                    height * 200 + 200
+                )}`}
             >
                 {createMap(layout, ai, aislePlans, aislesToVisit)}
             </svg>
@@ -194,7 +208,7 @@ const ShopMap = (props) => {
     return (
         <div className="shopMap">
             <h2>Shop Map</h2>
-            {pathMapSVG(0, 6)}
+            {pathMapSVG(0, 0, 5, 2)}
 
             <Link
                 to="/aisleList"
