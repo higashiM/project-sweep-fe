@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
-// import supermarkets from '../staticData/supermarkets'
+import Loader from './Loader'
 import * as api from '../utils/api'
 
 export default class SupermarketList extends Component {
@@ -8,7 +8,7 @@ export default class SupermarketList extends Component {
 
     componentDidMount() {
         api.getSupermarkets().then(({ supermarkets }) => {
-            this.setState({ supermarkets })
+            this.setState({ supermarkets, isLoading: false })
         })
     }
 
@@ -17,7 +17,8 @@ export default class SupermarketList extends Component {
     }
 
     render() {
-        const { supermarkets } = this.state
+        const { supermarkets, isLoading } = this.state
+        if (isLoading) return <Loader />
         return (
             <div className="notepad">
                 <h2>Supermarket List</h2>

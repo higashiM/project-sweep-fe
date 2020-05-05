@@ -3,9 +3,11 @@ import sortListItems from '../utils/sortListItems'
 import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
 import { paths } from '../resources/maplayout/paths'
+import Loader from './Loader'
 
 class AisleList extends Component {
     state = {
+        isLoading: true,
         number: 12,
         products: [
             {
@@ -23,6 +25,7 @@ class AisleList extends Component {
     componentDidMount() {
         const { listItems, categories, aisleOrder, aisleCount } = this.props
         this.setState({
+            isLoading: false,
             products: listItems.filter((item) => {
                 return (
                     categories[aisleOrder[aisleCount]].indexOf(
@@ -40,10 +43,12 @@ class AisleList extends Component {
             aisleCount,
             number,
             aisleOrder,
+            isLoading,
         } = this.props
         const signItems = sortListItems(this.state.products)
         getCategoriesArray(signItems)
 
+        if (isLoading) return <Loader />
         return (
             <div className="aisleList">
                 <section className="aisleSign">
