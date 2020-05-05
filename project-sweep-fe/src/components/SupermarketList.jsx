@@ -30,7 +30,7 @@ export default class SupermarketList extends Component {
                             to="/shopmap"
                             className="shoppingListCompleteButton"
                         >
-                            {supermarket.name} -{supermarket._id}
+                            {supermarket.name}
                         </Link>
                     )
                 })}
