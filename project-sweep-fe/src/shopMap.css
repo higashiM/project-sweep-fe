@@ -17,3 +17,11 @@
     background-color: #c0c0c0;
     box-shadow: 0px 5px 15px gray;
 }
+
+#waypoint {
+    fill: red;
+}
+
+#category_tooltip {
+    font-size: xx-large;
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from '@reach/router'
 import * as genMap from '../utils/genMap'
 import Loader from '../components/Loader'
+import Tooltip from '@material-ui/core/Tooltip'
 import {
     TopLeft,
     TopMiddle,
@@ -77,14 +78,26 @@ const ShopMap = (props) => {
                                             {aislesToVisit[xy]
                                                 ? aislesToVisit[xy].path
                                                 : null}
-                                            {aislesToVisit[xy]
-                                                ? aislesToVisit[xy].waypoint
-                                                    ? drawWayPoint(
-                                                          height[aisle.type] ||
-                                                              200
-                                                      )
-                                                    : null
-                                                : null}
+                                            {aislesToVisit[xy] ? (
+                                                aislesToVisit[xy].waypoint ? (
+                                                    <Tooltip
+                                                        id="category_tooltip"
+                                                        title={
+                                                            aisleListCat
+                                                                .catAndFood[
+                                                                aisle.num
+                                                            ]
+                                                        }
+                                                        leaveDelay="500"
+                                                    >
+                                                        {drawWayPoint(
+                                                            height[
+                                                                aisle.type
+                                                            ] || 200
+                                                        )}
+                                                    </Tooltip>
+                                                ) : null
+                                            ) : null}
                                             {showAisle(
                                                 aisle.num,
                                                 height[aisle.type] || 200
