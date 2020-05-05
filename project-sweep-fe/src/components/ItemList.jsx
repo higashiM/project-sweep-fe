@@ -6,9 +6,11 @@ import Switch from '@material-ui/core/Switch'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Link } from '@reach/router'
 import * as api from '../utils/api'
+import Loader from './Loader'
 
 export class ItemList extends Component {
     state = {
+        isLoading: true,
         sortedList: false,
         categories: [],
     }
@@ -19,12 +21,12 @@ export class ItemList extends Component {
                 return a.name > b.name ? 1 : -1
             })
 
-            this.setState({ categories: newCats })
+            this.setState({ categories: newCats, isLoading: false })
         })
     }
 
     render() {
-        const { sortedList, categories } = this.state
+        const { sortedList, categories, isLoading } = this.state
         const {
             listItems,
             addListItem,
@@ -33,6 +35,7 @@ export class ItemList extends Component {
             incrementQuantity,
             products,
         } = this.props
+        if (isLoading) return <Loader />
         return (
             <main className="notepad">
                 <h2 className="listTitle">My Shopping List</h2>
