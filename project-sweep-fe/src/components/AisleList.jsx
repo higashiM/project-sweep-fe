@@ -2,79 +2,57 @@ import React, { Component } from 'react'
 import sortListItems from '../utils/sortListItems'
 import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
+import { paths } from '../resources/maplayout/paths'
 
 class AisleList extends Component {
     state = {
         number: 12,
         products: [
             {
-                _id: '5eaaf6f1bc226579e0f41fdc',
-                foodName: 'laphroig',
-                quantity: 7,
+                _id: '5eac3027f1a6f8b162de7d7a',
+                foodName: 'mature cheddar',
+                quantity: 2,
                 category: {
-                    _id: '5eaaf6f0bc226579e0f41f7f',
-                    name: 'spirits & ready to drink',
+                    _id: '5eac3027f1a6f8b162de7d1b',
+                    name: 'cheese',
                 },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fdd',
-                foodName: 'yellow tail shiraz',
-                quantity: 1,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f80',
-                    name: 'wine, prosecco & champagne',
-                },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fdd',
-                foodName: 'White Zinfandel Rose Wine',
-                quantity: 1,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f80',
-                    name: 'wine, prosecco & champagne',
-                },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fdd',
-                foodName: 'White Zinfandel Rose Wine',
-                quantity: 1,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f80',
-                    name: 'bread',
-                },
-                __v: 0,
-            },
-            {
-                _id: '5eaaf6f1bc226579e0f41fdd',
-                foodName: 'White Zinfandel Rose Wine',
-                quantity: 1,
-                category: {
-                    _id: '5eaaf6f0bc226579e0f41f80',
-                    name: 'baby stuff',
-                },
-                __v: 0,
             },
         ],
     }
 
-    signItems = sortListItems(this.state.products)
+    componentDidMount() {
+        const { listItems, categories, aisleOrder, aisleCount } = this.props
+        this.setState({
+            products: listItems.filter((item) => {
+                return (
+                    categories[aisleOrder[aisleCount]].indexOf(
+                        item.category.name
+                    ) >= 0
+                )
+            }),
+        })
+    }
 
     render() {
         const { products } = this.state
-        getCategoriesArray(this.signItems)
+        const {
+            increaseAisleCount,
+            aisleCount,
+            number,
+            aisleOrder,
+        } = this.props
+        const signItems = sortListItems(this.state.products)
+        getCategoriesArray(signItems)
 
         return (
             <div className="aisleList">
                 <section className="aisleSign">
                     <div className="aisleNumber">
                         <p>Aisle</p>
-                        <p className="aisleNumberInd">{this.state.number}</p>
+                        <p className="aisleNumberInd">{number}</p>
                     </div>
 
-                    {this.signItems.map((category, i) => {
+                    {signItems.map((category, i) => {
                         return (
                             <div
                                 className={`aisleCatergory aisleCatergory${i}`}
@@ -100,7 +78,13 @@ class AisleList extends Component {
                         )
                     })}
                 </main>
-                <Link to="/aisleMap" className="shoppingListCompleteButton">
+                <Link
+                    to={
+                        aisleCount === aisleOrder.length - 1 ? '/' : '/aisleMap'
+                    }
+                    className="shoppingListCompleteButton"
+                    onClick={increaseAisleCount}
+                >
                     Next aisle...
                 </Link>
             </div>

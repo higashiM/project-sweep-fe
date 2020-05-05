@@ -12,7 +12,13 @@ import Loader from './components/Loader'
 
 class App extends Component {
     state = {
-        aislesToVisitInfopath: { pathMaps: {}, categories: {}, path: {} },
+
+        aislesToVisitInfo: {
+            path: [0],
+            categories: [''],
+              pathMaps:{},
+        },
+        aisleCount: 0,
         ismaploading: true,
         supermarket: '',
         products: [],
@@ -104,7 +110,6 @@ class App extends Component {
     }
 
     setAisletoVisitInfo = (aislesToVisitInfo) => {
-        console.log(aislesToVisitInfo)
         this.setState({ aislesToVisitInfo })
     }
 
@@ -114,8 +119,12 @@ class App extends Component {
             products,
             supermarket,
             ismaploading,
-            aislesToVisitInfo,
+
+            aislesToVisitInfo: { path, categories, pathMaps },
+            aisleCount,
         } = this.state
+
+
         return (
             <div className="App">
                 <Header />
@@ -140,8 +149,18 @@ class App extends Component {
                         supermarket={supermarket}
                         path="/shopmap"
                     />
-                    <AisleList path="/aisleList" />
-                    <AisleMap pathMaps={aislesToVisitInfo} path="/aisleMap" />
+
+                    <AisleList
+                        path="/aisleList"
+                        number={path[aisleCount]}
+                        listItems={listItems}
+                        aisleCount={aisleCount}
+                        categories={categories}
+                        aisleOrder={path}
+                        increaseAisleCount={this.increaseAisleCount}
+                    />
+                <AisleMap pathMaps={aislesToVisitInfo} path="/aisleMap" />
+
                 </Router>
             </div>
         )
@@ -194,6 +213,18 @@ class App extends Component {
                 }
             })
             return { listItems: newList }
+        })
+    }
+
+    increaseAisleCount = () => {
+        this.setState((currentState) => {
+            return {
+                aisleCount:
+                    currentState.aisleCount ===
+                    currentState.aislesToVisitInfo.path.length - 1
+                        ? 0
+                        : currentState.aisleCount + 1,
+            }
         })
     }
 }

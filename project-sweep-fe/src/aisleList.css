@@ -1,7 +1,8 @@
 .aisleList {
     background-color: cornsilk;
     border: 20px solid cornsilk;
-    max-width: 500px;
+
+    /* max-width: 500px; */
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -59,6 +60,7 @@
 }
 
 .aisleSign {
+    min-width: 350px;
     border: rgb(32, 57, 8) 1px solid;
     background-color: rgb(41, 150, 175);
     color: white;
@@ -74,7 +76,7 @@
     box-shadow: 0px 5px 15px gray;
 }
 
-.aisleNumber::before {
+/* .aisleNumber::before {
     content: '|';
     color: black;
     position: relative;
@@ -92,4 +94,4 @@
     left: 95px;
     top: -151px;
     font-weight: 900;
-}
+} */
