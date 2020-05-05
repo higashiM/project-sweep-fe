@@ -16,6 +16,7 @@ class App extends Component {
         aislesToVisitInfo: {
             path: [0],
             categories: [''],
+            pathMaps: {},
         },
         aisleCount: 0,
         ismaploading: true,
@@ -118,7 +119,8 @@ class App extends Component {
             products,
             supermarket,
             ismaploading,
-            aislesToVisitInfo: { path, categories },
+
+            aislesToVisitInfo: { path, categories, pathMaps },
             aisleCount,
             isLoading,
         } = this.state
@@ -147,6 +149,7 @@ class App extends Component {
                         supermarket={supermarket}
                         path="/shopmap"
                     />
+
                     <AisleList
                         path="/aisleList"
                         number={path[aisleCount]}
@@ -156,7 +159,13 @@ class App extends Component {
                         aisleOrder={path}
                         increaseAisleCount={this.increaseAisleCount}
                     />
-                    <AisleMap path="/aisleMap" />
+                    <AisleMap
+                        aisleCount={aisleCount}
+                        categories={categories}
+                        aisleOrder={path}
+                        pathMaps={pathMaps}
+                        path="/aisleMap"
+                    />
                 </Router>
             </div>
         )

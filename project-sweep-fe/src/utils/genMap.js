@@ -18,7 +18,7 @@ export const getAisleList = (listItems, categoryLookup) => {
             if (!aisleList.includes(aisleNo)) {
                 aisleList.push(aisleNo)
             }
-        }
+        } else console.log('category not found in lookup', element)
     }
     return { aisleList, catAndFood }
 }

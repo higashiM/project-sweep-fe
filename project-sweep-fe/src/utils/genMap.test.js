@@ -27,7 +27,7 @@ const aisleInfo = {
     18: { type: 'cr', x: 5, y: 2, num: 18 },
 }
 
-test('aisleinfo - gen path - all aisles are covered for single aisle', () => {
+test('1 - aisleinfo - gen path - all aisles are covered for single aisle', () => {
     const input = [1]
     const actual = genMap.genPath(input, shoplayout, aisleInfo)
     const waypoints = actual.map((aisle) => aisle[2])
@@ -36,7 +36,7 @@ test('aisleinfo - gen path - all aisles are covered for single aisle', () => {
         expect(waypoints.includes(aisle)).toBe(true)
     })
 })
-test('aisleinfo - gen path - all aisles are covered for multiple aisles', () => {
+test('2 -aisleinfo - gen path - all aisles are covered for multiple aisles', () => {
     const input = [1, 2, 7, 5]
     const actual = genMap.genPath(input, shoplayout, aisleInfo)
     const waypoints = actual.map((aisle) => aisle[2])
@@ -45,7 +45,7 @@ test('aisleinfo - gen path - all aisles are covered for multiple aisles', () => 
         expect(waypoints.includes(aisle)).toBe(true)
     })
 })
-test('aisleinfo - gen path all aisles are covered for more multiple aisles', () => {
+test('3 - aisleinfo - gen path all aisles are covered for more multiple aisles', () => {
     const input = [1, 2, 7, 5, 9, 11, 12, 14, 18]
     const actual = genMap.genPath(input, shoplayout, aisleInfo)
     const waypoints = actual.map((aisle) => aisle[2])
@@ -55,7 +55,7 @@ test('aisleinfo - gen path all aisles are covered for more multiple aisles', () 
     })
 })
 
-test('aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single aisle', () => {
+test('4  -aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single aisle', () => {
     const input = [1]
     const path = genMap.genPath(input, shoplayout, aisleInfo)
     const actual = genMap.assignSVGtoPath(path)
@@ -68,7 +68,7 @@ test('aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single a
     }
 })
 
-test('aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single aisle for multiple aisles', () => {
+test('5 -aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single aisle for multiple aisles', () => {
     const input = [1, 2, 7, 5]
     const path = genMap.genPath(input, shoplayout, aisleInfo)
     const actual = genMap.assignSVGtoPath(path)
@@ -80,7 +80,7 @@ test('aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single a
         }
     }
 })
-test('aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single aisle for more multiple aisles', () => {
+test('6 - aisleinfo - assignSVGtoPath- all aisles have defined SVG path for single aisle for more multiple aisles', () => {
     const input = [1, 2, 7, 5, 9, 11, 17, 12, 14, 18]
     const path = genMap.genPath(input, shoplayout, aisleInfo)
     const actual = genMap.assignSVGtoPath(path)
@@ -127,7 +127,7 @@ const aisleInfo2 = {
     24: { type: 'cr', x: 5, y: 3, num: 24 },
 }
 
-test('aisleinfo2 - gen path - all aisles are covered for single aisle', () => {
+test('7 - aisleinfo2 - gen path - all aisles are covered for single aisle', () => {
     const input = [1]
     const actual = genMap.genPath(input, shoplayout2, aisleInfo2)
     const waypoints = actual.map((aisle) => aisle[2])
@@ -136,17 +136,17 @@ test('aisleinfo2 - gen path - all aisles are covered for single aisle', () => {
         expect(waypoints.includes(aisle)).toBe(true)
     })
 })
-test('aisleinfo2 - gen path - all aisles are covered for multiple aisles', () => {
+test('8 - aisleinfo2 - gen path - all aisles are covered for multiple aisles', () => {
     const input = [1, 2, 7, 5]
     const actual = genMap.genPath(input, shoplayout2, aisleInfo2)
-    console.log(actual)
+
     const waypoints = actual.map((aisle) => aisle[2])
 
     input.forEach((aisle) => {
         expect(waypoints.includes(aisle)).toBe(true)
     })
 })
-test('aisleinfo2 - gen path all aisles are covered for more multiple aisles', () => {
+test('9 - aisleinfo2 - gen path all aisles are covered for more multiple aisles', () => {
     const input = [1, 2, 7, 5, 9, 11, 12, 14, 18]
     const actual = genMap.genPath(input, shoplayout2, aisleInfo2)
     const waypoints = actual.map((aisle) => aisle[2])
@@ -156,7 +156,7 @@ test('aisleinfo2 - gen path all aisles are covered for more multiple aisles', ()
     })
 })
 
-test('aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle', () => {
+test('10 - aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle', () => {
     const input = [1]
     const path = genMap.genPath(input, shoplayout2, aisleInfo2)
     const actual = genMap.assignSVGtoPath(path)
@@ -169,7 +169,7 @@ test('aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single 
     }
 })
 
-test('aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle for multiple aisles', () => {
+test('11 -aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle for multiple aisles', () => {
     const input = [1, 2, 7, 5]
     const path = genMap.genPath(input, shoplayout2, aisleInfo2)
     const actual = genMap.assignSVGtoPath(path)
@@ -181,7 +181,21 @@ test('aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single 
         }
     }
 })
-test('aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle for more multiple aisles', () => {
+
+test('12- aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle for multiple aisles', () => {
+    const input = [1, 2, 7, 5, 13, 6]
+    const path = genMap.genPath(input, shoplayout2, aisleInfo2)
+    const actual = genMap.assignSVGtoPath(path)
+
+    for (const key in actual) {
+        if (key !== 'waypoints') {
+            const element = actual[key]
+            expect(typeof element.path).toBe('object')
+        }
+    }
+})
+
+test('13 - aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for single aisle for more multiple aisles', () => {
     const input = [1, 2, 7, 5, 9, 11, 12, 14, 18]
     const path = genMap.genPath(input, shoplayout2, aisleInfo)
     const actual = genMap.assignSVGtoPath(path)
