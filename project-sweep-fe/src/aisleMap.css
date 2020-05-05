@@ -9,3 +9,7 @@
     border: 20px solid #fff4b3;
     box-shadow: gray -5px 5px 5px;
 }
+
+#waypoint {
+    fill: red;
+}

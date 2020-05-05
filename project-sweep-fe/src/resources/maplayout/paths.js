@@ -14,7 +14,7 @@ const showAisle = (aisleNum, height) => {
 }
 
 const drawWayPoint = (cy) => {
-    return <circle cx="45" cy={cy / 2 - 5} r="10" fill="red" />
+    return <circle id="waypoint" cx="45" cy={cy / 2 - 5} r="10" fill="red" />
 }
 
 const verticalPathSection = (id, height, y) => {
