@@ -1,3 +1,12 @@
+.loaderContainer {
+    max-width: 300px;
+    display: contents;
+}
+
+.loader {
+    width: 300px;
+}
+
 #topleg1 {
     animation: topleg1 2s linear 0s infinite;
     transform-origin: center;

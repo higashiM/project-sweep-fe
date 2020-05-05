@@ -12,6 +12,7 @@ import Loader from './components/Loader'
 
 class App extends Component {
     state = {
+        isLoading: true,
         aislesToVisitInfo: {
             path: [0],
             categories: [''],
@@ -100,7 +101,7 @@ class App extends Component {
 
     componentDidMount() {
         api.getProducts().then((data) => {
-            this.setState({ products: data })
+            this.setState({ products: data, isLoading: false })
         })
     }
 
@@ -121,8 +122,9 @@ class App extends Component {
 
             aislesToVisitInfo: { path, categories, pathMaps },
             aisleCount,
+            isLoading,
         } = this.state
-
+        if (isLoading) return <Loader />
         return (
             <div className="App">
                 <Header />
