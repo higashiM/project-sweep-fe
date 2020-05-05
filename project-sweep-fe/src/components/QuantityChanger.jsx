@@ -1,7 +1,7 @@
 import React from 'react'
 
-const QuantityChanger = () => {
-    const { foodName, quantity } = this.props
+const QuantityChanger = (props) => {
+    const { foodName, quantity } = props
     return (
         <section className="quantity-changer-container">
             <button

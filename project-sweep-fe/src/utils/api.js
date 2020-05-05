@@ -12,6 +12,12 @@ export const getProducts = () => {
 
 export const getCategories = () => {
     return request.get('/category').then(({ data }) => {
+        data.categories.forEach(
+            (category) =>
+                (category.name =
+                    category.name.charAt(0).toUpperCase() +
+                    category.name.substring(1))
+        )
         return data
     })
 }
