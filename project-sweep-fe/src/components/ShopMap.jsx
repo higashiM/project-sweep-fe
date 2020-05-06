@@ -14,7 +14,7 @@ import {
     CheckoutMiddle,
     CheckoutRight,
 } from '../resources/maplayout/index'
-import { drawWayPoint, showAisle } from '../resources/maplayout/paths'
+import { drawWayPoint, showAisle } from '../resources/maplayout/pathsSVG'
 
 const ShopMap = (props) => {
     const categoryLookup = props.supermarket.categoryLookup
@@ -24,10 +24,7 @@ const ShopMap = (props) => {
 
     const arrayAisles = aisleListCat.aisleList
 
-    const [aisles, setAisle] = useState('')
-    //const [arrayAisles, setArrayAisles] = useState([1, 7, 9, 11])
-
-    const [aislePlans, setAislePlans] = useState({
+    const [aislePlans] = useState({
         tl: <TopLeft />,
         tm: <TopMiddle />,
         tr: <TopRight />,
@@ -43,20 +40,121 @@ const ShopMap = (props) => {
 
     const layout = props.supermarket.layout
 
-    const height = { mm: 160, mr: 160, ml: 160 }
+    const midAisle = { tm: 120, tl: 120, tr: 120 }
 
     const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
 
     const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
 
+    const svgPath = genMap.genPathSVG(pathOfAisles, aislesToVisit)
+
     const createMap = (layout, aisleInfo, aislePlans, aislesToVisit) => {
         return (
             <>
+                <path
+                    className="path"
+                    d={`M45 ${
+                        200 + (layout.length - 2) * 160 + 165
+                    } v-5 ${svgPath}`}
+                    stroke="red"
+                    stroke-width="8px"
+                    fill="transparent"
+                    strokeLinecap="round"
+                ></path>
                 {layout.map((row, index) => {
                     //console.log(aislesToVisit, aislePlans, aisleInfo)
                     const y = index
                     return (
                         <>
+                            {layout.flat().map((aisle) => {
+                                switch (aisleInfo[aisle].type) {
+                                    case 'tl':
+                                        return <TopLeft x="0" y="0" />
+                                    case 'tm':
+                                        return (
+                                            <TopMiddle
+                                                x={aisleInfo[aisle].x * 80}
+                                                y="0"
+                                            />
+                                        )
+                                    case 'tr':
+                                        return (
+                                            <TopRight
+                                                x={aisleInfo[aisle].x * 80}
+                                                y="0"
+                                            />
+                                        )
+                                    case 'ml':
+                                        return (
+                                            <MiddleLeft
+                                                x="0"
+                                                y={
+                                                    200 +
+                                                    (aisleInfo[aisle].y - 1) *
+                                                        160
+                                                }
+                                            />
+                                        )
+                                    case 'mm':
+                                        return (
+                                            <MiddleMiddle
+                                                x={aisleInfo[aisle].x * 80}
+                                                y={
+                                                    200 +
+                                                    (aisleInfo[aisle].y - 1) *
+                                                        160
+                                                }
+                                            />
+                                        )
+                                    case 'mr':
+                                        return (
+                                            <MiddleRight
+                                                x={aisleInfo[aisle].x * 80}
+                                                y={
+                                                    200 +
+                                                    (aisleInfo[aisle].y - 1) *
+                                                        160
+                                                }
+                                            />
+                                        )
+                                    case 'cl':
+                                        return (
+                                            <CheckoutLeft
+                                                x="0"
+                                                y={
+                                                    200 +
+                                                    (aisleInfo[aisle].y - 1) *
+                                                        160
+                                                }
+                                            />
+                                        )
+                                    case 'cm':
+                                        return (
+                                            <CheckoutMiddle
+                                                x={aisleInfo[aisle].x * 80}
+                                                y={
+                                                    200 +
+                                                    (aisleInfo[aisle].y - 1) *
+                                                        160
+                                                }
+                                            />
+                                        )
+                                    case 'cr':
+                                        return (
+                                            <CheckoutRight
+                                                x={aisleInfo[aisle].x * 80}
+                                                y={
+                                                    200 +
+                                                    (aisleInfo[aisle].y - 1) *
+                                                        160
+                                                }
+                                            />
+                                        )
+                                    default:
+                                        return null
+                                }
+                            })}
+
                             {row.map((number, index) => {
                                 const aisle = aisleInfo[number]
                                 const xy =
@@ -88,19 +186,19 @@ const ShopMap = (props) => {
                                                                 aisle.num
                                                             ]
                                                         }
-                                                        leaveDelay="500"
+                                                        leaveDelay={2000}
                                                     >
                                                         {drawWayPoint(
-                                                            height[
+                                                            midAisle[
                                                                 aisle.type
-                                                            ] || 200
+                                                            ] || 80
                                                         )}
                                                     </Tooltip>
                                                 ) : null
                                             ) : null}
                                             {showAisle(
                                                 aisle.num,
-                                                height[aisle.type] || 200
+                                                midAisle[aisle.type] || 80
                                             )}
                                         </>
                                     </svg>
@@ -108,64 +206,6 @@ const ShopMap = (props) => {
                             })}
                         </>
                     )
-                })}
-                {layout.flat().map((aisle) => {
-                    switch (aisleInfo[aisle].type) {
-                        case 'tl':
-                            return <TopLeft x="0" y="0" />
-                        case 'tm':
-                            return (
-                                <TopMiddle x={aisleInfo[aisle].x * 80} y="0" />
-                            )
-                        case 'tr':
-                            return (
-                                <TopRight x={aisleInfo[aisle].x * 80} y="0" />
-                            )
-                        case 'ml':
-                            return (
-                                <MiddleLeft
-                                    x="0"
-                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
-                                />
-                            )
-                        case 'mm':
-                            return (
-                                <MiddleMiddle
-                                    x={aisleInfo[aisle].x * 80}
-                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
-                                />
-                            )
-                        case 'mr':
-                            return (
-                                <MiddleRight
-                                    x={aisleInfo[aisle].x * 80}
-                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
-                                />
-                            )
-                        case 'cl':
-                            return (
-                                <CheckoutLeft
-                                    x="0"
-                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
-                                />
-                            )
-                        case 'cm':
-                            return (
-                                <CheckoutMiddle
-                                    x={aisleInfo[aisle].x * 80}
-                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
-                                />
-                            )
-                        case 'cr':
-                            return (
-                                <CheckoutRight
-                                    x={aisleInfo[aisle].x * 80}
-                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
-                                />
-                            )
-                        default:
-                            return null
-                    }
                 })}
             </>
         )
