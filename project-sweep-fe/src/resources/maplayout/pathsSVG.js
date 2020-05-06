@@ -26,7 +26,7 @@ const horizontalPathSection = (id, width, x, y) => {
 }
 
 const both = 150
-const one = 155
+const one = 152
 const full = 160
 const exit = 10
 const end = 75
