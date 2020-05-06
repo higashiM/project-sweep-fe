@@ -26,7 +26,7 @@ class CategoryDropdown extends Component {
 
     render() {
         const { open } = this.state
-        const { categories } = this.props
+        const { categories, foodName, handleNewProduct } = this.props
 
         return (
             <div className="item-card-category dropdown">
@@ -43,13 +43,21 @@ class CategoryDropdown extends Component {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        {categories.map((catergory, i) => {
+                        {categories.map((category, i) => {
                             return (
                                 <MenuItem
-                                    value={catergory.name.toLowerCase()}
-                                    key={`${catergory.id} ${i}`}
+                                    value={category.name.toLowerCase()}
+                                    key={`${category.id} ${i}`}
+                                    onClick={() => {
+                                        if (
+                                            window.confirm(
+                                                `Would you like to add ${foodName} to our database under category ${category.name}?`
+                                            )
+                                        )
+                                            handleNewProduct(foodName, category)
+                                    }}
                                 >
-                                    {catergory.name}
+                                    {category.name}
                                 </MenuItem>
                             )
                         })}

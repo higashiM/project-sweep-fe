@@ -34,6 +34,7 @@ export class ItemList extends Component {
             handleCategoryChange,
             incrementQuantity,
             products,
+            handleNewProduct,
         } = this.props
         if (isLoading) return <Loader />
         return (
@@ -68,6 +69,7 @@ export class ItemList extends Component {
                                             handleCategoryChange
                                         }
                                         categories={categories}
+                                        handleNewProduct={handleNewProduct}
                                     />
                                 )
                             })}

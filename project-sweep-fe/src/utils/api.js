@@ -10,7 +10,7 @@ export const getProducts = () => {
             (product) =>
                 (product.foodName =
                     product.foodName.charAt(0).toUpperCase() +
-                    product.foodName.substring(1))
+                    product.foodName.substring(1).toLowerCase())
         )
         return data.products
     })
@@ -27,8 +27,13 @@ export const getCategories = () => {
         return data
     })
 }
+
 export const getSupermarkets = () => {
     return request.get('/supermarkets').then(({ data }) => {
         return data
     })
+}
+
+export const insertProduct = (foodName, category) => {
+    return request.post('/products', { foodName, category })
 }

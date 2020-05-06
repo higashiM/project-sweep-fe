@@ -12,6 +12,7 @@ const ItemCard = (props) => {
         categories,
         deleteListItem,
         incrementQuantity,
+        handleNewProduct,
     } = props
     return (
         <div className="item-card">
@@ -34,6 +35,7 @@ const ItemCard = (props) => {
                     foodName={foodName}
                     handleCategoryChange={handleCategoryChange}
                     categories={categories}
+                    handleNewProduct={handleNewProduct}
                 />
             ) : (
                 <p

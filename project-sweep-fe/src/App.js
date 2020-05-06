@@ -138,6 +138,7 @@ class App extends Component {
                         handleCategoryChange={this.handleCategoryChange}
                         incrementQuantity={this.incrementQuantity}
                         products={products}
+                        handleNewProduct={this.handleNewProduct}
                     />
                     <SupermarketList
                         setSupermarket={this.setSupermarket}
@@ -251,6 +252,16 @@ class App extends Component {
             })
             return { listItems: newList }
         })
+    }
+
+    handleNewProduct = (foodName, category) => {
+        if (
+            this.state.products.filter((product) => {
+                return product.foodName.toLowerCase() === foodName.toLowerCase()
+            }).length === 0
+        ) {
+            api.insertProduct(foodName, category)
+        }
     }
 }
 
