@@ -75,7 +75,9 @@ class AisleList extends Component {
                     {sortListItems(products).map((category, index) => {
                         return (
                             <section key={category + index}>
-                                <h3>{category.name}</h3>
+                                <h3 className="categoryName">
+                                    {category.name}
+                                </h3>
                                 <div>
                                     {category.items.map((item, index) => {
                                         return (

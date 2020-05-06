@@ -4,18 +4,40 @@
     margin: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #fff4b3;
+    background-color: #faf3dd;
     align-items: center;
-    border: 20px solid #fff4b3;
+    border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
+}
+
+.shopMap::before {
+    content: '';
+    position: relative;
+    top: -21px;
+    left: 280px;
+    border-width: 80px 0px 0 80px;
+    border-style: solid;
+    border-color: #b1ede8 #f4f1de;
+    box-shadow: gray -4px 4px 4px;
+    transition: all 0.5s;
+}
+
+.mapTitle {
+    position: relative;
+    top: -40px;
 }
 
 .shopMapSVG {
     border: black;
+    position: relative;
+    top: -40px;
     border-style: solid;
     box-shadow: darkblue;
     background-color: #c0c0c0;
     box-shadow: 0px 5px 15px gray;
+    width: 80%;
+    height: 50%;
+    margin: auto;
 }
 
 #waypoint {
@@ -24,4 +46,53 @@
 
 #category_tooltip {
     font-size: xx-large;
+}
+
+@media screen and (max-width: 814px) {
+    .shopMap,
+    .aisleList {
+        width: 500px;
+    }
+    .shopMap::before {
+        left: 230px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .shopMap,
+    .aisleList {
+        width: 400px;
+    }
+    .shopMap::before {
+        left: 185px;
+        border-width: 70px 0px 0 70px;
+    }
+}
+@media screen and (max-width: 570px) {
+    .shopMap,
+    .aisleList {
+        width: 300px;
+    }
+    .shopMap::before {
+        left: 136px;
+        border-width: 70px 0px 0 70px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .shopMap,
+    .aisleList {
+        width: 280px;
+    }
+    .shopMap::before {
+        left: 126px;
+        border-width: 70px 0px 0 70px;
+    }
+}
+@media screen and (max-width: 330px) {
+    .shopMap {
+        width: 250px;
+    }
+    .shopMap::before {
+        left: 115.5px;
+        border-width: 60px 0px 0 60px;
+    }
 }
