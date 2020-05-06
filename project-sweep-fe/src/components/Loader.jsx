@@ -14,9 +14,9 @@ const Loader = () => {
                 <g
                     id="Page-1"
                     stroke="none"
-                    stroke-width="1"
+                    strokeWidth="1"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                 >
                     <g id="Mobile">
                         <circle
@@ -29,9 +29,9 @@ const Loader = () => {
                         <polyline
                             id="Path"
                             stroke="#666A74"
-                            stroke-width="20"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="20"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             points="381.5 554 434.922244 554 458.068985 585.34063 496.292361 786 861.854127 786 920.5 585.34063 472.744448 585.34063"
                         ></polyline>
                         <line
@@ -41,9 +41,9 @@ const Loader = () => {
                             y2="785.25"
                             id="Line"
                             stroke="#666A74"
-                            stroke-width="20"
-                            stroke-linecap="square"
-                            stroke-linejoin="round"
+                            strokeWidth="20"
+                            strokeLinecap="square"
+                            strokeLinejoin="round"
                         ></line>
                         <line
                             x1="609.241379"
@@ -52,9 +52,9 @@ const Loader = () => {
                             y2="784.253731"
                             id="Line-Copy"
                             stroke="#666A74"
-                            stroke-width="20"
-                            stroke-linecap="square"
-                            stroke-linejoin="round"
+                            strokeWidth="20"
+                            strokeLinecap="square"
+                            strokeLinejoin="round"
                         ></line>
                         <line
                             x1="693.241379"
@@ -63,9 +63,9 @@ const Loader = () => {
                             y2="784.253731"
                             id="Line-Copy-2"
                             stroke="#666A74"
-                            stroke-width="20"
-                            stroke-linecap="square"
-                            stroke-linejoin="round"
+                            strokeWidth="20"
+                            strokeLinecap="square"
+                            strokeLinejoin="round"
                         ></line>
                         <line
                             x1="776.258621"
@@ -74,9 +74,9 @@ const Loader = () => {
                             y2="784.253731"
                             id="Line-Copy-3"
                             stroke="#666A74"
-                            stroke-width="20"
-                            stroke-linecap="square"
-                            stroke-linejoin="round"
+                            strokeWidth="20"
+                            strokeLinecap="square"
+                            strokeLinejoin="round"
                         ></line>
                         <line
                             x1="860.264706"
@@ -85,20 +85,20 @@ const Loader = () => {
                             y2="695.26"
                             id="Line-Copy-4"
                             stroke="#666A74"
-                            stroke-width="20"
-                            stroke-linecap="square"
-                            stroke-linejoin="round"
+                            strokeWidth="20"
+                            strokeLinecap="square"
+                            strokeLinejoin="round"
                         ></line>
                         <path
                             d="M495.821987,787 C447.392671,827 447.392671,847 495.821987,847 C544.251304,847 665.810641,847 860.5,847"
                             id="Path-3"
                             stroke="#666A74"
-                            stroke-width="20"
+                            strokeWidth="20"
                         ></path>
                         <circle
                             id="Oval"
                             stroke="#33353B"
-                            stroke-width="15"
+                            strokeWidth="15"
                             cx="526.5"
                             cy="900"
                             r="24.5"
@@ -106,7 +106,7 @@ const Loader = () => {
                         <circle
                             id="Oval-Copy"
                             stroke="#33353B"
-                            stroke-width="15"
+                            strokeWidth="15"
                             cx="808.5"
                             cy="900"
                             r="24.5"
@@ -136,8 +136,8 @@ const Loader = () => {
                             y2="532.168182"
                             id="Line-2"
                             stroke="#273C75"
-                            stroke-width="50"
-                            stroke-linecap="round"
+                            strokeWidth="50"
+                            strokeLinecap="round"
                         ></line>
                         <line
                             x1="163.993132"
@@ -146,8 +146,8 @@ const Loader = () => {
                             y2="505.042045"
                             id="Line-2-Copy-5"
                             stroke="#273C75"
-                            stroke-width="50"
-                            stroke-linecap="round"
+                            strokeWidth="50"
+                            strokeLinecap="round"
                         ></line>
                         <line
                             x1="165.03"
@@ -156,8 +156,8 @@ const Loader = () => {
                             y2="773"
                             id="topleg2"
                             stroke="#273C75"
-                            stroke-width="60"
-                            stroke-linecap="round"
+                            strokeWidth="60"
+                            strokeLinecap="round"
                         ></line>
                         <line
                             x1="153"
@@ -166,8 +166,8 @@ const Loader = () => {
                             y2="772.638158"
                             id="topleg1"
                             stroke="#273C75"
-                            stroke-width="60"
-                            stroke-linecap="round"
+                            strokeWidth="60"
+                            strokeLinecap="round"
                         ></line>
                         <line
                             x1="220"
@@ -176,8 +176,8 @@ const Loader = () => {
                             y2="924.180921"
                             id="bottomleg2"
                             stroke="#273C75"
-                            stroke-width="60"
-                            stroke-linecap="round"
+                            strokeWidth="60"
+                            strokeLinecap="round"
                         ></line>
                         <line
                             x1="122"
@@ -186,8 +186,8 @@ const Loader = () => {
                             y2="899"
                             id="bottomleg1"
                             stroke="#273C75"
-                            stroke-width="60"
-                            stroke-linecap="round"
+                            strokeWidth="60"
+                            strokeLinecap="round"
                         ></line>
                     </g>
                 </g>

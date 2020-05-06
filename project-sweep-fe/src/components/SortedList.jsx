@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import sortListItems from '../utils/sortListItems'
-// const foods = require('../staticData/foods')
 
 const SortedList = (props) => {
     return (
@@ -11,7 +10,11 @@ const SortedList = (props) => {
                         <h3>{category.name}</h3>
                         <ul>
                             {category.items.map((item, index) => {
-                                return <li key={item + index}>{item}</li>
+                                return (
+                                    <li
+                                        key={item + index}
+                                    >{`${item[0]} ${item[1]}`}</li>
+                                )
                             })}
                         </ul>
                     </section>

@@ -1,31 +1,15 @@
 import React, { Component } from 'react'
-// import { makeStyles } from '@material-ui/core/styles'
+
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-// import Button from '@material-ui/core/Button'
-// import catergories from '../staticData/categories'
-// import * as api from '../utils/api'
 
 class CategoryDropdown extends Component {
     state = {
         open: true,
         categories: [],
     }
-
-    // useStyles = makeStyles((theme) => ({
-    //     button: {
-    //         display: 'block',
-    //         marginTop: 0,
-    //     },
-    //     formControl: {
-    //         margin: 0,
-    //         minWidth: 120,
-    //     },
-    // }))
-
-    // classes = this.useStyles()
 
     handleChange = (event) => {
         const { foodName, handleCategoryChange } = this.props
@@ -46,8 +30,6 @@ class CategoryDropdown extends Component {
 
         return (
             <div className="item-card-category dropdown">
-                {/* <Button className={classes.button} onClick={handleOpen}></Button> */}
-                {/* className={this.classes.formControl} */}
                 <FormControl>
                     <InputLabel id="dropdown">Category</InputLabel>
                     <Select

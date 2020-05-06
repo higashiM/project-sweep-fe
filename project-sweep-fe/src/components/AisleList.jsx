@@ -3,11 +3,12 @@ import sortListItems from '../utils/sortListItems'
 import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
 import Loader from './Loader'
+import Checkbox from '@material-ui/core/Checkbox'
 
 class AisleList extends Component {
     state = {
+        checkedItems: [],
         isLoading: true,
-        number: 12,
         products: [
             {
                 _id: '5eac3027f1a6f8b162de7d7a',
@@ -36,13 +37,14 @@ class AisleList extends Component {
     }
 
     render() {
-        const { products } = this.state
+        const { products, checkedItems } = this.state
         const {
             increaseAisleCount,
             aisleCount,
             number,
             aisleOrder,
             isLoading,
+            removeListItems,
         } = this.props
         const signItems = sortListItems(this.state.products)
         getCategoriesArray(signItems)
@@ -59,6 +61,7 @@ class AisleList extends Component {
                     {signItems.map((category, i) => {
                         return (
                             <div
+                                key={category + i}
                                 className={`aisleCatergory aisleCatergory${i}`}
                             >
                                 {category.name}
@@ -71,28 +74,60 @@ class AisleList extends Component {
                         return (
                             <section key={category + index}>
                                 <h3>{category.name}</h3>
-                                <ul>
+                                <div>
                                     {category.items.map((item, index) => {
                                         return (
-                                            <li key={item + index}>{item}</li>
+                                            <div
+                                                className="aisleListItem"
+                                                key={item + index}
+                                            >
+                                                <li>{`${item[0]} ${item[1]}`}</li>
+                                                <Checkbox
+                                                    onClick={() =>
+                                                        this.handleCheckBox(
+                                                            item[1]
+                                                        )
+                                                    }
+                                                    name="checkedB"
+                                                    color="primary"
+                                                />
+                                            </div>
                                         )
                                     })}
-                                </ul>
+                                </div>
                             </section>
                         )
                     })}
                 </main>
                 <Link
                     to={
-                        aisleCount === aisleOrder.length - 1 ? '/' : '/aisleMap'
+                        aisleCount === aisleOrder.length - 1
+                            ? '/summaryPage'
+                            : '/aisleMap'
                     }
                     className="shoppingListCompleteButton"
-                    onClick={increaseAisleCount}
+                    onClick={() => {
+                        increaseAisleCount()
+                        removeListItems(checkedItems)
+                    }}
                 >
                     Next aisle...
                 </Link>
             </div>
         )
+    }
+    handleCheckBox = (item) => {
+        this.setState((currState) => {
+            if (currState.checkedItems.indexOf(item) === -1) {
+                return { checkedItems: [...currState.checkedItems, item] }
+            } else {
+                return {
+                    checkedItems: currState.checkedItems.filter((curItem) => {
+                        return curItem !== item
+                    }),
+                }
+            }
+        })
     }
 }
 

@@ -7,9 +7,9 @@ const QuantityChanger = (props) => {
             <button
                 className="increment-button down"
                 onClick={() => {
-                    this.props.incrementQuantity(-1, foodName)
+                    props.incrementQuantity(-1, foodName)
                     if (quantity === 1) {
-                        this.props.deleteListItem(foodName)
+                        props.deleteListItem(foodName)
                     }
                 }}
             >
@@ -18,7 +18,7 @@ const QuantityChanger = (props) => {
             <button
                 className="increment-button up"
                 onClick={() => {
-                    this.props.incrementQuantity(1, foodName)
+                    props.incrementQuantity(1, foodName)
                 }}
             >
                 +

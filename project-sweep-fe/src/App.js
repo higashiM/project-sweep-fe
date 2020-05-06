@@ -9,6 +9,7 @@ import AisleMap from './components/AisleMap'
 import { Router } from '@reach/router'
 import * as api from './utils/api'
 import Loader from './components/Loader'
+import SummaryPage from './components/SummaryPage'
 
 class App extends Component {
     state = {
@@ -157,6 +158,7 @@ class App extends Component {
                         aisleCount={aisleCount}
                         categories={categories}
                         aisleOrder={path}
+                        removeListItems={this.removeListItems}
                         increaseAisleCount={this.increaseAisleCount}
                     />
                     <AisleMap
@@ -165,6 +167,11 @@ class App extends Component {
                         aisleOrder={path}
                         pathMaps={pathMaps}
                         path="/aisleMap"
+                    />
+                    <SummaryPage
+                        path="/summaryPage"
+                        listItems={listItems}
+                        clearList={this.clearList}
                     />
                 </Router>
             </div>
@@ -175,6 +182,10 @@ class App extends Component {
         this.setState((currentState) => {
             return { listItems: [newItem, ...currentState.listItems] }
         })
+    }
+
+    clearList = () => {
+        this.setState({ listItems: [] })
     }
 
     deleteListItem = (itemName) => {
@@ -230,6 +241,15 @@ class App extends Component {
                         ? 0
                         : currentState.aisleCount + 1,
             }
+        })
+    }
+
+    removeListItems = (checkedItems) => {
+        this.setState((currState) => {
+            const newList = currState.listItems.filter((item) => {
+                return checkedItems.indexOf(item.foodName) === -1
+            })
+            return { listItems: newList }
         })
     }
 }
