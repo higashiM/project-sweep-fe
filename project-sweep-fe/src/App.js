@@ -34,9 +34,6 @@ class App extends Component {
         })
     }
     componentDidUpdate() {
-        // Remember state for the next mount
-        console.log('here')
-
         localStorage.setItem('appState', JSON.stringify(this.state))
     }
 

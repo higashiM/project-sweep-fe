@@ -71,6 +71,7 @@ h2 {
     align-items: center;
     border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
+    min-height: 400px;
 }
 
 .notepad::before {

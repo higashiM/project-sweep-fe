@@ -22,15 +22,10 @@
     transition: all 0.5s;
 }
 
-.mapTitle {
-    position: relative;
-    top: -40px;
-}
-
 .shopMapSVG {
     border: black;
     position: relative;
-    top: -40px;
+    top: -5px;
     border-style: solid;
     box-shadow: darkblue;
     background-color: #c0c0c0;
