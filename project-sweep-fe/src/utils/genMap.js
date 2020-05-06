@@ -1,5 +1,5 @@
-import { paths, drawWayPoint, showAisle } from '../resources/maplayout/paths'
-import { topPaths } from '../resources/maplayout/topPaths'
+//import { paths, drawWayPoint, showAisle } from '../resources/maplayout/paths'
+import { paths } from '../resources/maplayout/pathsSVG'
 
 export const getAisleList = (listItems, categoryLookup) => {
     const aisleList = []
@@ -26,7 +26,7 @@ export const getAisleList = (listItems, categoryLookup) => {
 export const genPath = (aislesToVisit, layout, ai) => {
     const start = [0, layout.length, 'start']
     const maxRow = layout.length - 1
-    const maxColumn = layout[0].length
+    // const maxColumn = layout[0].length
 
     const columnsToTraverse = {} //lookup object for colums containg aisles to visit
     const aisleTickOff = {} //object to count off which aisles have been visited
@@ -264,7 +264,6 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
 
         const ref = 'xy'.concat(currX.toString(), currY.toString())
         let newPath = paths[path]
-        if (currY === 0) newPath = topPaths[path]
 
         const waypoint = currPos ? currPos : null
         //constructs onject for renderingsvg
@@ -283,4 +282,20 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
     //console.log(aislestoVisit)
 
     return aislestoVisit
+}
+
+export const genPathSVG = (path, aislestoVisit) => {
+    let concatPath = ' '
+
+    for (let index = 1; index < path.length - 1; index++) {
+        const element = path[index]
+
+        const x = element[0]
+        const y = element[1]
+        const ref = 'xy'.concat(x.toString(), y.toString())
+        const addPath = aislestoVisit[ref].path
+
+        concatPath = concatPath.concat(addPath)
+    }
+    return concatPath
 }
