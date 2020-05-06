@@ -26,10 +26,9 @@ class AisleMap extends Component {
             aislesToVisit,
             svgPath,
         } = pathMaps[thisAisle]
-        console.log(pathMaps[thisAisle])
 
         const superMap = CreateMap(layout, ai, aislesToVisit, svgPath)
-        console.log(layout)
+
         if (ismaploading) return <LoaderPath />
         return (
             <div className="aisleMap">
