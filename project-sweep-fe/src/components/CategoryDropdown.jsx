@@ -46,7 +46,7 @@ class CategoryDropdown extends Component {
                         {categories.map((catergory, i) => {
                             return (
                                 <MenuItem
-                                    value={catergory.name}
+                                    value={catergory.name.toLowerCase()}
                                     key={`${catergory.id} ${i}`}
                                 >
                                     {catergory.name}
