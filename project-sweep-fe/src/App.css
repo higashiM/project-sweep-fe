@@ -16,18 +16,18 @@ a {
 }
 
 .app-title {
-    background-color: #99b7d3;
+    background-color: #423c51;
     margin: 20px;
     padding: 10px;
     border-radius: 10px;
     color: white;
-    border: 2px solid #7f97ae;
+    border: 2px solid #423c51;
     box-shadow: 5px 5px 5px gray;
     font-weight: 900;
 }
 
 body {
-    background-color: #98c3cb;
+    background-color: #b1ede8;
     text-align: center;
 }
 
@@ -67,9 +67,9 @@ h2 {
     margin: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #fff4b3;
+    background-color: #faf3dd;
     align-items: center;
-    border: 20px solid #fff4b3;
+    border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
 }
 
@@ -80,7 +80,7 @@ h2 {
     left: 170px;
     border-width: 40px 0px 0 40px;
     border-style: solid;
-    border-color: #98c3cb #ebe1a6;
+    border-color: #b1ede8 #f4f1de;
     box-shadow: gray -4px 4px 4px;
     transition: all 0.5s;
 }
@@ -126,7 +126,7 @@ ul {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     grid-area: but;
-    background-color: #fff4b3;
+    background-color: #f4f1de;
     align-self: center;
     color: rgb(80, 80, 80);
     font-size: 16px;
@@ -143,6 +143,7 @@ ul {
     text-align: left;
     padding: 5px;
     margin: 0;
+
     color: rgb(172, 171, 171);
     cursor: pointer;
 }
@@ -195,6 +196,8 @@ ul {
 
 .increment-button {
     font-size: 20px;
+    padding-right: 10px;
+    background-color: white;
 }
 
 .increment-button.up {
@@ -219,12 +222,38 @@ ul {
 }
 
 .shoppingListCompleteButton {
-    background-color: #99b7d3;
+    background-color: #423c51;
     padding: 8px 15px;
     margin-top: 20px;
     border-radius: 10px;
     color: white;
-    border: 2px solid #7f97ae;
+    border: 2px solid #423c51;
     font-size: 20px;
     font-weight: 900;
+}
+
+@media screen and (max-width: 400px) {
+    .notepad {
+        width: 260px;
+        margin: 10px;
+    }
+    .notepad::before {
+        left: 130px;
+    }
+    .item-card {
+        grid-template-columns: 90px 140px 65px;
+    }
+    .quantity-changer-container {
+        padding-left: 5px;
+    }
+    .inputArea {
+        min-width: 230px;
+        padding: 0px 10px;
+    }
+    .sorted-list {
+        padding-left: 30px;
+    }
+    .removeButton {
+        padding-right: 15px;
+    }
 }

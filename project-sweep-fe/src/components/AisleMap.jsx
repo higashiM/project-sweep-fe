@@ -13,7 +13,7 @@ class AisleMap extends Component {
         if (ismaploading) return <Loader />
         return (
             <div className="aisleMap">
-                <h2>
+                <h2 className="mapTitle">
                     Aisle {thisAisle} going to {nextAisle}
                 </h2>
                 <>{map}</>

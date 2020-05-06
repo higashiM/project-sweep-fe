@@ -4,12 +4,42 @@
     margin: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #fff4b3;
+    background-color: #faf3dd;
     align-items: center;
-    border: 20px solid #fff4b3;
+    min-height: 700px;
+    border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
+}
+.aisleMap::before {
+    content: '';
+    position: relative;
+    top: -21px;
+    left: 280px;
+    border-width: 80px 0px 0 80px;
+    border-style: solid;
+    border-color: #b1ede8 #f4f1de;
+    box-shadow: gray -4px 4px 4px;
+    transition: all 0.5s;
 }
 
 #waypoint {
     fill: red;
+}
+@media screen and (max-width: 658px) {
+    .aisleMap {
+        width: 500px;
+    }
+    .aisleMap::before {
+        left: 230px;
+    }
+}
+@media screen and (max-width: 560px) {
+    .aisleMap {
+        width: 300px;
+        margin: auto;
+    }
+    .aisleMap::before {
+        left: 140px;
+        border-width: 60px 0px 0 60px;
+    }
 }
