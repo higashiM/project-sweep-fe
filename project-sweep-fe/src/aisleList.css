@@ -1,6 +1,6 @@
 .aisleList {
-    background-color: cornsilk;
-    border: 20px solid cornsilk;
+    background-color: #faf3dd;
+    border: 20px solid #faf3dd;
 
     /* max-width: 500px; */
     margin: 20px;
@@ -10,6 +10,23 @@
     box-shadow: gray -5px 5px 5px;
 }
 
+.aisleList::before {
+    content: '';
+    position: relative;
+    top: -21px;
+    left: 174px;
+    border-width: 45px 0px 0 45px;
+    border-style: solid;
+    border-color: #b1ede8 #f4f1de;
+    box-shadow: gray -4px 4px 4px;
+    transition: all 0.5s;
+}
+
+.aisleList:hover::before {
+    transform: scale(1.3);
+    top: -14px;
+    left: 168px;
+}
 .aisleCatergory {
     border: rgba(0, 0, 0, 0.28) 2px solid;
     border-bottom: 0;
@@ -101,3 +118,54 @@
     top: -151px;
     font-weight: 900;
 } */
+@media screen and (max-width: 814px) {
+    .aisleList {
+        width: 500px;
+    }
+    .aisleList::before {
+        left: 248px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .aisleList {
+        width: 400px;
+    }
+    .aisleList::before {
+        left: 185px;
+        border-width: 70px 0px 0 70px;
+    }
+}
+@media screen and (max-width: 570px) {
+    .aisleList {
+        width: 300px;
+    }
+    .aisleSign {
+        min-width: 250px;
+    }
+    .aisleList::before {
+        left: 136px;
+        border-width: 70px 0px 0 70px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .aisleList {
+        width: 280px;
+    }
+    .aisleListItem,
+    .categoryName {
+        padding: 0px 15px;
+    }
+    .aisleList::before {
+        left: 126px;
+        border-width: 70px 0px 0 70px;
+    }
+}
+@media screen and (max-width: 330px) {
+    .aisleList {
+        width: 250px;
+    }
+    .aisleList::before {
+        left: 115.5px;
+        border-width: 60px 0px 0 60px;
+    }
+}

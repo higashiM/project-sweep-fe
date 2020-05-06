@@ -1,6 +1,6 @@
 {
-    "short_name": "Aislon8r",
-    "name": "Aislonator",
+    "short_name": "Aisle Navigate",
+    "name": "Aisle Navigate",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -16,5 +16,5 @@
     "start_url": ".",
     "display": "standalone",
     "theme_color": "#000000",
-    "background_color": "#ffffff"
+    "background_color": "#99b7d3"
 }

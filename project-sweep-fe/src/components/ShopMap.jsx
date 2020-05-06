@@ -260,7 +260,7 @@ const ShopMap = (props) => {
 
     return (
         <div className="shopMap">
-            <h2>Shop Map</h2>
+            <h2 className="mapTitle">Shop Map</h2>
             {pathMapSVG(0, 0, 5, 2)}
 
             <Link
