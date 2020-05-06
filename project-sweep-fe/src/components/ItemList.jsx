@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Link } from '@reach/router'
 import * as api from '../utils/api'
 import Loader from './Loader'
+import Button from '@material-ui/core/Button'
 
 export class ItemList extends Component {
     state = {
@@ -35,6 +36,7 @@ export class ItemList extends Component {
             incrementQuantity,
             products,
             handleNewProduct,
+            clearList,
         } = this.props
         if (isLoading) return <Loader />
         return (
@@ -74,8 +76,18 @@ export class ItemList extends Component {
                                 )
                             })}
                         </ul>
+                        <div className="clearButtonContainer">
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={clearList}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </div>
                 )}
+
                 <Link
                     to="/supermarketlist"
                     className="shoppingListCompleteButton"
