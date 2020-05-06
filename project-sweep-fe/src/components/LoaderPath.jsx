@@ -1,7 +1,7 @@
 import React from 'react'
 
 const LoaderPath = (props) => {
-    let aisleCount = props.aisleCount
+    const { aisleCount, totalAisles } = props
 
     return (
         <div className="loaderPathContainer">
@@ -24,14 +24,16 @@ const LoaderPath = (props) => {
                         <path
                             id="redLine1"
                             d="M0 990 h900 l 100 -100 h-900 z "
-                            stroke="red"
+                            stroke="black"
+                            stroke-width="1px"
                             fill="red"
                         ></path>
 
                         <path
                             id="shopSquare"
-                            d={`M600 790 h 200 v${aisleCount * -75} h-200
-                            } z `}
+                            d={`M600 790 h 250 v${
+                                (aisleCount / totalAisles) * -500
+                            } h-250 z `}
                             stroke="red"
                             fill="red"
                         ></path>

@@ -207,3 +207,12 @@ test('13 - aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for si
         }
     }
 })
+
+test('14 - new svgPath function', () => {
+    const input = [1, 2, 7, 5, 9, 11, 12, 14, 18]
+    const path = genMap.genPath(input, shoplayout2, aisleInfo)
+    const actual = genMap.assignSVGtoPath(path)
+
+    const result = genMap.genPathSVG(path, actual, shoplayout2, aisleInfo)
+    console.log(actual)
+})

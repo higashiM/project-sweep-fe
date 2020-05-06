@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import sortListItems from '../utils/sortListItems'
 import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
-import { paths } from '../resources/maplayout/paths'
 import Loader from './Loader'
 
 class AisleList extends Component {

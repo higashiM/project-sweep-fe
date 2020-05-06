@@ -56,3 +56,15 @@
     box-shadow: 0px 5px 15px gray;
     margin: 10px;
 }
+
+.path {
+    stroke-dasharray: 10000;
+    stroke-dashoffset: 10000;
+    animation: dash 10s linear forwards;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

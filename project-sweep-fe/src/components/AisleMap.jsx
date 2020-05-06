@@ -18,7 +18,10 @@ class AisleMap extends Component {
                         <p>Next</p>
                         <p className="aisleMapNumberInd">{nextAisle}</p>
                     </div>
-                    <LoaderPath aisleCount={aisleCount} />
+                    <LoaderPath
+                        aisleCount={aisleCount}
+                        totalAisles={aisleOrder.length}
+                    />
                 </section>
 
                 <>{map}</>
