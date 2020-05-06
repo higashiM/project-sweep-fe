@@ -10,22 +10,6 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
-if ('caches' in window) {
-    caches.open('my-cache').then((myCache) => {
-        // Do stuff
-
-        myCache.addAll(['/supermarketlist', '/category', '/supermarkets'])
-    })
-
-    caches.match('/products').then((cachedResponse) => {
-        if (cachedResponse) {
-            console.log(cachedResponse)
-        } else {
-            // Handle if response not found
-        }
-    })
-}
-
 const isLocalhost = Boolean(
     window.location.hostname === 'localhost' ||
         // [::1] is the IPv6 localhost address.

@@ -234,8 +234,8 @@ ul {
 
 @media screen and (max-width: 400px) {
     .notepad {
-        width: 260px;
-        margin: 10px;
+        max-width: 260px;
+        margin: 5px;
     }
     .notepad::before {
         left: 130px;
