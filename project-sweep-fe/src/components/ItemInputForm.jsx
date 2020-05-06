@@ -60,7 +60,6 @@ export class ItemInputForm extends Component {
         event.preventDefault()
         const { newItem } = this.state
         const { products } = this.props
-        console.log(newItem)
         let foodMatch = products.find((food) => {
             return food.foodName === newItem.foodName
         })

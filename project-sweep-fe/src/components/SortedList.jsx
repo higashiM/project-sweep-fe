@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import sortListItems from '../utils/sortListItems'
-// const foods = require('../staticData/foods')
 
 const SortedList = (props) => {
     return (
