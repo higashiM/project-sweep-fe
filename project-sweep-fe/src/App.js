@@ -12,98 +12,32 @@ import Loader from './components/Loader'
 import SummaryPage from './components/SummaryPage'
 
 class App extends Component {
-    state = {
-        isLoading: true,
-        aislesToVisitInfo: {
-            path: [0],
-            categories: [''],
-            pathMaps: {},
-        },
-        aisleCount: 0,
-        ismaploading: true,
-        supermarket: '',
-        products: [],
-        listItems: [
-            {
-                _id: '5eac3027f1a6f8b162de7d7a',
-                foodName: 'mature cheddar',
-                quantity: 2,
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d1b',
-                    name: 'cheese',
-                },
-            },
-            {
-                quantity: 1,
-                _id: '5eac3027f1a6f8b162de7d73',
-                foodName: 'strawberries',
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d14',
-                    name: 'fruit',
-                },
-            },
-            {
-                _id: '5eac3027f1a6f8b162de7d78',
-                foodName: 'hot cross buns',
-                quantity: 6,
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d19',
-                    name: 'bakery',
-                },
-                __v: 0,
-            },
-            {
-                quantity: 8,
-                _id: '5eac3027f1a6f8b162de7d9f',
-                foodName: 'brooklyn lager',
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d42',
-                    name: 'beer, cider & ales',
-                },
-            },
-            {
-                _id: '5eac3027f1a6f8b162de7d8a',
-                quantity: 1,
-                foodName: 'jaffa cakes',
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d2b',
-                    name: 'biscuits, chocolate & sweets',
-                },
-            },
-            {
-                _id: '5eac3027f1a6f8b162de7d8a',
-                quantity: 1,
-                foodName: 'custard creams',
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d24',
-                    name: 'biscuits, chocolate & sweets',
-                },
-            },
-            {
-                _id: '5eac3027f1a6f8b162de7d8a',
-                quantity: 1,
-                foodName: 'malted milks',
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d24',
-                    name: 'biscuits, chocolate & sweets',
-                },
-            },
-            {
-                quantity: 2,
-                _id: '5eac3027f1a6f8b162de7da1',
-                foodName: 'yellow tail shiraz',
-                category: {
-                    _id: '5eac3027f1a6f8b162de7d44',
-                    name: 'wine, prosecco & champagne',
-                },
-            },
-        ],
-    }
+    state = localStorage.getItem('appState')
+        ? JSON.parse(localStorage.getItem('appState'))
+        : {
+              isLoading: true,
+              aislesToVisitInfo: {
+                  path: [0],
+                  categories: [''],
+                  pathMaps: {},
+              },
+              aisleCount: 0,
+              ismaploading: true,
+              supermarket: '',
+              products: [],
+              listItems: [],
+          }
 
     componentDidMount() {
         api.getProducts().then((data) => {
             this.setState({ products: data, isLoading: false })
         })
+    }
+    componentDidUpdate() {
+        // Remember state for the next mount
+        console.log('here')
+
+        localStorage.setItem('appState', JSON.stringify(this.state))
     }
 
     setSupermarket = (supermarket) => {
