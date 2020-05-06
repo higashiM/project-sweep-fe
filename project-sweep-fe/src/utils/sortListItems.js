@@ -4,7 +4,9 @@ const sortListItems = (unsortedList) => {
     unsortedList.forEach((item) => {
         let foodCategoryObj = {}
         let categoryMatch = foodCategoryArr.find((category) => {
-            return category.name === item.category.name
+            return (
+                category.name.toLowerCase() === item.category.name.toLowerCase()
+            )
         })
 
         if (!categoryMatch) {

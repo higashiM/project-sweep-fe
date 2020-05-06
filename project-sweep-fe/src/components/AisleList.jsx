@@ -24,6 +24,8 @@ class AisleList extends Component {
 
     componentDidMount() {
         const { listItems, categories, aisleOrder, aisleCount } = this.props
+        console.log(listItems)
+
         this.setState({
             isLoading: false,
             products: listItems.filter((item) => {
@@ -48,7 +50,7 @@ class AisleList extends Component {
         } = this.props
         const signItems = sortListItems(this.state.products)
         getCategoriesArray(signItems)
-
+        console.log(this.state.products)
         if (isLoading) return <Loader />
         return (
             <div className="aisleList">
