@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
-import Loader from '../components/Loader'
+import LoaderPath from '../components/LoaderPath'
 
 class AisleMap extends Component {
     render() {
@@ -10,12 +10,20 @@ class AisleMap extends Component {
 
         const map = pathMaps[thisAisle]
 
-        if (ismaploading) return <Loader />
+        if (ismaploading) return <LoaderPath />
         return (
             <div className="aisleMap">
-                <h2 className="mapTitle">
-                    Aisle {thisAisle} going to {nextAisle}
-                </h2>
+                <section className="aisleMapSign">
+                    <div className="aisleMapNumber">
+                        <p>Next</p>
+                        <p className="aisleMapNumberInd">{nextAisle}</p>
+                    </div>
+                    <LoaderPath
+                        aisleCount={aisleCount}
+                        totalAisles={aisleOrder.length}
+                    />
+                </section>
+
                 <>{map}</>
                 <Link to="/aisleList" className="shoppingListCompleteButton">
                     Next list...

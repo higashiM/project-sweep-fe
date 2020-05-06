@@ -43,3 +43,58 @@
         border-width: 60px 0px 0 60px;
     }
 }
+.aisleMapNumber {
+    font-weight: 700;
+    grid-area: num;
+    font-size: 1.8em;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: rgba(0, 0, 0, 0.28) 1px solid;
+}
+
+.aisleMapNumber p {
+    margin: 0px;
+}
+
+.aisleMapNumberInd {
+    font-size: 50px;
+}
+
+.loaderPathContainer {
+    grid-area: loaderPath;
+    width: 100%;
+    max-width: 50em;
+
+    display: contents;
+}
+
+.aisleMapSign {
+    min-width: 200px;
+    max-width: 600px;
+
+    border: rgb(32, 57, 8) 1px solid;
+    background-color: rgb(41, 150, 175);
+    color: white;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 'num loaderPath';
+    align-content: left;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px gray;
+    margin: 10px;
+}
+
+.path {
+    stroke-dasharray: 10000;
+    stroke-dashoffset: 10000;
+    animation: dash 10s linear forwards;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
