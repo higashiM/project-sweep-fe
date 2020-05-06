@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import sortListItems from '../utils/sortListItems'
 import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
-import { paths } from '../resources/maplayout/paths'
 import Loader from './Loader'
 import Checkbox from '@material-ui/core/Checkbox'
 
@@ -10,7 +9,6 @@ class AisleList extends Component {
     state = {
         checkedItems: [],
         isLoading: true,
-        number: 12,
         products: [
             {
                 _id: '5eac3027f1a6f8b162de7d7a',
@@ -39,13 +37,14 @@ class AisleList extends Component {
     }
 
     render() {
-        const { products } = this.state
+        const { products, checkedItems } = this.state
         const {
             increaseAisleCount,
             aisleCount,
             number,
             aisleOrder,
             isLoading,
+            removeListItems,
         } = this.props
         const signItems = sortListItems(this.state.products)
         getCategoriesArray(signItems)
@@ -62,6 +61,7 @@ class AisleList extends Component {
                     {signItems.map((category, i) => {
                         return (
                             <div
+                                key={category + i}
                                 className={`aisleCatergory aisleCatergory${i}`}
                             >
                                 {category.name}
@@ -71,17 +71,17 @@ class AisleList extends Component {
                 </section>
                 <main className="sorted-list">
                     {sortListItems(products).map((category, index) => {
-                        console.log(category)
                         return (
                             <section key={category + index}>
                                 <h3>{category.name}</h3>
                                 <div>
                                     {category.items.map((item, index) => {
                                         return (
-                                            <div className="aisleListItem">
-                                                <li
-                                                    key={item + index}
-                                                >{`${item[0]} ${item[1]}`}</li>
+                                            <div
+                                                className="aisleListItem"
+                                                key={item + index}
+                                            >
+                                                <li>{`${item[0]} ${item[1]}`}</li>
                                                 <Checkbox
                                                     onClick={() =>
                                                         this.handleCheckBox(
@@ -101,10 +101,15 @@ class AisleList extends Component {
                 </main>
                 <Link
                     to={
-                        aisleCount === aisleOrder.length - 1 ? '/' : '/aisleMap'
+                        aisleCount === aisleOrder.length - 1
+                            ? '/summaryPage'
+                            : '/aisleMap'
                     }
                     className="shoppingListCompleteButton"
-                    onClick={increaseAisleCount}
+                    onClick={() => {
+                        increaseAisleCount()
+                        removeListItems(checkedItems)
+                    }}
                 >
                     Next aisle...
                 </Link>
@@ -112,7 +117,6 @@ class AisleList extends Component {
         )
     }
     handleCheckBox = (item) => {
-        console.log(item)
         this.setState((currState) => {
             if (currState.checkedItems.indexOf(item) === -1) {
                 return { checkedItems: [...currState.checkedItems, item] }

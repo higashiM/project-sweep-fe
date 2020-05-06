@@ -1,5 +1,3 @@
-// const foods = require('../staticData/foods')
-
 const sortListItems = (unsortedList) => {
     const foodCategoryArr = []
 
