@@ -9,6 +9,7 @@ import AisleMap from './components/AisleMap'
 import { Router } from '@reach/router'
 import * as api from './utils/api'
 import Loader from './components/Loader'
+import SupermarketsMap from './components/SupermarketsMap'
 
 class App extends Component {
     state = {
@@ -128,7 +129,8 @@ class App extends Component {
         return (
             <div className="App">
                 <Header />
-                <Router>
+                <SupermarketsMap />
+                {/* <Router>
                     <ItemList
                         path="/"
                         listItems={listItems}
@@ -166,7 +168,7 @@ class App extends Component {
                         pathMaps={pathMaps}
                         path="/aisleMap"
                     />
-                </Router>
+                </Router> */}
             </div>
         )
     }
