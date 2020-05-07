@@ -61,12 +61,7 @@ class AisleMap extends Component {
                     layout={layout}
                 />
                 <Button variant="contained" color="primary">
-                    <Link
-                        to="/aisleList"
-                        className="shoppingListCompleteButton"
-                    >
-                        Next list...
-                    </Link>
+                    <Link to="/aisleList">Next list...</Link>
                 </Button>
             </div>
         )

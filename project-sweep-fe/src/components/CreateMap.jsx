@@ -23,6 +23,14 @@ export default function CreateMap(
     aisleListCat,
     listItems
 ) {
+    /*     console.log(
+        layout,
+        aisleInfo,
+        aislesToVisit,
+        svgPath,
+        aisleListCat,
+        listItems
+    ) */
     return (
         <>
             <path
@@ -96,10 +104,8 @@ export default function CreateMap(
             })}
 
             {layout.flat().map((aisleNum) => {
-                // console.log(aislesToVisit, aisleListCat.food)
-                const midAisle = { tm: 120, tl: 120, tr: 120 }
                 const aisleData = aisleInfo[aisleNum]
-                const type = aisleData
+                const type = aisleData.type
                 const x = aisleData.x
                 const y = aisleData.y
 
@@ -107,7 +113,7 @@ export default function CreateMap(
                 return (
                     <svg
                         x={`${x * 80}`}
-                        y={`${y * 200 + -40 * (y === layout.length - 1)}`}
+                        y={`${200 + (aisleInfo[aisleNum].y - 1) * 160}`}
                         id={xy}
                         width="80px"
                         version="1.1"
@@ -117,8 +123,8 @@ export default function CreateMap(
                         {aislesToVisit[xy] ? (
                             aislesToVisit[xy].waypoint ? (
                                 <Waypoint
-                                    cy={midAisle[type] || 80 - 5}
-                                    num={aisleData.num}
+                                    cy={80}
+                                    num={aisleNum}
                                     food={
                                         aisleListCat.food[aisleNum]
                                             ? aisleListCat.food[aisleNum]
@@ -127,10 +133,10 @@ export default function CreateMap(
                                     listItems={listItems}
                                 />
                             ) : (
-                                showAisle(aisleData.num, midAisle[type] || 80)
+                                showAisle(aisleNum, 80)
                             )
                         ) : (
-                            showAisle(aisleData.num, midAisle[type] || 80)
+                            showAisle(aisleNum, 80)
                         )}
                     </svg>
                 )

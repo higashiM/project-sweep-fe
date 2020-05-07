@@ -13,6 +13,13 @@
     font-size: large;
 }
 
+.MuiPaper-root {
+    background-color: red;
+}
+.foodList {
+    color: red;
+}
+
 .path {
     stroke-dasharray: 4000;
     stroke-dashoffset: 4000;

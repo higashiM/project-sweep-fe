@@ -49,7 +49,9 @@ export default function Waypoint(props) {
                 }}
             >
                 {food.map((item) => (
-                    <div id={item}>{item}</div>
+                    <div className="foodlist" id={item}>
+                        {item}
+                    </div>
                 ))}
             </Popover>
         </>
