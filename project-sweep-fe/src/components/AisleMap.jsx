@@ -3,6 +3,7 @@ import { Link } from '@reach/router'
 import LoaderPath from '../components/LoaderPath'
 import MapBox from './MapBox'
 import CreateMap from './CreateMap'
+import Button from '@material-ui/core/Button'
 
 class AisleMap extends Component {
     render() {
@@ -25,9 +26,18 @@ class AisleMap extends Component {
             ai,
             aislesToVisit,
             svgPath,
+            aisleListCat,
+            listItems,
         } = pathMaps[thisAisle]
 
-        const superMap = CreateMap(layout, ai, aislesToVisit, svgPath)
+        const superMap = CreateMap(
+            layout,
+            ai,
+            aislesToVisit,
+            svgPath,
+            aisleListCat,
+            listItems
+        )
 
         if (ismaploading) return <LoaderPath />
         return (
@@ -50,9 +60,14 @@ class AisleMap extends Component {
                     superMap={superMap}
                     layout={layout}
                 />
-                <Link to="/aisleList" className="shoppingListCompleteButton">
-                    Next list...
-                </Link>
+                <Button variant="contained" color="primary">
+                    <Link
+                        to="/aisleList"
+                        className="shoppingListCompleteButton"
+                    >
+                        Next list...
+                    </Link>
+                </Button>
             </div>
         )
     }
