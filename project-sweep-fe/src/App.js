@@ -26,6 +26,7 @@ class App extends Component {
               supermarket: '',
               products: [],
               listItems: [],
+              userLocation: [53.5347271, -2.0665093],
           }
 
     componentDidMount() {
@@ -35,7 +36,6 @@ class App extends Component {
     }
     componentDidUpdate() {
         // Remember state for the next mount
-        console.log('here')
 
         localStorage.setItem('appState', JSON.stringify(this.state))
     }
@@ -54,12 +54,13 @@ class App extends Component {
             products,
             supermarket,
             ismaploading,
-
+            userLocation,
             aislesToVisitInfo: { path, categories, pathMaps },
             aisleCount,
             isLoading,
         } = this.state
         if (isLoading) return <Loader />
+        console.log(userLocation)
         return (
             <div className="App">
                 <Header />
@@ -78,6 +79,7 @@ class App extends Component {
                     <SupermarketList
                         setSupermarket={this.setSupermarket}
                         path="/supermarketlist"
+                        userLocation={userLocation}
                     />
                     <ShopMap
                         setAisletoVisitInfo={this.setAisletoVisitInfo}

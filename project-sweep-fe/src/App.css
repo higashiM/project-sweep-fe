@@ -250,12 +250,14 @@ a {
 }
 
 .shoppingListCompleteButton {
-    background-color: #423c51;
+    width: 90%;
+    text-align: left;
+    /* background-color: #423c51; */
     padding: 8px 15px;
     margin-top: 20px;
     border-radius: 10px;
     color: white;
-    border: 2px solid #423c51;
+    /* border: 2px solid #423c51; */
     font-size: 20px;
     font-weight: 900;
 }
@@ -294,4 +296,15 @@ a {
 
 .button {
     margin-top: 20px;
+}
+
+.supermarketButton {
+    text-align: left;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.superMarketName {
+    font-size: 20px;
 }
