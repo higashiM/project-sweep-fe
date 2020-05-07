@@ -28,12 +28,25 @@ const SummaryPage = (props) => {
             </div>
             <div className="button">
                 <Button variant="contained" color="primary">
-                    <Link to="/">Keep items for next time</Link>
+                    <Link
+                        to="/"
+                        onClick={() => {
+                            props.clearPath()
+                        }}
+                    >
+                        Keep items for next time
+                    </Link>
                 </Button>
             </div>
             <div className="button">
                 <Button variant="contained" color="primary">
-                    <Link to="/" onClick={props.clearList}>
+                    <Link
+                        to="/"
+                        onClick={() => {
+                            props.clearList()
+                            props.clearPath()
+                        }}
+                    >
                         Clear list
                     </Link>
                 </Button>

@@ -187,7 +187,7 @@ a {
 .item-card {
     display: grid;
     grid-template-columns: 85px 180px 80px;
-    grid-template-rows: 30px;
+    grid-template-rows: auto;
     grid-template-areas:
         'quan name but'
         'quan cat but';
@@ -212,14 +212,15 @@ a {
     text-align: left;
     min-width: 300px;
     margin-top: 20px;
+    margin-left: 20px;
 }
 
-.unsorted-list-container {
+/* .unsorted-list-container {
     border: solid;
     width: 70%;
     height: 100vh;
     margin: auto;
-}
+} */
 
 .increment-button {
     font-size: 20px;
@@ -266,10 +267,6 @@ a {
     }
     .notepad::before {
         left: 130px;
-    }
-
-    .notepad:hover::before {
-        left: 124px;
     }
 
     .item-card {

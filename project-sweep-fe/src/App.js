@@ -108,6 +108,7 @@ class App extends Component {
                         path="/summaryPage"
                         listItems={listItems}
                         clearList={this.clearList}
+                        clearPath={this.clearPath}
                     />
                 </Router>
             </div>
@@ -186,6 +187,18 @@ class App extends Component {
                 return checkedItems.indexOf(item.foodName) === -1
             })
             return { listItems: newList }
+        })
+    }
+
+    clearPath = () => {
+        this.setState({
+            aislesToVisitInfo: {
+                path: [0],
+                categories: [''],
+                pathMaps: {},
+                aisleCount: 0,
+                supermarket: '',
+            },
         })
     }
 
