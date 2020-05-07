@@ -4,6 +4,7 @@ import { paths } from '../resources/maplayout/pathsSVG'
 export const getAisleList = (listItems, categoryLookup) => {
     const aisleList = []
     const catAndFood = {}
+    const food = {}
 
     for (const item in listItems) {
         const element = listItems[item]
@@ -18,9 +19,12 @@ export const getAisleList = (listItems, categoryLookup) => {
             if (!aisleList.includes(aisleNo)) {
                 aisleList.push(aisleNo)
             }
+
+            if (!food[aisleNo]) food[aisleNo] = []
+            food[aisleNo].push(element.foodName)
         } else console.log('category not found in lookup', element)
     }
-    return { aisleList, catAndFood }
+    return { aisleList, catAndFood, food }
 }
 
 export const genPath = (aislesToVisit, layout, ai) => {

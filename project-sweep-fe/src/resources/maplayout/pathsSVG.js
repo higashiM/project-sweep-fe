@@ -1,20 +1,15 @@
 import React from 'react'
 
 const showAisle = (aisleNum, height) => {
-    let x = 40
-    if (aisleNum > 9) x = 35
+    let x = 45
 
     return (
         <>
-            <text x={x} y={`${height}`}>
+            <text x={x} y={`${height}`} style={{ textAnchor: 'middle' }}>
                 {`${aisleNum}`}
             </text>
         </>
     )
-}
-
-const drawWayPoint = (cy) => {
-    return <circle id="waypoint" cx="45" cy={cy - 5} r="10" fill="red" />
 }
 
 const verticalPathSection = (id, height, y) => {
@@ -117,4 +112,4 @@ const paths = {
 
     BotMtoBotR: botRTraverse,
 }
-export { paths, showAisle, drawWayPoint }
+export { paths, showAisle }
