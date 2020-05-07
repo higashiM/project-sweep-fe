@@ -87,11 +87,7 @@ const ShopMap = (props) => {
                 layout={layout}
             />
             <Button variant="contained" color="primary">
-                <Link
-                    to="/aisleMap"
-                    className="shoppingListCompleteButton"
-                    onClick={() => handleClick()}
-                >
+                <Link to="/aisleMap" onClick={() => handleClick()}>
                     Get Started...
                 </Link>
             </Button>
