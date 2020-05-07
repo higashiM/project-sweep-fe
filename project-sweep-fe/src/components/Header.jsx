@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <svg
             className="header"
-            width="396px"
+            width="360px"
             height="101px"
             viewBox="0 0 396 101"
             version="1.1"
