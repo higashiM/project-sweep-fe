@@ -84,16 +84,12 @@ export class ItemList extends Component {
                             >
                                 Clear
                             </Button>
+                            <Button variant="contained" color="primary">
+                                <Link to="/supermarketlist">Go shop...</Link>
+                            </Button>
                         </div>
                     </div>
                 )}
-
-                <Link
-                    to="/supermarketlist"
-                    className="shoppingListCompleteButton"
-                >
-                    Go shop...
-                </Link>
             </main>
         )
     }
