@@ -187,7 +187,7 @@ a {
 .item-card {
     display: grid;
     grid-template-columns: 85px 180px 80px;
-    grid-template-rows: 30px;
+    grid-template-rows: auto;
     grid-template-areas:
         'quan name but'
         'quan cat but';
@@ -212,14 +212,15 @@ a {
     text-align: left;
     min-width: 300px;
     margin-top: 20px;
+    margin-left: 20px;
 }
 
-.unsorted-list-container {
+/* .unsorted-list-container {
     border: solid;
     width: 70%;
     height: 100vh;
     margin: auto;
-}
+} */
 
 .increment-button {
     font-size: 20px;
@@ -249,12 +250,14 @@ a {
 }
 
 .shoppingListCompleteButton {
-    background-color: #423c51;
+    width: 90%;
+    text-align: left;
+    /* background-color: #423c51; */
     padding: 8px 15px;
     margin-top: 20px;
     border-radius: 10px;
     color: white;
-    border: 2px solid #423c51;
+    /* border: 2px solid #423c51; */
     font-size: 20px;
     font-weight: 900;
 }
@@ -266,10 +269,6 @@ a {
     }
     .notepad::before {
         left: 130px;
-    }
-
-    .notepad:hover::before {
-        left: 124px;
     }
 
     .item-card {
@@ -297,4 +296,15 @@ a {
 
 .button {
     margin-top: 20px;
+}
+
+.supermarketButton {
+    text-align: left;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.superMarketName {
+    font-size: 20px;
 }
