@@ -4,6 +4,7 @@ import getCategoriesArray from '../utils/getCategoriesArray'
 import { Link } from '@reach/router'
 import Loader from './Loader'
 import Checkbox from '@material-ui/core/Checkbox'
+import Button from '@material-ui/core/Button'
 
 class AisleList extends Component {
     state = {
@@ -103,20 +104,23 @@ class AisleList extends Component {
                         )
                     })}
                 </main>
-                <Link
-                    to={
-                        aisleCount === aisleOrder.length - 1
-                            ? '/summaryPage'
-                            : '/aisleMap'
-                    }
-                    className="shoppingListCompleteButton"
-                    onClick={() => {
-                        increaseAisleCount()
-                        removeListItems(checkedItems)
-                    }}
-                >
-                    Next aisle...
-                </Link>
+                <div className="button">
+                    <Button variant="contained" color="primary">
+                        <Link
+                            to={
+                                aisleCount === aisleOrder.length - 1
+                                    ? '/summaryPage'
+                                    : '/aisleMap'
+                            }
+                            onClick={() => {
+                                increaseAisleCount()
+                                removeListItems(checkedItems)
+                            }}
+                        >
+                            Next aisle...
+                        </Link>
+                    </Button>
+                </div>
             </div>
         )
     }
