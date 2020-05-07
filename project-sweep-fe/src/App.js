@@ -70,6 +70,7 @@ class App extends Component {
                         incrementQuantity={this.incrementQuantity}
                         products={products}
                         handleNewProduct={this.handleNewProduct}
+                        clearList={this.clearList}
                     />
                     <SupermarketList
                         setSupermarket={this.setSupermarket}

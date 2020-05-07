@@ -72,9 +72,9 @@
 }
 
 .path {
-    stroke-dasharray: 10000;
-    stroke-dashoffset: 10000;
-    animation: dash 10s linear forwards;
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: dash 15s linear forwards;
 }
 
 @keyframes dash {

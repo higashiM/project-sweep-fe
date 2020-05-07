@@ -1,14 +1,33 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
 import LoaderPath from '../components/LoaderPath'
+import MapBox from './MapBox'
+import CreateMap from './CreateMap'
 
 class AisleMap extends Component {
     render() {
         const { aisleCount, aisleOrder, pathMaps, ismaploading } = this.props
-        const thisAisle = aisleOrder[aisleCount - 1]
+
+        let thisAisle = aisleOrder[aisleCount - 1]
         const nextAisle = aisleOrder[aisleCount]
 
-        const map = pathMaps[thisAisle]
+        if (aisleCount === 0) {
+            thisAisle = 'start'
+        }
+        console.log(thisAisle, nextAisle)
+
+        const {
+            xStart,
+            yStart,
+            width,
+            height,
+            layout,
+            ai,
+            aislesToVisit,
+            svgPath,
+        } = pathMaps[thisAisle]
+
+        const superMap = CreateMap(layout, ai, aislesToVisit, svgPath)
 
         if (ismaploading) return <LoaderPath />
         return (
@@ -23,8 +42,14 @@ class AisleMap extends Component {
                         totalAisles={aisleOrder.length}
                     />
                 </section>
-
-                <>{map}</>
+                <MapBox
+                    xStart={xStart}
+                    yStart={yStart}
+                    width={width}
+                    height={height}
+                    superMap={superMap}
+                    layout={layout}
+                />
                 <Link to="/aisleList" className="shoppingListCompleteButton">
                     Next list...
                 </Link>

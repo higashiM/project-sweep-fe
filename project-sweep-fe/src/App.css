@@ -258,3 +258,7 @@ ul {
         padding-right: 15px;
     }
 }
+
+.clearButtonContainer {
+    display: flex;
+}
