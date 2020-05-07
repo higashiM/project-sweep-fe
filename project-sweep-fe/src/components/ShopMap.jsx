@@ -1,20 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from '@reach/router'
 import * as genMap from '../utils/genMap'
 import Loader from '../components/Loader'
-import Tooltip from '@material-ui/core/Tooltip'
-import {
-    TopLeft,
-    TopMiddle,
-    TopRight,
-    MiddleLeft,
-    MiddleMiddle,
-    MiddleRight,
-    CheckoutLeft,
-    CheckoutMiddle,
-    CheckoutRight,
-} from '../resources/maplayout/index'
-import { drawWayPoint, showAisle } from '../resources/maplayout/pathsSVG'
 import CreateMap from './CreateMap'
 import MapBox from './MapBox'
 
@@ -25,18 +12,6 @@ const ShopMap = (props) => {
     const aisleListCat = genMap.getAisleList(listItems, categoryLookup)
 
     const arrayAisles = aisleListCat.aisleList
-
-    const [aislePlans] = useState({
-        tl: <TopLeft />,
-        tm: <TopMiddle />,
-        tr: <TopRight />,
-        ml: <MiddleLeft />,
-        mm: <MiddleMiddle />,
-        mr: <MiddleRight />,
-        cl: <CheckoutLeft />,
-        cm: <CheckoutMiddle />,
-        cr: <CheckoutRight />,
-    })
 
     const ai = props.supermarket.aisleInfo
 
