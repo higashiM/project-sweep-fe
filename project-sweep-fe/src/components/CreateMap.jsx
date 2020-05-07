@@ -9,6 +9,7 @@ import {
     CheckoutLeft,
     CheckoutMiddle,
     CheckoutRight,
+    Trolley,
 } from '../resources/maplayout/index'
 
 import { showAisle } from '../resources/maplayout/pathsSVG'
@@ -30,7 +31,7 @@ export default function CreateMap(
         svgPath,
         aisleListCat,
         listItems
-    ) */
+        ) */
     return (
         <>
             <path
@@ -79,10 +80,12 @@ export default function CreateMap(
                         )
                     case 'cl':
                         return (
-                            <CheckoutLeft
-                                x="0"
-                                y={200 + (aisleInfo[aisle].y - 1) * 160}
-                            />
+                            <>
+                                <CheckoutLeft
+                                    x="0"
+                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
+                                />
+                            </>
                         )
                     case 'cm':
                         return (
@@ -105,25 +108,20 @@ export default function CreateMap(
 
             {layout.flat().map((aisleNum) => {
                 const aisleData = aisleInfo[aisleNum]
-                const type = aisleData.type
+
                 const x = aisleData.x
                 const y = aisleData.y
+                const posy = 200 + (aisleInfo[aisleNum].y - 1) * 160
+                const posx = x * 80
 
                 const xy = 'xy' + x.toString() + y.toString()
                 return (
-                    <svg
-                        x={`${x * 80}`}
-                        y={`${200 + (aisleInfo[aisleNum].y - 1) * 160}`}
-                        id={xy}
-                        width="80px"
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                    >
+                    <>
                         {aislesToVisit[xy] ? (
                             aislesToVisit[xy].waypoint ? (
                                 <Waypoint
-                                    cy={80}
+                                    cy={posy + 80}
+                                    cx={posx}
                                     num={aisleNum}
                                     food={
                                         aisleListCat.food[aisleNum]
@@ -133,12 +131,12 @@ export default function CreateMap(
                                     listItems={listItems}
                                 />
                             ) : (
-                                showAisle(aisleNum, 80)
+                                showAisle(aisleNum, posx + 45, posy + 80)
                             )
                         ) : (
-                            showAisle(aisleNum, 80)
+                            showAisle(aisleNum, posx + 45, posy + 80)
                         )}
-                    </svg>
+                    </>
                 )
             })}
         </>

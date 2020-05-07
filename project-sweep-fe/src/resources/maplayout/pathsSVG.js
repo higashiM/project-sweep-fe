@@ -1,11 +1,9 @@
 import React from 'react'
 
-const showAisle = (aisleNum, height) => {
-    let x = 45
-
+const showAisle = (aisleNum, posx, posy) => {
     return (
         <>
-            <text x={x} y={`${height}`} style={{ textAnchor: 'middle' }}>
+            <text x={posx} y={`${posy}`} style={{ textAnchor: 'middle' }}>
                 {`${aisleNum}`}
             </text>
         </>

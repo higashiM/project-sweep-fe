@@ -1,0 +1,20 @@
+
+<svg width="80px" height="px" x={this.props.x} y={this.props.y} viewBox="0 0 80 80" version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Trolley</title>
+
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <title>Mobile</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mobile">
+            <line x1="388.741379" y1="354.75" x2="430.258621" y2="554.25" id="Line" stroke="#666A74" stroke-width="20" stroke-linecap="square" stroke-linejoin="round"></line>
+            <line x1="470.741379" y1="354.746269" x2="512.258621" y2="553.253731" id="Line-Copy" stroke="#666A74" stroke-width="20" stroke-linecap="square" stroke-linejoin="round"></line>
+            <line x1="554.741379" y1="354.746269" x2="596.258621" y2="553.253731" id="Line-Copy-2" stroke="#666A74" stroke-width="20" stroke-linecap="square" stroke-linejoin="round"></line>
+            <line x1="637.758621" y1="354.746269" x2="680.241379" y2="553.253731" id="Line-Copy-3" stroke="#666A74" stroke-width="20" stroke-linecap="square" stroke-linejoin="round"></line>
+            <line x1="721.764706" y1="354.74" x2="746.235294" y2="464.26" id="Line-Copy-4" stroke="#666A74" stroke-width="20" stroke-linecap="square" stroke-linejoin="round"></line>
+            <path d="M357.321987,556 C308.892671,596 308.892671,616 357.321987,616 C405.751304,616 527.310641,616 722,616" id="Path-3" stroke="#666A74" stroke-width="20"></path>
+            <polyline id="Path" stroke="#666A74" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" points="243 323 296.422244 323 319.568985 354.34063 357.792361 555 723.354127 555 782 354.34063 334.244448 354.34063"></polyline>
+            <circle id="Oval" stroke="#33353B" stroke-width="15" cx="388" cy="669" r="24.5"></circle>
+            <circle id="Oval-Copy" stroke="#33353B" stroke-width="15" cx="670" cy="669" r="24.5"></circle>
+        </g>
+    </g>
+</svg>
