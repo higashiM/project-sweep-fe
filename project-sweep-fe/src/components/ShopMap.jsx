@@ -1,98 +1,107 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from '@reach/router'
 import * as genMap from '../utils/genMap'
 import Loader from '../components/Loader'
 import CreateMap from './CreateMap'
-import MapBox from './MapBox'
 import Button from '@material-ui/core/Button'
 
-const ShopMap = (props) => {
-    const categoryLookup = props.supermarket.categoryLookup
-    const listItems = props.listItems
+export default class ShopMap extends Component {
+    state = { isloading: true, svgPath: {}, aislesToVisit: {} }
 
-    const aisleListCat = genMap.getAisleList(listItems, categoryLookup)
+    componentDidMount = () => {
+        this.calculatePath()
+    }
 
-    const arrayAisles = aisleListCat.aisleList
-    const supermarketname = props.supermarket.name
-    const ai = props.supermarket.aisleInfo
+    calculatePath = () => {
+        const listItems = this.props.listItems
+        const categoryLookup = this.props.supermarket.categoryLookup
+        const aisleListCat = genMap.getAisleList(listItems, categoryLookup)
+        const arrayAisles = aisleListCat.aisleList
+        const ai = this.props.supermarket.aisleInfo
+        const layout = this.props.supermarket.layout
+        const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
+        const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
 
-    const layout = props.supermarket.layout
+        const svgPath = genMap.genPathSVG(
+            pathOfAisles,
+            aislesToVisit,
+            false,
+            layout.length
+        )
 
-    const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
+        this.setState(
+            { svgPath, aislesToVisit, aisleListCat, isloading: false },
+            this.setDataforAisles(
+                pathOfAisles,
+                layout,
+                ai,
+                aislesToVisit,
+                svgPath,
+                aisleListCat,
+                listItems
+            )
+        )
+    }
 
-    const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
-
-    const svgPath = genMap.genPathSVG(pathOfAisles, aislesToVisit)
-
-    const superMap = CreateMap(
+    setDataforAisles = (
+        pathOfAisles,
         layout,
         ai,
         aislesToVisit,
         svgPath,
         aisleListCat,
         listItems
-    )
-
-    const handleClick = () => {
-        const pathMaps = {}
-
-        const pathOfWayPoints = pathOfAisles.filter(
-            (point) => Number.isInteger(point[2]) | (point[2] === 'start')
-        )
-
-        pathOfWayPoints.forEach((path, index) => {
-            const xStart = path[0]
-            const yStart = Math.min(path[1], layout.length - 1) //added min to take account for start at 0,3
-            let width = layout[0].length
-            let height = layout.length
-            if (pathOfWayPoints[index + 1]) {
-                width = Math.abs(pathOfWayPoints[index + 1][0] - path[0]) + 1
-                height = Math.abs(pathOfWayPoints[index + 1][1] - path[1]) + 1
-            }
-            pathMaps[path[2]] = {
-                xStart,
-                yStart,
-                width,
-                height,
-                layout,
-                ai,
-                aislesToVisit,
-                svgPath,
-                aisleListCat,
-                listItems,
-            }
-        })
+    ) => {
+        const pathMaps = {
+            layout,
+            ai,
+            aislesToVisit,
+            svgPath,
+            aisleListCat,
+            listItems,
+            pathOfAisles,
+        }
         const categories = aisleListCat.catAndFood
-        const path = pathOfWayPoints
+        const path = pathOfAisles
             .map((point) => point[2])
             .filter((point) => Number.isInteger(point))
-        props.setAisletoVisitInfo({ categories, path, pathMaps })
+        this.props.setAisletoVisitInfo({ categories, path, pathMaps })
     }
 
-    if (props.ismaploading) return <Loader />
+    render() {
+        const supermarketname = this.props.supermarket.name
+        const { isMapLoading } = this.props
+        const { isLoading, svgPath, aislesToVisit, aisleListCat } = this.state
+        const listItems = this.props.listItems
+        const ai = this.props.supermarket.aisleInfo
+        const layout = this.props.supermarket.layout
 
-    return (
-        <div className="shopMap">
-            <h2 className="mapTitle">
-                Your Optimal Route @ {supermarketname}
-                <p className="mapHelp">click on a waypoint to view details</p>
-            </h2>
+        console.log(this.props.supermarket.layout)
 
-            <MapBox
-                xStart={0}
-                yStart={0}
-                width={layout[0].length}
-                height={layout.length}
-                superMap={superMap}
-                layout={layout}
-            />
-            <Button variant="contained" color="primary">
-                <Link to="/aisleMap" onClick={() => handleClick()}>
-                    Get Started...
-                </Link>
-            </Button>
-        </div>
-    )
+        if (isLoading | isMapLoading) {
+            return <Loader />
+        }
+        return (
+            <div className="shopMap">
+                <h2 className="mapTitle">
+                    Your Optimal Route @ {supermarketname}
+                    <p className="mapHelp">
+                        click on a waypoint to view details
+                    </p>
+                </h2>
+
+                <CreateMap
+                    layout={layout}
+                    aisleInfo={ai}
+                    aislesToVisit={aislesToVisit}
+                    svgPath={svgPath}
+                    aisleListCat={aisleListCat}
+                    listItems={listItems}
+                />
+                <Button variant="contained" color="primary">
+                    <Link to="/aisleMap">Get Started...</Link>
+                </Button>
+            </div>
+        )
+    }
 }
-
-export default ShopMap
