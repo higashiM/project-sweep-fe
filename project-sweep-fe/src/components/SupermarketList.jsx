@@ -75,7 +75,7 @@ export default class SupermarketList extends Component {
                                                 this.handleClick(supermarket)
                                             }
                                             key={supermarket._id}
-                                            to="/shopmap"
+                                            to="/itemcheck"
                                         >
                                             <div className="superMarketName">
                                                 {supermarket.name}
