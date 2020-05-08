@@ -333,10 +333,9 @@ export const genPathSVG = (path, aislestoVisit, aisleMap, layoutLength) => {
     const moveX = 80 * path[1][0]
 
     let concatPath = ' '
-    if (aisleMap && path[0][2] !== 'start')
+    if (aisleMap && path[0][2] !== 'start') {
         concatPath = concatPath.concat('m', moveX, ' ', moveY)
-
-    if (!aisleMap) concatPath = concatPath.concat('v-5')
+    } else concatPath = concatPath.concat('v-5')
 
     for (let index = 1; index < path.length - 1; index++) {
         const element = path[index]

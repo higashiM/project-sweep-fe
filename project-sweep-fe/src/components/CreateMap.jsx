@@ -24,7 +24,10 @@ export default function CreateMap(props) {
         svgPath,
         aisleListCat,
         listItems,
+        trolleyAisle,
     } = props
+
+    let istrolleyAisle = trolleyAisle || 'start'
 
     return (
         <svg
@@ -118,17 +121,21 @@ export default function CreateMap(props) {
                     <>
                         {aislesToVisit[xy] ? (
                             aislesToVisit[xy].waypoint ? (
-                                <Waypoint
-                                    cy={posy + 80}
-                                    cx={posx}
-                                    num={aisleNum}
-                                    food={
-                                        aisleListCat.food[aisleNum]
-                                            ? aisleListCat.food[aisleNum]
-                                            : null
-                                    }
-                                    listItems={listItems}
-                                />
+                                aisleNum === istrolleyAisle ? (
+                                    <Trolley x={posx + 15} y={posy + 25} />
+                                ) : (
+                                    <Waypoint
+                                        cy={posy + 80}
+                                        cx={posx}
+                                        num={aisleNum}
+                                        food={
+                                            aisleListCat.food[aisleNum]
+                                                ? aisleListCat.food[aisleNum]
+                                                : null
+                                        }
+                                        listItems={listItems}
+                                    />
+                                )
                             ) : (
                                 showAisle(aisleNum, posx + 45, posy + 80)
                             )
@@ -138,7 +145,10 @@ export default function CreateMap(props) {
                     </>
                 )
             })}
-            <Trolley x={15} y={200 + (layout.length - 2) * 160 + 120} />
+
+            {istrolleyAisle === 'start' ? (
+                <Trolley x={15} y={200 + (layout.length - 2) * 160 + 120} />
+            ) : null}
         </svg>
     )
 }

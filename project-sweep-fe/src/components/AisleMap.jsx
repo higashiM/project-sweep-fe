@@ -70,7 +70,7 @@ class AisleMap extends Component {
         const { layout, ai, aisleListCat, listItems } = pathMaps
 
         const { newAislesToVisit, newSVGPath, isloading } = this.state
-        // const thisAisle = aisleOrder[aisleCount - 1]
+        const thisAisle = aisleOrder[aisleCount - 1]
         const nextAisle = aisleOrder[aisleCount]
 
         if (ismaploading | isloading) return <LoaderPath />
@@ -93,6 +93,7 @@ class AisleMap extends Component {
                     svgPath={newSVGPath}
                     aisleListCat={aisleListCat}
                     listItems={listItems}
+                    trolleyAisle={thisAisle}
                 />
                 <Button variant="contained" color="primary">
                     <Link to="/aisleList">Next list...</Link>

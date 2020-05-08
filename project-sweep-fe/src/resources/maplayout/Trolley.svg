@@ -10,15 +10,17 @@
           xmlnsXlink="http://www.w3.org/1999/xlink"
         >
     <title>Trolley</title>
-          <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+          <g stroke="none" strokeWidth="1" fill="#D6DBDF  " fillRule="evenodd">
             <g id="Custom-Preset-3">
-              <use
-                fill="#F06C00"
-                fillOpacity="1"
-                strokeOpacity="1"
-             
-              ></use>
-
+              <polyline
+                id="Path"
+                stroke="#666A74"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                points="1,48 4.766318,48 6.398184,50.2965116 9.092968,65 34.865412,65 39,50.2965116 7.432818,50.2965116"
+              ></polyline>
+         
               <line
                 x1="12.926724"
                 y1="50.9169776"
@@ -79,14 +81,6 @@
                 cy="72"
                 r="3"
               ></circle>
-              <polyline
-                id="Path"
-                stroke="#666A74"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                points="1,48 4.766318,48 6.398184,50.2965116 9.092968,65 34.865412,65 39,50.2965116 7.432818,50.2965116"
-              ></polyline>
             </g>
           </g>
         </svg>
