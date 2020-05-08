@@ -21,6 +21,7 @@ export class ItemInputForm extends Component {
                 <form onSubmit={this.handleSubmit} className="item-input-form">
                     <Autocomplete
                         options={products}
+                        freeSolo
                         getOptionLabel={(option) => option.foodName}
                         onChange={this.handleKeyUp}
                         inputValue={this.state.newItem.foodName}

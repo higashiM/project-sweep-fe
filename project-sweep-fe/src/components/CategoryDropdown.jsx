@@ -49,12 +49,7 @@ class CategoryDropdown extends Component {
                                     value={category.name.toLowerCase()}
                                     key={`${category.id} ${i}`}
                                     onClick={() => {
-                                        if (
-                                            window.confirm(
-                                                `Would you like to add ${foodName} to our database under category ${category.name}?`
-                                            )
-                                        )
-                                            handleNewProduct(foodName, category)
+                                        handleNewProduct(foodName, category)
                                     }}
                                 >
                                     {category.name}

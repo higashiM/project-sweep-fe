@@ -210,7 +210,13 @@ class App extends Component {
                 return product.foodName.toLowerCase() === foodName.toLowerCase()
             }).length === 0
         ) {
-            api.insertProduct(foodName, category)
+            if (
+                window.confirm(
+                    `Would you like to add ${foodName} to our database under category ${category.name}?`
+                )
+            ) {
+                api.insertProduct(foodName, category)
+            }
         }
     }
 }
