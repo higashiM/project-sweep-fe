@@ -22,7 +22,12 @@ export default class ShopMap extends Component {
         const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
         const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
 
-        const svgPath = genMap.genPathSVG(pathOfAisles, aislesToVisit)
+        const svgPath = genMap.genPathSVG(
+            pathOfAisles,
+            aislesToVisit,
+            false,
+            layout.length
+        )
 
         this.setState(
             { svgPath, aislesToVisit, aisleListCat, isloading: false },

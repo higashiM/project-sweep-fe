@@ -181,7 +181,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         const currY = curr[1]
         const nextX = next[0]
         const nextY = next[1]
-        const nextNextX = nextNext[0]
+
         const nextNextY = nextNext[1]
 
         const prevPos = prev[2]
@@ -321,20 +321,22 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
 
         if (waypoint) aislestoVisit.waypoints.push(waypoint)
     }
-    console.log(aislePath, aislestoVisit)
+    // console.log(aislePath, aislestoVisit)
 
     return aislestoVisit
 }
 
-export const genPathSVG = (path, aislestoVisit, aisleMap, layout) => {
-    console.log(path, aislestoVisit)
+export const genPathSVG = (path, aislestoVisit, aisleMap, layoutLength) => {
+    //  console.log(layoutLength)
 
-    const moveY = -80 + (path[1][1] - 2) * 160
+    const moveY = -80 + (path[1][1] - (layoutLength - 1)) * 160
     const moveX = 80 * path[1][0]
 
     let concatPath = ' '
     if (aisleMap && path[0][2] !== 'start')
         concatPath = concatPath.concat('m', moveX, ' ', moveY)
+
+    if (!aisleMap) concatPath = concatPath.concat('v-5')
 
     for (let index = 1; index < path.length - 1; index++) {
         const element = path[index]
@@ -346,6 +348,6 @@ export const genPathSVG = (path, aislestoVisit, aisleMap, layout) => {
 
         concatPath = concatPath.concat(addPath)
     }
-    console.log(concatPath)
+    // console.log(concatPath)
     return concatPath
 }

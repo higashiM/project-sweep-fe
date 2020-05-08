@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
 import LoaderPath from '../components/LoaderPath'
-import MapBox from './MapBox'
 import CreateMap from './CreateMap'
 import Button from '@material-ui/core/Button'
 import * as genMap from '../utils/genMap'
@@ -26,7 +25,7 @@ class AisleMap extends Component {
             svgSnip,
             newAislesToVisit,
             true,
-            layout
+            layout.length
         )
 
         this.setState({ newAislesToVisit, newSVGPath, isloading: false })
@@ -60,7 +59,7 @@ class AisleMap extends Component {
                     'finish',
                 ]
                 pathSnip.push(finish)
-                console.log(pathSnip)
+                //      console.log(pathSnip)
                 return pathSnip
             }
         }
@@ -71,7 +70,7 @@ class AisleMap extends Component {
         const { layout, ai, aisleListCat, listItems } = pathMaps
 
         const { newAislesToVisit, newSVGPath, isloading } = this.state
-
+        // const thisAisle = aisleOrder[aisleCount - 1]
         const nextAisle = aisleOrder[aisleCount]
 
         if (ismaploading | isloading) return <LoaderPath />

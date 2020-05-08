@@ -37,11 +37,9 @@ export default function CreateMap(props) {
         >
             <path
                 className="path"
-                d={`M45 ${
-                    200 + (layout.length - 2) * 160 + 165
-                } v-5 ${svgPath}`}
+                d={`M45 ${200 + (layout.length - 2) * 160 + 165} ${svgPath} `}
                 stroke="red"
-                stroke-width="8px"
+                strokeWidth="8px"
                 fill="transparent"
                 strokeLinecap="round"
             ></path>
@@ -140,6 +138,7 @@ export default function CreateMap(props) {
                     </>
                 )
             })}
+            <Trolley x={15} y={200 + (layout.length - 2) * 160 + 120} />
         </svg>
     )
 }
