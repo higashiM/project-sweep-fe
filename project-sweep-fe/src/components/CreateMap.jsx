@@ -9,37 +9,40 @@ import {
     CheckoutLeft,
     CheckoutMiddle,
     CheckoutRight,
+    Trolley,
 } from '../resources/maplayout/index'
 
 import { showAisle } from '../resources/maplayout/pathsSVG'
 import Waypoint from './Waypoint'
 //import Waypoint from './Waypoint'
 
-export default function CreateMap(
-    layout,
-    aisleInfo,
-    aislesToVisit,
-    svgPath,
-    aisleListCat,
-    listItems
-) {
-    /*     console.log(
+export default function CreateMap(props) {
+    const {
         layout,
         aisleInfo,
         aislesToVisit,
         svgPath,
         aisleListCat,
-        listItems
-    ) */
+        listItems,
+        trolleyAisle,
+    } = props
+
+    let istrolleyAisle = trolleyAisle || 'start'
+
     return (
-        <>
+        <svg
+            className="shopMapSVG"
+            width={layout[0].length * 80}
+            height={200 * layout.length}
+            viewBox={`${0} ${0} ${layout[0].length * 80} ${
+                200 * layout.length
+            }`}
+        >
             <path
                 className="path"
-                d={`M45 ${
-                    200 + (layout.length - 2) * 160 + 165
-                } v-5 ${svgPath}`}
+                d={`M45 ${200 + (layout.length - 2) * 160 + 165} ${svgPath} `}
                 stroke="red"
-                stroke-width="8px"
+                strokeWidth="8px"
                 fill="transparent"
                 strokeLinecap="round"
             ></path>
@@ -79,10 +82,12 @@ export default function CreateMap(
                         )
                     case 'cl':
                         return (
-                            <CheckoutLeft
-                                x="0"
-                                y={200 + (aisleInfo[aisle].y - 1) * 160}
-                            />
+                            <>
+                                <CheckoutLeft
+                                    x="0"
+                                    y={200 + (aisleInfo[aisle].y - 1) * 160}
+                                />
+                            </>
                         )
                     case 'cm':
                         return (
@@ -105,42 +110,45 @@ export default function CreateMap(
 
             {layout.flat().map((aisleNum) => {
                 const aisleData = aisleInfo[aisleNum]
-                const type = aisleData.type
+
                 const x = aisleData.x
                 const y = aisleData.y
+                const posy = 200 + (aisleInfo[aisleNum].y - 1) * 160
+                const posx = x * 80
 
                 const xy = 'xy' + x.toString() + y.toString()
                 return (
-                    <svg
-                        x={`${x * 80}`}
-                        y={`${200 + (aisleInfo[aisleNum].y - 1) * 160}`}
-                        id={xy}
-                        width="80px"
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                    >
+                    <>
                         {aislesToVisit[xy] ? (
                             aislesToVisit[xy].waypoint ? (
-                                <Waypoint
-                                    cy={80}
-                                    num={aisleNum}
-                                    food={
-                                        aisleListCat.food[aisleNum]
-                                            ? aisleListCat.food[aisleNum]
-                                            : null
-                                    }
-                                    listItems={listItems}
-                                />
+                                aisleNum === istrolleyAisle ? (
+                                    <Trolley x={posx + 15} y={posy + 25} />
+                                ) : (
+                                    <Waypoint
+                                        cy={posy + 80}
+                                        cx={posx}
+                                        num={aisleNum}
+                                        food={
+                                            aisleListCat.food[aisleNum]
+                                                ? aisleListCat.food[aisleNum]
+                                                : null
+                                        }
+                                        listItems={listItems}
+                                    />
+                                )
                             ) : (
-                                showAisle(aisleNum, 80)
+                                showAisle(aisleNum, posx + 45, posy + 80)
                             )
                         ) : (
-                            showAisle(aisleNum, 80)
+                            showAisle(aisleNum, posx + 45, posy + 80)
                         )}
-                    </svg>
+                    </>
                 )
             })}
-        </>
+
+            {istrolleyAisle === 'start' ? (
+                <Trolley x={15} y={200 + (layout.length - 2) * 160 + 120} />
+            ) : null}
+        </svg>
     )
 }

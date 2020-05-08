@@ -1,11 +1,9 @@
 import React from 'react'
 
 import Popover from '@material-ui/core/Popover'
-import Typography from '@material-ui/core/Typography'
-import { showAisle } from '../resources/maplayout/pathsSVG'
 
 export default function Waypoint(props) {
-    const { cy, num, food } = props
+    const { cx, cy, num, food } = props
     const [anchorEl, setAnchorEl] = React.useState(null)
 
     const handleClick = (event) => {
@@ -23,10 +21,10 @@ export default function Waypoint(props) {
         <>
             <svg className="wayPointButton" onClick={handleClick}>
                 <g>
-                    <circle id={'waypointCircle'} cx="45" cy={cy} r="13" />
+                    <circle id={'waypointCircle'} cx={cx + 45} cy={cy} r="13" />
                     <text
                         id={'waypointNum'}
-                        x="45"
+                        x={cx + 45}
                         y={cy + 5}
                         style={{ textAnchor: 'middle' }}
                     >

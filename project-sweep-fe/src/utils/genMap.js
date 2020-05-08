@@ -173,6 +173,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         const curr = aislePath[index]
         const prev = aislePath[index - 1]
         const next = aislePath[index + 1]
+        const nextNext = aislePath[index + 1]
 
         const prevX = prev[0]
         const prevY = prev[1]
@@ -180,9 +181,13 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         const currY = curr[1]
         const nextX = next[0]
         const nextY = next[1]
+
+        const nextNextY = nextNext[1]
+
         const prevPos = prev[2]
         const nextPos = next[2]
         const currPos = curr[2]
+        const nextNextPos = nextNext[2]
 
         //paths can be constructed above or below the shelves on same tile
         const pathLookup = [
@@ -219,6 +224,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
             BotLtoBotM: 'TopM',
             BotRtoBotM: 'TopM',
             TopRtoBotM: 'BotM',
+            TopMtoTopR: 'BotR',
         }
 
         let ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
@@ -242,13 +248,41 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
             exit = traversingBottom[nextY - currY + 1][nextX - currX + 1]
         }
 
-        //execute turns at cottom end of column
+        //execute turns at bottom end of column
         if (
             (currX < nextX && prevY < currY) | (currX > prevX && nextY < currY)
         ) {
             ent = turningUpLookup[prevY - currY + 1][prevX - currX + 1]
             exit = turningUpLookup[nextY - currY + 1][nextX - currX + 1]
         }
+        //execute turns at top of column if next two same level or going down
+
+        if (nextNext) {
+            if (
+                prevY < currY &&
+                currX < nextX &&
+                nextY >= currY &&
+                nextNextY >= currY
+            ) {
+                ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
+                exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
+            }
+        }
+
+        //execute turns at top of column if next is final waypoint
+
+        if (nextNext) {
+            if (
+                prevY < currY &&
+                currX < nextX &&
+                nextY >= currY &&
+                nextNextPos === 'finish'
+            ) {
+                ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
+                exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
+            }
+        }
+
         if (prevExit) {
             ent = prevExittoEntLookup[prevExit]
         }
@@ -264,6 +298,10 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         //adds end point to path
         if (nextPos === 'finish') {
             path = path.concat('End')
+        }
+
+        if (prevPos === 'aiMapStart') {
+            path = 'End'.concat(path)
         }
 
         const ref = 'xy'.concat(currX.toString(), currY.toString())
@@ -283,13 +321,21 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
 
         if (waypoint) aislestoVisit.waypoints.push(waypoint)
     }
-    //console.log(aislestoVisit)
+    // console.log(aislePath, aislestoVisit)
 
     return aislestoVisit
 }
 
-export const genPathSVG = (path, aislestoVisit) => {
+export const genPathSVG = (path, aislestoVisit, aisleMap, layoutLength) => {
+    //  console.log(layoutLength)
+
+    const moveY = -80 + (path[1][1] - (layoutLength - 1)) * 160
+    const moveX = 80 * path[1][0]
+
     let concatPath = ' '
+    if (aisleMap && path[0][2] !== 'start') {
+        concatPath = concatPath.concat('m', moveX, ' ', moveY)
+    } else concatPath = concatPath.concat('v-5')
 
     for (let index = 1; index < path.length - 1; index++) {
         const element = path[index]
@@ -301,5 +347,6 @@ export const genPathSVG = (path, aislestoVisit) => {
 
         concatPath = concatPath.concat(addPath)
     }
+    // console.log(concatPath)
     return concatPath
 }

@@ -1,0 +1,86 @@
+
+      <svg
+          className="Trolley"
+          width="100px"
+          height="80px"
+          viewBox="0 0 80 80"
+          x={this.props.x} y={this.props.y} 
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+        >
+    <title>Trolley</title>
+          <g stroke="none" strokeWidth="1" fill="#D6DBDF  " fillRule="evenodd">
+            <g id="Custom-Preset-3">
+              <polyline
+                id="Path"
+                stroke="#666A74"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                points="1,48 4.766318,48 6.398184,50.2965116 9.092968,65 34.865412,65 39,50.2965116 7.432818,50.2965116"
+              ></polyline>
+         
+              <line
+                x1="12.926724"
+                y1="50.9169776"
+                x2="15.642241"
+                y2="63.6389925"
+                id="Line"
+                stroke="#666A74"
+                strokeWidth="3"
+                strokeLinecap="square"
+                strokeLinejoin="round"
+              ></line>
+              <line
+                x1="18.926724"
+                y1="50.9169776"
+                x2="21.642241"
+                y2="63.6389925"
+                id="Line"
+                stroke="#666A74"
+                strokeWidth="3"
+                strokeLinecap="square"
+                strokeLinejoin="round"
+              ></line>
+              <line
+                x1="24.926724"
+                y1="50.9169776"
+                x2="27.642241"
+                y2="63.6389925"
+                id="Line"
+                stroke="#666A74"
+                strokeWidth="3"
+                strokeLinecap="square"
+                strokeLinejoin="round"
+              ></line>
+              <line
+                x1="30.926724"
+                y1="50.9169776"
+                x2="33.642241"
+                y2="63.6389925"
+                id="Line"
+                stroke="#666A74"
+                strokeWidth="3"
+                strokeLinecap="square"
+                strokeLinejoin="round"
+              ></line>
+              <circle
+                id="Oval"
+                stroke="#33353B"
+                strokeWidth="2"
+                cx="12"
+                cy="72"
+                r="3"
+              ></circle>
+              <circle
+                id="Oval"
+                stroke="#33353B"
+                strokeWidth="2"
+                cx="32"
+                cy="72"
+                r="3"
+              ></circle>
+            </g>
+          </g>
+        </svg>

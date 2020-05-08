@@ -1,45 +1,79 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
 import LoaderPath from '../components/LoaderPath'
-import MapBox from './MapBox'
 import CreateMap from './CreateMap'
 import Button from '@material-ui/core/Button'
+import * as genMap from '../utils/genMap'
 
 class AisleMap extends Component {
-    render() {
-        const { aisleCount, aisleOrder, pathMaps, ismaploading } = this.props
+    state = { newSVGPath: {}, newAislesToVisit: {}, isloading: true }
 
+    componentDidMount = () => {
+        const { aisleCount, aisleOrder } = this.props
         let thisAisle = aisleOrder[aisleCount - 1]
         const nextAisle = aisleOrder[aisleCount]
-
         if (aisleCount === 0) {
             thisAisle = 'start'
         }
-        console.log(thisAisle, nextAisle)
+        const pathOfAisles = this.props.pathMaps.pathOfAisles
+        const layout = this.props.pathMaps.layout
+        const svgSnip = this.svgSnip(pathOfAisles, thisAisle, nextAisle)
 
-        const {
-            xStart,
-            yStart,
-            width,
-            height,
-            layout,
-            ai,
-            aislesToVisit,
-            svgPath,
-            aisleListCat,
-            listItems,
-        } = pathMaps[thisAisle]
+        const newAislesToVisit = genMap.assignSVGtoPath(svgSnip)
 
-        const superMap = CreateMap(
-            layout,
-            ai,
-            aislesToVisit,
-            svgPath,
-            aisleListCat,
-            listItems
+        const newSVGPath = genMap.genPathSVG(
+            svgSnip,
+            newAislesToVisit,
+            true,
+            layout.length
         )
 
-        if (ismaploading) return <LoaderPath />
+        this.setState({ newAislesToVisit, newSVGPath, isloading: false })
+    }
+
+    svgSnip = (pathOfAisles, thisAisle, nextAisle) => {
+        let pathSnip = []
+        let foundThis = false
+
+        for (let i = 0; i < pathOfAisles.length; i++) {
+            if (pathOfAisles[i][2] === thisAisle) {
+                foundThis = true
+                if (thisAisle !== 'start') {
+                    const start = [
+                        pathOfAisles[i - 1][0],
+                        pathOfAisles[i - 1][1],
+                        'aiMapStart',
+                    ]
+                    pathSnip.push(start)
+                }
+            }
+
+            if (foundThis) {
+                pathSnip.push(pathOfAisles[i])
+            }
+
+            if (pathOfAisles[i][2] === nextAisle) {
+                const finish = [
+                    pathOfAisles[i + 1][0],
+                    pathOfAisles[i + 1][1],
+                    'finish',
+                ]
+                pathSnip.push(finish)
+                //      console.log(pathSnip)
+                return pathSnip
+            }
+        }
+    }
+    render() {
+        const { aisleCount, aisleOrder, pathMaps, ismaploading } = this.props
+
+        const { layout, ai, aisleListCat, listItems } = pathMaps
+
+        const { newAislesToVisit, newSVGPath, isloading } = this.state
+        const thisAisle = aisleOrder[aisleCount - 1]
+        const nextAisle = aisleOrder[aisleCount]
+
+        if (ismaploading | isloading) return <LoaderPath />
         return (
             <div className="aisleMap">
                 <section className="aisleMapSign">
@@ -52,13 +86,14 @@ class AisleMap extends Component {
                         totalAisles={aisleOrder.length}
                     />
                 </section>
-                <MapBox
-                    xStart={xStart}
-                    yStart={yStart}
-                    width={width}
-                    height={height}
-                    superMap={superMap}
+                <CreateMap
                     layout={layout}
+                    aisleInfo={ai}
+                    aislesToVisit={newAislesToVisit}
+                    svgPath={newSVGPath}
+                    aisleListCat={aisleListCat}
+                    listItems={listItems}
+                    trolleyAisle={thisAisle}
                 />
                 <Button variant="contained" color="primary">
                     <Link to="/aisleList">Next list...</Link>
