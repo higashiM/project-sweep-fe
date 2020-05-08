@@ -69,92 +69,161 @@ export class SupermarketCreator extends Component {
         const {
             layout,
             name,
-            location,
+
             aisleInfo,
             categories,
             currentAisle,
             currentCategory,
+            categoryLookup,
         } = this.state
+        let categoryLookupArr = Object.entries(categoryLookup)
         return (
-            <div>
-                <p>
-                    Supermarket Aisle Layout {layout.length}x{layout[0].length}
-                </p>
-                <label htmlFor="increment-rows">Change Rows</label>
-                <section id="increment-rows">
-                    <button
-                        disabled={layout.length === 2}
-                        onClick={() => {
-                            this.incrementDimensions(-1, 'row')
-                        }}
-                        className="increment-button down"
-                    >
-                        -
-                    </button>
-                    <button
-                        onClick={() => {
-                            this.incrementDimensions(1, 'row')
-                        }}
-                        className="increment-button up"
-                    >
-                        +
-                    </button>
-                </section>
-                <label htmlFor="increment-columns">Change columns</label>
-                <section id="increment-columns">
-                    <button
-                        disabled={layout[0].length === 3}
-                        onClick={() => {
-                            this.incrementDimensions(-1, 'column')
-                        }}
-                        className="increment-button down"
-                    >
-                        -
-                    </button>
-                    <button
-                        onClick={() => {
-                            this.incrementDimensions(1, 'column')
-                        }}
-                        className="increment-button up"
-                    >
-                        +
-                    </button>
-                </section>
-                <section className="category-lookup-input-container">
-                    <CategoryAisleSelectCard
-                        categories={categories}
-                        updateCurrent={this.updateCurrent}
-                        currentCategory={this.state.currentCategory}
-                    />
-                    <CategoryAisleSelectCard
-                        className="aisle-category-dropdown"
-                        aisles={Object.keys(aisleInfo)}
-                        updateCurrent={this.updateCurrent}
-                        currentCategory={this.state.currentAisle}
-                    />
+            <main className="supermarketCreatorContainer">
+                <form clasName="newSupermarket-form">
+                    <label htmlFor="">
+                        Supermarket Name:
+                        <input
+                            type="text"
+                            onChange={this.handleChange}
+                            value={name}
+                            required
+                        ></input>
+                    </label>
+                    <p>
+                        Supermarket Aisle Layout {layout.length}x
+                        {layout[0].length}
+                    </p>
+                    <section className="layout-change-container">
+                        <label htmlFor="increment-rows">
+                            Change Rows
+                            <section id="increment-layout">
+                                <button
+                                    disabled={layout.length === 2}
+                                    onClick={() => {
+                                        this.incrementDimensions(-1, 'row')
+                                    }}
+                                    className="increment-button down"
+                                >
+                                    -
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        this.incrementDimensions(1, 'row')
+                                    }}
+                                    className="increment-button up"
+                                >
+                                    +
+                                </button>
+                            </section>
+                        </label>
+
+                        <label htmlFor="increment-columns">
+                            Change columns
+                            <section className="increment-layout">
+                                <button
+                                    disabled={layout[0].length === 3}
+                                    onClick={() => {
+                                        this.incrementDimensions(-1, 'column')
+                                    }}
+                                    className="increment-button down"
+                                >
+                                    -
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        this.incrementDimensions(1, 'column')
+                                    }}
+                                    className="increment-button up"
+                                >
+                                    +
+                                </button>
+                            </section>
+                        </label>
+                    </section>
+                    <section className="category-lookup-input-container">
+                        <h4>Assign Categories To Aisles</h4>
+                        <CategoryAisleSelectCard
+                            categories={categories}
+                            updateCurrent={this.updateCurrent}
+                            currentCategory={this.state.currentCategory}
+                        />
+                        <CategoryAisleSelectCard
+                            className="aisle-category-dropdown"
+                            aisles={Object.keys(aisleInfo)}
+                            updateCurrent={this.updateCurrent}
+                            currentCategory={this.state.currentAisle}
+                        />
+                        <Button
+                            className="add-to-lookup-button"
+                            variant="contained"
+                            color="primary"
+                            onClick={() =>
+                                this.updateCategoryLookup(
+                                    currentAisle,
+                                    currentCategory
+                                )
+                            }
+                        >
+                            Add
+                        </Button>
+                    </section>
+                    <ul className="category/aisle-assignment-list">
+                        {categoryLookupArr.map((entry) => {
+                            return (
+                                <li>
+                                    <strong>Aisle</strong> {entry[1]},{' '}
+                                    <strong>Category:</strong> {entry[0]}
+                                </li>
+                            )
+                        })}
+                    </ul>
                     <Button
-                        className="add-to-lookup-button"
                         variant="contained"
                         color="primary"
-                        onClick={() =>
-                            this.updateCategoryLookup(
-                                currentAisle,
-                                currentCategory
-                            )
-                        }
+                        onClick={this.handleSubmit}
                     >
-                        Add
+                        Submit
                     </Button>
-                </section>
-            </div>
+                </form>
+            </main>
         )
+    }
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const { name, aisleInfo, categoryLookup, layout } = this.state
+        api.postSupermarkets(name, aisleInfo, categoryLookup, layout).then(
+            () => {
+                this.setState({
+                    name: '',
+                    categoryLookup: {},
+                    aisleInfo: {
+                        1: { type: 'tl', x: 0, y: 0, num: 1 },
+                        2: { type: 'tm', x: 1, y: 0, num: 2 },
+                        3: { type: 'tr', x: 2, y: 0, num: 3 },
+                        4: { type: 'cl', x: 3, y: 0, num: 4 },
+                        5: { type: 'cm', x: 4, y: 0, num: 5 },
+                        6: { type: 'cr', x: 5, y: 0, num: 6 },
+                    },
+                    layout: [
+                        [1, 2, 3],
+                        [4, 5, 6],
+                    ],
+                })
+            }
+        )
+    }
+    handleChange = (event) => {
+        console.log(event.target.value)
+        this.setState({ name: event.target.value })
     }
 
     updateCategoryLookup = (aisle, category) => {
         this.setState(
             (currentState) => {
                 currentState.categoryLookup[category] = aisle
-                return { categoryLookup: { ...currentState.categoryLookup } }
+                return {
+                    categoryLookup: { ...currentState.categoryLookup },
+                }
             },
             () => {
                 this.setState({ currentAisle: '', currentCategory: '' })
@@ -171,66 +240,61 @@ export class SupermarketCreator extends Component {
     incrementDimensions = (increment, type) => {
         const { layout } = this.state
 
-        this.setState(
-            (currentState) => {
-                let newColumns
-                let newRows
-                if (type === 'row') {
-                    newColumns = currentState.layout[0].length
-                    newRows = currentState.layout.length + increment
-                } else {
-                    newColumns = currentState.layout[0].length + increment
-                    newRows = currentState.layout.length
-                }
-
-                let newLayout = []
-                let newAisleinfo = {}
-                let count = 1
-                for (let currentRow = 0; currentRow < newRows; currentRow++) {
-                    let row = []
-                    for (
-                        let currentColumn = 0;
-                        currentColumn < newColumns;
-                        currentColumn++
-                    ) {
-                        if (currentColumn === 0) {
-                            newAisleinfo[count] = {
-                                type: `${typeAssigner(currentRow, newRows)}l`,
-                                x: currentColumn,
-                                y: currentRow,
-                                num: count,
-                            }
-                        }
-                        if (currentColumn === newColumns - 1) {
-                            newAisleinfo[count] = {
-                                type: `${typeAssigner(currentRow, newRows)}r`,
-                                x: currentColumn,
-                                y: currentRow,
-                                num: count,
-                            }
-                        }
-                        if (
-                            currentColumn !== newColumns - 1 &&
-                            currentColumn !== 0
-                        ) {
-                            newAisleinfo[count] = {
-                                type: `${typeAssigner(currentRow, newRows)}m`,
-                                x: currentColumn,
-                                y: currentRow,
-                                num: count,
-                            }
-                        }
-                        row.push(count)
-                        count++
-                    }
-                    newLayout.push(row)
-                }
-                return { layout: newLayout, aisleInfo: newAisleinfo }
-            },
-            () => {
-                console.log(this.state.aisleInfo)
+        this.setState((currentState) => {
+            let newColumns
+            let newRows
+            if (type === 'row') {
+                newColumns = currentState.layout[0].length
+                newRows = currentState.layout.length + increment
+            } else {
+                newColumns = currentState.layout[0].length + increment
+                newRows = currentState.layout.length
             }
-        )
+
+            let newLayout = []
+            let newAisleinfo = {}
+            let count = 1
+            for (let currentRow = 0; currentRow < newRows; currentRow++) {
+                let row = []
+                for (
+                    let currentColumn = 0;
+                    currentColumn < newColumns;
+                    currentColumn++
+                ) {
+                    if (currentColumn === 0) {
+                        newAisleinfo[count] = {
+                            type: `${typeAssigner(currentRow, newRows)}l`,
+                            x: currentColumn,
+                            y: currentRow,
+                            num: count,
+                        }
+                    }
+                    if (currentColumn === newColumns - 1) {
+                        newAisleinfo[count] = {
+                            type: `${typeAssigner(currentRow, newRows)}r`,
+                            x: currentColumn,
+                            y: currentRow,
+                            num: count,
+                        }
+                    }
+                    if (
+                        currentColumn !== newColumns - 1 &&
+                        currentColumn !== 0
+                    ) {
+                        newAisleinfo[count] = {
+                            type: `${typeAssigner(currentRow, newRows)}m`,
+                            x: currentColumn,
+                            y: currentRow,
+                            num: count,
+                        }
+                    }
+                    row.push(count)
+                    count++
+                }
+                newLayout.push(row)
+            }
+            return { layout: newLayout, aisleInfo: newAisleinfo }
+        })
     }
 }
 //type - refers the svg tile eg 0,0 is always top left

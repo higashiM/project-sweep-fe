@@ -34,6 +34,15 @@ export const getSupermarkets = () => {
     })
 }
 
+export const postSupermarkets = (name, aisleInfo, categoryLookup, layout) => {
+    return request.post('/supermarkets', {
+        name,
+        aisleInfo,
+        categoryLookup,
+        layout,
+    })
+}
+
 export const insertProduct = (foodName, category) => {
     return request.post('/products', { foodName, category })
 }
