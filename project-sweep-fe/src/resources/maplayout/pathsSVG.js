@@ -1,11 +1,9 @@
 import React from 'react'
 
-const showAisle = (aisleNum, height) => {
-    let x = 45
-
+const showAisle = (aisleNum, posx, posy) => {
     return (
         <>
-            <text x={x} y={`${height}`} style={{ textAnchor: 'middle' }}>
+            <text x={posx} y={`${posy}`} style={{ textAnchor: 'middle' }}>
                 {`${aisleNum}`}
             </text>
         </>
@@ -65,9 +63,22 @@ const shortVerticalBot = verticalPathSection('shortVerticalBot', one, 0)
 const shortVerticalBot_minus = verticalPathSection('shortVerticalBot', -one, 0)
 
 const paths = {
+    EndTopMtoBotR: verticalEnd.concat(botRTraverse),
+    EndBotMtoTopL: verticalEnd_minus.concat(topLTraverse_minus),
+    EndBotMtoTopR: verticalEnd_minus.concat(topRTraverse),
+    EndTopMtoBotM: verticalEnd,
+    EndBotMtoTopM: verticalEnd_minus,
+    EndTopLtoBotM: verticalEnd,
+    EndTopLtoBotR: verticalEnd.concat(botRTraverse),
+    EndBotLtoTopM: verticalEnd_minus,
     TopMtoBotMEnd: verticalEnd,
+    BotMtoTopLEnd: verticalEnd_minus,
+    BotMtoTopREnd: verticalEnd_minus,
+    TopMtoBotREnd: verticalEnd,
+    TopMtoBotLEnd: verticalEnd,
     BotMtoTopMEnd: verticalEnd_minus,
     TopLtoBotMEnd: topLTraverse.concat(verticalEnd),
+    TopLtoBotREnd: topLTraverse.concat(verticalEnd),
     BotLtoTopMEnd: botLTraverse.concat(verticalEnd_minus),
 
     BotLtoTopR: botLTraverse.concat(shortVerticalBoth_minus, topRTraverse),
