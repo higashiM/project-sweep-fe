@@ -2,7 +2,7 @@
 @import 'aisleList.css';
 @import 'Loader.css';
 @import 'aisleMap.css';
-
+@import 'supermarketCreator.css';
 .App {
     text-align: center;
     display: flex;
@@ -93,6 +93,7 @@ h2 {
     align-items: center;
     border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
+    min-height: 400px;
 }
 
 .notepad::before {
@@ -163,6 +164,7 @@ a {
 .quantity-changer-container {
     grid-area: quan;
 }
+
 .item-card-category {
     grid-area: cat;
     border-left: 2px solid #f1af88;

@@ -6,7 +6,7 @@
     flex-direction: column;
     background-color: #faf3dd;
     align-items: center;
-    min-height: 700px;
+    min-height: 500px;
     border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
 }
@@ -20,6 +20,10 @@
     border-color: #487eb0 #f4f1de;
     box-shadow: gray -4px 4px 4px;
     transition: all 0.5s;
+}
+
+#waypoint {
+    fill: red;
 }
 
 @media screen and (max-width: 658px) {
@@ -72,7 +76,7 @@
     min-width: 200px;
     max-width: 600px;
     position: relative;
-    top: -45px;
+    top: -20px;
     border: rgb(32, 57, 8) 1px solid;
     background-color: rgb(72, 126, 176);
     color: white;

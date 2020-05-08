@@ -10,6 +10,7 @@ import { Router } from '@reach/router'
 import * as api from './utils/api'
 import Loader from './components/Loader'
 import SummaryPage from './components/SummaryPage'
+import SupermarketCreator from './components/SupermarketCreator'
 import ItemCheck from './components/ItemCheck'
 
 class App extends Component {
@@ -37,7 +38,6 @@ class App extends Component {
     }
     componentDidUpdate() {
         // Remember state for the next mount
-
         localStorage.setItem('appState', JSON.stringify(this.state))
     }
 
@@ -89,7 +89,6 @@ class App extends Component {
                         supermarket={supermarket}
                         path="/shopmap"
                     />
-
                     <AisleList
                         path="/aisleList"
                         number={path[aisleCount]}
@@ -113,6 +112,7 @@ class App extends Component {
                         clearList={this.clearList}
                         clearPath={this.clearPath}
                     />
+                    <SupermarketCreator path="/createSupermarket" />
                     <ItemCheck
                         path="itemcheck"
                         listItems={listItems}
