@@ -6,8 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 
-class ItemCheck extends React.Component {
-    state = { open: false, category: [] }
+class ItemSelect extends React.Component {
+    state = { open: false }
 
     handleOpen = () => {
         this.setState({ open: true })
@@ -16,9 +16,43 @@ class ItemCheck extends React.Component {
     handleClose = () => {
         this.setState({ open: false })
     }
+    render() {
+        const { item, categoryLookup, handleCategoryChange } = this.props
+        const { open } = this.state
+        return (
+            <Select
+                labelId="catergory dropdown"
+                open={open}
+                onClose={this.handleClose}
+                onOpen={this.handleOpen}
+                value={item.category.name}
+                onChange={(value) => {
+                    handleCategoryChange(item.foodName, value.target.value)
+                }}
+            >
+                <MenuItem value="">
+                    <em>None</em>
+                </MenuItem>
+                {Object.keys(categoryLookup).map((category, i) => {
+                    return (
+                        <MenuItem
+                            value={category.toLowerCase()}
+                            key={`${category} ${i}`}
+                            onClick={() => {}}
+                        >
+                            {category}
+                        </MenuItem>
+                    )
+                })}
+            </Select>
+        )
+    }
+}
+
+class ItemCheck extends React.Component {
+    state = { category: [] }
 
     render() {
-        const { open } = this.state
         const {
             supermarket: { categoryLookup },
             listItems,
@@ -52,44 +86,23 @@ class ItemCheck extends React.Component {
                                     <InputLabel id="dropdown">
                                         Category
                                     </InputLabel>
-                                    <Select
-                                        labelId="catergory dropdown"
-                                        open={open}
-                                        onClose={this.handleClose}
-                                        onOpen={this.handleOpen}
-                                        value={item.category.name}
-                                        onChange={(value) => {
-                                            handleCategoryChange(
-                                                item.foodName,
-                                                value.target.value
-                                            )
-                                        }}
-                                    >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        {Object.keys(categoryLookup).map(
-                                            (category, i) => {
-                                                return (
-                                                    <MenuItem
-                                                        value={category.toLowerCase()}
-                                                        key={`${category} ${i}`}
-                                                        onClick={() => {}}
-                                                    >
-                                                        {category}
-                                                    </MenuItem>
-                                                )
-                                            }
-                                        )}
-                                    </Select>
+                                    <ItemSelect
+                                        item={item}
+                                        categoryLookup={categoryLookup}
+                                        handleCategoryChange={
+                                            handleCategoryChange
+                                        }
+                                    />
                                 </FormControl>
                             </div>
                         )
                     })}
                 <div className="button">
-                    <Button variant="contained" color="primary">
-                        <Link to="/shopmap">Go shop...</Link>
-                    </Button>
+                    <Link to="/shopmap">
+                        <Button variant="contained" color="primary">
+                            Go shop...
+                        </Button>
+                    </Link>
                 </div>
             </div>
         )

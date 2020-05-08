@@ -39,6 +39,7 @@ h1 {
 .header {
     text-transform: none;
     margin-top: 10px;
+    max-width: 100%;
 }
 
 #bottomleg3 {
@@ -188,7 +189,7 @@ a {
 
 .item-card {
     display: grid;
-    grid-template-columns: 85px 180px 80px;
+    grid-template-columns: 1fr 180px 80px;
     grid-template-rows: auto;
     grid-template-areas:
         'quan name but'
@@ -228,6 +229,7 @@ a {
     font-size: 20px;
     padding-right: 10px;
     background-color: white;
+    padding: 0px 10px;
 }
 
 .increment-button.up {
@@ -266,15 +268,15 @@ a {
 
 @media screen and (max-width: 400px) {
     .notepad {
-        max-width: 260px;
+        max-width: 300px;
         margin: 5px;
     }
     .notepad::before {
-        left: 130px;
+        left: 150px;
     }
 
     .item-card {
-        grid-template-columns: 90px 140px 65px;
+        grid-template-columns: auto 180px 25px;
     }
     .quantity-changer-container {
         padding-left: 5px;
@@ -282,10 +284,6 @@ a {
     .inputArea {
         min-width: 230px;
         padding: 0px 10px;
-    }
-
-    .removeButton {
-        padding-right: 15px;
     }
 }
 

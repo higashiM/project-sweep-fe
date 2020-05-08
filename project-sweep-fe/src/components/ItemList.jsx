@@ -25,9 +25,14 @@ export class ItemList extends Component {
             this.setState({
                 categories: newCats,
                 isLoading: false,
-                aisleCount: 0,
             })
         })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.supermarket) {
+            this.props.clearPath()
+        }
     }
 
     render() {

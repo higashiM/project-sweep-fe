@@ -64,20 +64,23 @@ class App extends Component {
         console.log(userLocation)
         return (
             <div className="App">
-                <Header clearPath={this.clearPath} />
+                <Header />
                 <Router>
                     <ItemList
                         path="/"
+                        clearPath={this.clearPath}
                         listItems={listItems}
                         addListItem={this.addListItem}
                         deleteListItem={this.deleteListItem}
                         handleCategoryChange={this.handleCategoryChange}
                         incrementQuantity={this.incrementQuantity}
                         products={products}
+                        supermarket={supermarket}
                         handleNewProduct={this.handleNewProduct}
                         clearList={this.clearList}
                     />
                     <SupermarketList
+                        listItems={listItems}
                         setSupermarket={this.setSupermarket}
                         path="/supermarketlist"
                         userLocation={userLocation}
@@ -205,9 +208,10 @@ class App extends Component {
                 path: [0],
                 categories: [''],
                 pathMaps: {},
-                aisleCount: 0,
-                supermarket: '',
             },
+            supermarket: '',
+            aisleCount: 0,
+            ismaploading: true,
         })
     }
 
