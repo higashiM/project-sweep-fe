@@ -16,24 +16,25 @@ import { showAisle } from '../resources/maplayout/pathsSVG'
 import Waypoint from './Waypoint'
 //import Waypoint from './Waypoint'
 
-export default function CreateMap(
-    layout,
-    aisleInfo,
-    aislesToVisit,
-    svgPath,
-    aisleListCat,
-    listItems
-) {
-    /*     console.log(
+export default function CreateMap(props) {
+    const {
         layout,
         aisleInfo,
         aislesToVisit,
         svgPath,
         aisleListCat,
-        listItems
-        ) */
+        listItems,
+    } = props
+
     return (
-        <>
+        <svg
+            className="shopMapSVG"
+            width={layout[0].length * 80}
+            height={200 * layout.length}
+            viewBox={`${0} ${0} ${layout[0].length * 80} ${
+                200 * layout.length
+            }`}
+        >
             <path
                 className="path"
                 d={`M45 ${
@@ -139,6 +140,6 @@ export default function CreateMap(
                     </>
                 )
             })}
-        </>
+        </svg>
     )
 }

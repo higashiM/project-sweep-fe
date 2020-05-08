@@ -224,6 +224,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
             BotLtoBotM: 'TopM',
             BotRtoBotM: 'TopM',
             TopRtoBotM: 'BotM',
+            TopMtoTopR: 'BotR',
         }
 
         let ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
@@ -299,6 +300,10 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
             path = path.concat('End')
         }
 
+        if (prevPos === 'aiMapStart') {
+            path = 'End'.concat(path)
+        }
+
         const ref = 'xy'.concat(currX.toString(), currY.toString())
         let newPath = paths[path]
 
@@ -321,8 +326,15 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
     return aislestoVisit
 }
 
-export const genPathSVG = (path, aislestoVisit) => {
+export const genPathSVG = (path, aislestoVisit, aisleMap, layout) => {
+    console.log(path, aislestoVisit)
+
+    const moveY = -80 + (path[1][1] - 2) * 160
+    const moveX = 80 * path[1][0]
+
     let concatPath = ' '
+    if (aisleMap && path[0][2] !== 'start')
+        concatPath = concatPath.concat('m', moveX, ' ', moveY)
 
     for (let index = 1; index < path.length - 1; index++) {
         const element = path[index]
@@ -334,5 +346,6 @@ export const genPathSVG = (path, aislestoVisit) => {
 
         concatPath = concatPath.concat(addPath)
     }
+    console.log(concatPath)
     return concatPath
 }
