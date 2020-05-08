@@ -11,6 +11,7 @@ import * as api from './utils/api'
 import Loader from './components/Loader'
 import SummaryPage from './components/SummaryPage'
 import SupermarketCreator from './components/SupermarketCreator'
+import ItemCheck from './components/ItemCheck'
 
 class App extends Component {
     state = localStorage.getItem('appState')
@@ -63,7 +64,7 @@ class App extends Component {
         console.log(userLocation)
         return (
             <div className="App">
-                <Header />
+                <Header clearPath={this.clearPath} />
                 <Router>
                     <ItemList
                         path="/"
@@ -112,6 +113,12 @@ class App extends Component {
                         clearPath={this.clearPath}
                     />
                     <SupermarketCreator path="/createSupermarket" />
+                    <ItemCheck
+                        path="itemcheck"
+                        listItems={listItems}
+                        supermarket={supermarket}
+                        handleCategoryChange={this.handleCategoryChange}
+                    />
                 </Router>
             </div>
         )
@@ -210,7 +217,13 @@ class App extends Component {
                 return product.foodName.toLowerCase() === foodName.toLowerCase()
             }).length === 0
         ) {
-            api.insertProduct(foodName, category)
+            if (
+                window.confirm(
+                    `Would you like to add ${foodName} to our database under category ${category.name}?`
+                )
+            ) {
+                api.insertProduct(foodName, category)
+            }
         }
     }
 }

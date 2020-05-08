@@ -319,3 +319,7 @@ a {
 .mapContainer {
     width: 95%;
 }
+
+.MuiFormControl-root {
+    width: 300px;
+}

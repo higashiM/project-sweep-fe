@@ -22,7 +22,7 @@ class SupermarketsMap extends Component {
         console.log(this.props.coords)
 
         const { isLoading } = this.state
-        // const { supermarkets } = this.props
+
         if (isLoading) return <Loader />
         return (
             <div className="mapContainer">
