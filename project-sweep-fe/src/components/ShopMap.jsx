@@ -4,6 +4,7 @@ import * as genMap from '../utils/genMap'
 import Loader from '../components/Loader'
 import CreateMap from './CreateMap'
 import MapBox from './MapBox'
+import Button from '@material-ui/core/Button'
 
 const ShopMap = (props) => {
     const categoryLookup = props.supermarket.categoryLookup
@@ -12,7 +13,7 @@ const ShopMap = (props) => {
     const aisleListCat = genMap.getAisleList(listItems, categoryLookup)
 
     const arrayAisles = aisleListCat.aisleList
-
+    const supermarketname = props.supermarket.name
     const ai = props.supermarket.aisleInfo
 
     const layout = props.supermarket.layout
@@ -23,7 +24,14 @@ const ShopMap = (props) => {
 
     const svgPath = genMap.genPathSVG(pathOfAisles, aislesToVisit)
 
-    const superMap = CreateMap(layout, ai, aislesToVisit, svgPath)
+    const superMap = CreateMap(
+        layout,
+        ai,
+        aislesToVisit,
+        svgPath,
+        aisleListCat,
+        listItems
+    )
 
     const handleClick = () => {
         const pathMaps = {}
@@ -50,6 +58,8 @@ const ShopMap = (props) => {
                 ai,
                 aislesToVisit,
                 svgPath,
+                aisleListCat,
+                listItems,
             }
         })
         const categories = aisleListCat.catAndFood
@@ -57,14 +67,16 @@ const ShopMap = (props) => {
             .map((point) => point[2])
             .filter((point) => Number.isInteger(point))
         props.setAisletoVisitInfo({ categories, path, pathMaps })
-        console.log(categories, path, pathMaps)
     }
 
     if (props.ismaploading) return <Loader />
 
     return (
         <div className="shopMap">
-            <h2 className="mapTitle">Shop Map</h2>
+            <h2 className="mapTitle">
+                Your Optimal Route @ {supermarketname}
+                <p className="mapHelp">click on a waypoint to view details</p>
+            </h2>
 
             <MapBox
                 xStart={0}
@@ -74,13 +86,11 @@ const ShopMap = (props) => {
                 superMap={superMap}
                 layout={layout}
             />
-            <Link
-                to="/aisleMap"
-                className="shoppingListCompleteButton"
-                onClick={() => handleClick()}
-            >
-                Get Started...
-            </Link>
+            <Button variant="contained" color="primary">
+                <Link to="/aisleMap" onClick={() => handleClick()}>
+                    Get Started...
+                </Link>
+            </Button>
         </div>
     )
 }

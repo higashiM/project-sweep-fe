@@ -34,8 +34,8 @@ const LoaderPath = (props) => {
                             d={`M600 790 h 250 v${
                                 (aisleCount / totalAisles) * -500
                             } h-250 z `}
-                            stroke="red"
-                            fill="red"
+                            stroke="yellow"
+                            fill="yellow"
                         ></path>
 
                         <circle

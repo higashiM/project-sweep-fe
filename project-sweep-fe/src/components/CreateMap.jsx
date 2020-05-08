@@ -12,10 +12,25 @@ import {
 } from '../resources/maplayout/index'
 
 import { showAisle } from '../resources/maplayout/pathsSVG'
+import Waypoint from './Waypoint'
 //import Waypoint from './Waypoint'
 
-export default function CreateMap(layout, aisleInfo, aislesToVisit, svgPath) {
-    const midAisle = { tm: 120, tl: 120, tr: 120 }
+export default function CreateMap(
+    layout,
+    aisleInfo,
+    aislesToVisit,
+    svgPath,
+    aisleListCat,
+    listItems
+) {
+    /*     console.log(
+        layout,
+        aisleInfo,
+        aislesToVisit,
+        svgPath,
+        aisleListCat,
+        listItems
+    ) */
     return (
         <>
             <path
@@ -90,39 +105,39 @@ export default function CreateMap(layout, aisleInfo, aislesToVisit, svgPath) {
 
             {layout.flat().map((aisleNum) => {
                 const aisleData = aisleInfo[aisleNum]
+                const type = aisleData.type
                 const x = aisleData.x
                 const y = aisleData.y
-                //console.log(aislesToVisit, aislePlans, aisleInfo)
 
                 const xy = 'xy' + x.toString() + y.toString()
                 return (
                     <svg
                         x={`${x * 80}`}
-                        y={`${y * 200 + -40 * (y === layout.length - 1)}`}
+                        y={`${200 + (aisleInfo[aisleNum].y - 1) * 160}`}
                         id={xy}
                         width="80px"
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
                         xmlnsXlink="http://www.w3.org/1999/xlink"
                     >
-                        <>
-                            {aislesToVisit[xy] ? aislesToVisit[xy].path : null}
-                            {aislesToVisit[xy] ? (
-                                aislesToVisit[xy].waypoint ? (
-                                    <circle
-                                        id="waypoint"
-                                        cx="45"
-                                        cy={midAisle[aisleData.type] || 80 - 5}
-                                        r="10"
-                                        fill="red"
-                                    />
-                                ) : null
-                            ) : null}
-                            {showAisle(
-                                aisleData.num,
-                                midAisle[aisleData.type] || 80
-                            )}
-                        </>
+                        {aislesToVisit[xy] ? (
+                            aislesToVisit[xy].waypoint ? (
+                                <Waypoint
+                                    cy={80}
+                                    num={aisleNum}
+                                    food={
+                                        aisleListCat.food[aisleNum]
+                                            ? aisleListCat.food[aisleNum]
+                                            : null
+                                    }
+                                    listItems={listItems}
+                                />
+                            ) : (
+                                showAisle(aisleNum, 80)
+                            )
+                        ) : (
+                            showAisle(aisleNum, 80)
+                        )}
                     </svg>
                 )
             })}

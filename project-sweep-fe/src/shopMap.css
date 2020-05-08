@@ -9,7 +9,52 @@
     border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
 }
+.mapHelp {
+    font-size: large;
+}
 
+.MuiPaper-root {
+    background-color: red;
+}
+.foodList {
+    color: red;
+}
+
+.path {
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: dash 15s linear forwards;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+#waypointCircle {
+    fill: orange;
+    stroke: black;
+    stroke-width: 1;
+    z-index: 1;
+}
+
+#waypointCircle:hover {
+    fill: blue;
+    stroke: black;
+    stroke-width: 0.1;
+    cursor: pointer;
+}
+
+#waypointNum {
+    font-size: 15;
+    z-index: -100;
+    pointer-events: none;
+}
+
+.Waypoint {
+    z-index: 2;
+}
 .shopMap::before {
     content: '';
     position: relative;
@@ -17,7 +62,7 @@
     left: 280px;
     border-width: 80px 0px 0 80px;
     border-style: solid;
-    border-color: #b1ede8 #f4f1de;
+    border-color: #487eb0 #f4f1de;
     box-shadow: gray -4px 4px 4px;
     transition: all 0.5s;
 }
@@ -35,14 +80,6 @@
     width: 90%;
     height: 60%;
     margin: auto;
-}
-
-#waypoint {
-    fill: red;
-}
-
-#category_tooltip {
-    font-size: xx-large;
 }
 
 @media screen and (max-width: 814px) {

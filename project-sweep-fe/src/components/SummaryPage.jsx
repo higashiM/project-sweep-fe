@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import sortListItems from '../utils/sortListItems'
+import Button from '@material-ui/core/Button'
 
 const SummaryPage = (props) => {
     return (
@@ -25,16 +26,31 @@ const SummaryPage = (props) => {
                     )
                 })}
             </div>
-            <Link to="/" className="shoppingListCompleteButton">
-                Keep items for next time
-            </Link>
-            <Link
-                to="/"
-                className="shoppingListCompleteButton"
-                onClick={props.clearList}
-            >
-                Clear list
-            </Link>
+            <div className="button">
+                <Button variant="contained" color="primary">
+                    <Link
+                        to="/"
+                        onClick={() => {
+                            props.clearPath()
+                        }}
+                    >
+                        Keep items for next time
+                    </Link>
+                </Button>
+            </div>
+            <div className="button">
+                <Button variant="contained" color="primary">
+                    <Link
+                        to="/"
+                        onClick={() => {
+                            props.clearList()
+                            props.clearPath()
+                        }}
+                    >
+                        Clear list
+                    </Link>
+                </Button>
+            </div>
         </div>
     )
 }
