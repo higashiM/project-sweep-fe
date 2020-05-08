@@ -12,13 +12,31 @@
     box-shadow: gray -5px 5px 5px;
 }
 .newSupermarket-form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas:
+        'name postcode '
+        'layout layout '
+        'lookup lookup'
+        'submit clear';
+}
+
+.shopName-input {
+    grid-area: name;
     display: flex;
     align-items: center;
-    flex-direction: column;
+}
+.shopPostcode-input {
+    grid-area: postcode;
+    display: flex;
+    align-items: center;
 }
 .layout-change-container {
+    grid-area: layout;
+    margin: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     justify-content: center;
 }
 .increment-layout {
@@ -26,6 +44,17 @@
     margin: 0px 50px;
     text-align: center;
     justify-content: center;
+}
+#newSupermarket-submit-button {
+    grid-area: submit;
+    margin: auto;
+    width: 50%;
+}
+
+#newSupermarket-clear-button {
+    grid-area: clear;
+    margin: auto;
+    width: 50%;
 }
 
 .aisle-category-dropdown {
@@ -38,6 +67,6 @@
 .category-lookup-input-container {
     display: flex;
     align-items: center;
-
-    width: 50px;
+    justify-content: center;
+    grid-area: lookup;
 }

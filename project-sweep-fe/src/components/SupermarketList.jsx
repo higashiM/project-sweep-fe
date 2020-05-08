@@ -96,7 +96,9 @@ export default class SupermarketList extends Component {
                         })
                 )}
                 <Link to="/createSupermarket">
-                    <button>Add New Supermarket</button>
+                    <Button variant="contained" color="secondary">
+                        Add New Supermarket
+                    </Button>
                 </Link>
             </div>
         )

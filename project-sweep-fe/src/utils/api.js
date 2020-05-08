@@ -1,5 +1,16 @@
 import axios from 'axios'
 
+export const getLongLat = (postcode) => {
+    return axios
+        .get(`https://api.postcodes.io/postcodes/${postcode}`)
+        .then(({ data }) => {
+            let newLocation = []
+            console.log(data.result.longitude, data.result.latitude)
+            newLocation.push(data.result.longitude, data.result.latitude)
+            return newLocation
+        })
+}
+
 const request = axios.create({
     baseURL: 'https://aisleonator.herokuapp.com/api',
 })
@@ -34,12 +45,20 @@ export const getSupermarkets = () => {
     })
 }
 
-export const postSupermarkets = (name, aisleInfo, categoryLookup, layout) => {
+export const postSupermarkets = (
+    name,
+    aisleInfo,
+    categoryLookup,
+    layout,
+    location
+) => {
+    console.log(location)
     return request.post('/supermarkets', {
         name,
         aisleInfo,
         categoryLookup,
         layout,
+        location,
     })
 }
 
