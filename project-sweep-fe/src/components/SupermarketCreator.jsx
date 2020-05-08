@@ -132,6 +132,7 @@ export class SupermarketCreator extends Component {
                     <section className="category-lookup-input-container">
                         <h4>Assign Categories To Aisles</h4>
                         <CategoryAisleSelectCard
+                            className="aisle-category-dropdown"
                             categories={categories}
                             updateCurrent={this.updateCurrent}
                             currentCategory={this.state.currentCategory}

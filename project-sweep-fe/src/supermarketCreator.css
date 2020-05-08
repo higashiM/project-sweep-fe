@@ -48,25 +48,31 @@
 #newSupermarket-submit-button {
     grid-area: submit;
     margin: auto;
-    width: 50%;
+    width: 30%;
 }
 
 #newSupermarket-clear-button {
     grid-area: clear;
     margin: auto;
-    width: 50%;
+    width: 30%;
 }
-
+/* 
 .aisle-category-dropdown {
+    width: 40px;
+    margin: 20px;
+    padding: 20px;
+} */
+
+.add-to-lookup-button {
     margin: 10px;
 }
-.add-to-lookup-button {
-    height: 30px;
-    margin: 30px;
-}
+
 .category-lookup-input-container {
     display: flex;
+    grid-area: lookup;
+    width: 50%;
+    margin: 0px auto;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    grid-area: lookup;
 }
