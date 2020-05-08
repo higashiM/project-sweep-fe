@@ -25,7 +25,6 @@ class AisleList extends Component {
 
     componentDidMount() {
         const { listItems, categories, aisleOrder, aisleCount } = this.props
-        console.log(listItems)
 
         this.setState({
             isLoading: false,

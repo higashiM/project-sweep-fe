@@ -22,7 +22,11 @@ export class ItemList extends Component {
                 return a.name > b.name ? 1 : -1
             })
 
-            this.setState({ categories: newCats, isLoading: false })
+            this.setState({
+                categories: newCats,
+                isLoading: false,
+                aisleCount: 0,
+            })
         })
     }
 
