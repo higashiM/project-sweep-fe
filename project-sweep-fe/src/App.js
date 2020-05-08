@@ -10,6 +10,7 @@ import { Router } from '@reach/router'
 import * as api from './utils/api'
 import Loader from './components/Loader'
 import SummaryPage from './components/SummaryPage'
+import SupermarketCreator from './components/SupermarketCreator'
 
 class App extends Component {
     state = localStorage.getItem('appState')
@@ -87,7 +88,6 @@ class App extends Component {
                         supermarket={supermarket}
                         path="/shopmap"
                     />
-
                     <AisleList
                         path="/aisleList"
                         number={path[aisleCount]}
@@ -111,6 +111,7 @@ class App extends Component {
                         clearList={this.clearList}
                         clearPath={this.clearPath}
                     />
+                    <SupermarketCreator path="/createSupermarket" />
                 </Router>
             </div>
         )

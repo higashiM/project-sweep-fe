@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
+import * as api from '../utils/api'
+import CategoryAisleSelectCard from './CategoryAisleSelectCard'
+import Button from '@material-ui/core/Button'
 const typeAssigner = require('../utils/typeAssigner')
-import SupermarketCreator from './components/SupermarketCreator'
-;<SupermarketCreator path="/createSupermarket" />
-<Link to="/createSupermarket">
-                    <button>Add New Supermarket</button>
-                </Link>
 
 export class SupermarketCreator extends Component {
     state = {
+        currentCategory: '',
+        currentAisle: null,
+        categories: [],
+        isLoading: true,
         name: '',
         location: [],
         layout: [
@@ -44,11 +46,35 @@ export class SupermarketCreator extends Component {
             //  'coffee, tea & hot chocolate': 12,
             //  'world foods': 5,
         },
-        aisleInfo: {},
+        aisleInfo: {
+            1: { type: 'tl', x: 0, y: 0, num: 1 },
+            2: { type: 'tm', x: 1, y: 0, num: 2 },
+            3: { type: 'tr', x: 2, y: 0, num: 3 },
+            4: { type: 'cl', x: 3, y: 0, num: 4 },
+            5: { type: 'cm', x: 4, y: 0, num: 5 },
+            6: { type: 'cr', x: 5, y: 0, num: 6 },
+        },
+    }
+    componentDidMount() {
+        api.getCategories().then(({ categories }) => {
+            const newCats = categories.sort((a, b) => {
+                return a.name > b.name ? 1 : -1
+            })
+
+            this.setState({ categories: newCats, isLoading: false })
+        })
     }
 
     render() {
-        const { layout, name, location, aisleInfo } = this.state
+        const {
+            layout,
+            name,
+            location,
+            aisleInfo,
+            categories,
+            currentAisle,
+            currentCategory,
+        } = this.state
         return (
             <div>
                 <p>
@@ -94,9 +120,54 @@ export class SupermarketCreator extends Component {
                         +
                     </button>
                 </section>
+                <section className="category-lookup-input-container">
+                    <CategoryAisleSelectCard
+                        categories={categories}
+                        updateCurrent={this.updateCurrent}
+                        currentCategory={this.state.currentCategory}
+                    />
+                    <CategoryAisleSelectCard
+                        className="aisle-category-dropdown"
+                        aisles={Object.keys(aisleInfo)}
+                        updateCurrent={this.updateCurrent}
+                        currentCategory={this.state.currentAisle}
+                    />
+                    <Button
+                        className="add-to-lookup-button"
+                        variant="contained"
+                        color="primary"
+                        onClick={() =>
+                            this.updateCategoryLookup(
+                                currentAisle,
+                                currentCategory
+                            )
+                        }
+                    >
+                        Add
+                    </Button>
+                </section>
             </div>
         )
     }
+
+    updateCategoryLookup = (aisle, category) => {
+        this.setState(
+            (currentState) => {
+                currentState.categoryLookup[category] = aisle
+                return { categoryLookup: { ...currentState.categoryLookup } }
+            },
+            () => {
+                this.setState({ currentAisle: '', currentCategory: '' })
+                console.log(this.state.categoryLookup)
+            }
+        )
+    }
+    updateCurrent = (type, value) => {
+        type === 'category'
+            ? this.setState({ currentCategory: value })
+            : this.setState({ currentAisle: value })
+    }
+
     incrementDimensions = (increment, type) => {
         const { layout } = this.state
 
