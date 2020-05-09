@@ -63,6 +63,7 @@ const shortVerticalBot = verticalPathSection('shortVerticalBot', one, 0)
 const shortVerticalBot_minus = verticalPathSection('shortVerticalBot', -one, 0)
 
 const paths = {
+    EndBotMtoBotM: verticalEnd,
     EndTopMtoBotR: verticalEnd.concat(botRTraverse),
     EndBotMtoTopL: verticalEnd_minus.concat(topLTraverse_minus),
     EndBotMtoTopR: verticalEnd_minus.concat(topRTraverse),
