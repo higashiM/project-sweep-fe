@@ -95,9 +95,11 @@ class AisleMap extends Component {
                     listItems={listItems}
                     trolleyAisle={thisAisle}
                 />
-                <Button variant="contained" color="primary">
-                    <Link to="/aisleList">Next list...</Link>
-                </Button>
+                <Link to="/aisleList">
+                    <Button variant="contained" color="primary">
+                        Next list...
+                    </Button>
+                </Link>
             </div>
         )
     }
