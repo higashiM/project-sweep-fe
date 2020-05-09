@@ -32,8 +32,8 @@ const aisleInfo = {
     18: { type: 'cr', x: 5, y: 2, num: 18 },
 }
 
-test(`0 - createMap path [7,9,15,4,6,18] that ends in the right place`, () => {
-    const input = [7, 9, 15, 4, 6, 18]
+test(`0 - createMap path [7,9,15,4,6,18] that ends in the right place, goes through all waypoints and generates an pathtext`, () => {
+    const input = [15, 4, 9]
     const path = genMap.genPath(input, shoplayout, aisleInfo)
     const route = genMap.assignSVGtoPath(path)
 
@@ -60,28 +60,26 @@ for (let i = 1; i < 1000; i++) {
     inputArray.length = numVisits
     inputArray.fill(0)
     const input = inputArray.map((num) => Math.ceil(Math.random() * 16))
+    const path = genMap.genPath(input, shoplayout, aisleInfo)
+    const route = genMap.assignSVGtoPath(path)
+    const svgPath = genMap.genPathSVG(path, route, shoplayout, aisleInfo)
 
-    console.log(numVisits, input)
-    test(`${i} - createMap path ${input.join()} that ends in the right place`, () => {
-        const path = genMap.genPath(input, shoplayout, aisleInfo)
-        const route = genMap.assignSVGtoPath(path)
+    const teststring = `M45 ${
+        200 + (shoplayout.length - 2) * 160 + 165
+    } ${svgPath} `
+    const properties = new svgPathProperties(teststring)
+    const length = properties.getTotalLength()
+    const point = properties.getPointAtLength(length)
+    const lastStopX = path[path.length - 2][0]
+    const lastStopY = path[path.length - 2][1]
 
-        const svgPath = genMap.genPathSVG(path, route, shoplayout, aisleInfo)
-
-        const teststring = `M45 ${
-            200 + (shoplayout.length - 2) * 160 + 165
-        } ${svgPath} `
-        const properties = new svgPathProperties(teststring)
-        const length = properties.getTotalLength()
-        const point = properties.getPointAtLength(length)
-        const lastStopX = path[path.length - 2][0]
-        const lastStopY = path[path.length - 2][1]
+    test(`${i} - createMap path ${input.join()} for that ends in the right place`, () => {
         expect(point.x).toBe(80 * lastStopX + 45)
         expect(point.y).toBeGreaterThanOrEqual(
-            200 + (lastStopY - 1) * 160 + 85 - 10
+            200 + (lastStopY - 1) * 160 + 85 - 15
         )
         expect(point.y).toBeLessThanOrEqual(
-            200 + (lastStopY - 1) * 160 + 85 + 10
+            200 + (lastStopY - 1) * 160 + 85 + 15
         )
 
         for (const key in route) {
@@ -90,5 +88,11 @@ for (let i = 1; i < 1000; i++) {
                 expect(typeof element.path).toBe('string')
             }
         }
+
+        const waypoints = path.map((aisle) => aisle[2])
+
+        input.forEach((aisle) => {
+            expect(waypoints.includes(aisle)).toBe(true)
+        })
     })
 }

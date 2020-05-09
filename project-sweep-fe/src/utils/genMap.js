@@ -72,7 +72,7 @@ export const genPath = (aislesToVisit, layout, ai) => {
         aislePath
     ) => {
         const ref = 'xy'.concat(x, y)
-        //console.log(goingUp, x, y, aislePath, columnsToTraverse, aisleTickOff)
+        console.log(goingUp, x, y, aislePath, columnsToTraverse, aisleTickOff)
 
         //add current location to the path - if aisle need to visit delete from checklist
         if (aisleTickOff[ref]) {
@@ -114,6 +114,21 @@ export const genPath = (aislesToVisit, layout, ai) => {
             (reachedFinalObject | nothingToGetThisColumn) &
             (readyToTurnForNextColumn | nothingToGetNextColumn)
         ) {
+            //fix bug where it would traverse straight aceoss aisles it needs to go through for items
+            if (
+                (nothingToGetThisColumn &&
+                    !nothingToGetNextColumn &&
+                    y === 0 &&
+                    !goingUp) |
+                (nothingToGetThisColumn &&
+                    !nothingToGetNextColumn &&
+                    y === maxRow &&
+                    goingUp)
+            ) {
+                console.log('switch')
+                goingUp = !goingUp
+            }
+
             return goForaWalk(
                 x + 1,
                 y,
@@ -227,24 +242,31 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
             TopMtoTopR: 'BotR',
         }
 
-        let ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
         let exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
+        let ent = 'BotM'
 
         const prevRef = 'xy'.concat(prevX.toString(), prevY.toString())
         let prevExit = null
         if (aislestoVisit[prevRef]) prevExit = aislestoVisit[prevRef].exit
+        if (prevExit) {
+            ent = prevExittoEntLookup[prevExit]
+        }
 
         //traverses along other
         if (prevY === currY && currY === nextY && !currPos) {
             if (prevExit) {
-                ent = prevExittoEntLookup[prevExit]
                 exit = prevExittoEntLookup[ent]
             }
         }
 
+        //  fixes traversing exception
+
+        if (currY === 0 && nextY === currY && nextPos) {
+            exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
+        }
+
         //traverses along bottom from start
         if (prevPos === 'start' && nextX > currX && !currPos) {
-            ent = traversingBottom[prevY - currY + 1][prevX - currX + 1]
             exit = traversingBottom[nextY - currY + 1][nextX - currX + 1]
         }
 
@@ -252,7 +274,6 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         if (
             (currX < nextX && prevY < currY) | (currX > prevX && nextY < currY)
         ) {
-            ent = turningUpLookup[prevY - currY + 1][prevX - currX + 1]
             exit = turningUpLookup[nextY - currY + 1][nextX - currX + 1]
         }
         //execute turns at top of column if next two same level or going down
@@ -278,14 +299,10 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
                 nextY >= currY &&
                 nextNextPos === 'finish'
             ) {
-                ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
                 exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
             }
         }
 
-        if (prevExit) {
-            ent = prevExittoEntLookup[prevExit]
-        }
         //constructname of svgto use
         let path = ent.concat('to', exit)
 
@@ -321,7 +338,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
 
         if (waypoint) aislestoVisit.waypoints.push(waypoint)
     }
-    // console.log(aislePath, aislestoVisit)
+    console.log(aislePath, aislestoVisit)
 
     return aislestoVisit
 }

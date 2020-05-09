@@ -75,7 +75,7 @@ export default class ShopMap extends Component {
         const listItems = this.props.listItems
         const ai = this.props.supermarket.aisleInfo
         const layout = this.props.supermarket.layout
-
+        console.log(svgPath, aislesToVisit, aisleListCat)
         console.log(this.props.supermarket.layout)
 
         if (isLoading | isMapLoading) {
