@@ -75,7 +75,7 @@ export default class ShopMap extends Component {
         const listItems = this.props.listItems
         const ai = this.props.supermarket.aisleInfo
         const layout = this.props.supermarket.layout
-
+        console.log(svgPath, aislesToVisit, aisleListCat)
         console.log(this.props.supermarket.layout)
 
         if (isLoading | isMapLoading) {
@@ -99,8 +99,9 @@ export default class ShopMap extends Component {
                     listItems={listItems}
                 />
                 <Link to="/aisleMap">
-                    Get Started...
-                    <Button variant="contained" color="primary"></Button>
+                    <Button variant="contained" color="primary">
+                        Get Started...
+                    </Button>
                 </Link>
             </div>
         )
