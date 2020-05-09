@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as api from '../utils/api'
 import CategoryAisleSelectCard from './CategoryAisleSelectCard'
 import Button from '@material-ui/core/Button'
+import sortAisleItems from '../utils/sortAisleInput'
 const typeAssigner = require('../utils/typeAssigner')
 
 export class SupermarketCreator extends Component {
@@ -49,8 +50,10 @@ export class SupermarketCreator extends Component {
             categoryLookup,
         } = this.state
         let categoryLookupArr = Object.entries(categoryLookup)
+        console.log(categoryLookupArr)
         return (
             <main className="supermarketCreatorContainer">
+                <h2>Supermarket input form</h2>
                 <form
                     className="newSupermarket-form"
                     onSubmit={(event) => {
@@ -58,8 +61,9 @@ export class SupermarketCreator extends Component {
                     }}
                 >
                     <label className="shopName-input">
-                        Supermarket Name:
+                        Supermarket Name: <br />
                         <input
+                            className="inputField"
                             type="text"
                             onChange={this.handleChange}
                             value={name}
@@ -70,6 +74,7 @@ export class SupermarketCreator extends Component {
                     <label className="shopPostcode-input">
                         Supermarket Postcode:
                         <input
+                            className="inputField"
                             type="text"
                             onChange={this.handleChange}
                             value={location}
@@ -79,58 +84,67 @@ export class SupermarketCreator extends Component {
                     </label>
 
                     <section className="layout-change-container">
-                        <p>
+                        <h4 className="formsubtitle">
                             Supermarket Aisle Layout {layout.length}x
                             {layout[0].length}
-                        </p>
-                        <label htmlFor="increment-rows">
-                            Change Rows
-                            <section id="increment-layout">
-                                <button
-                                    disabled={layout.length === 2}
-                                    onClick={() => {
-                                        this.incrementDimensions(-1, 'row')
-                                    }}
-                                    className="increment-button down"
-                                >
-                                    -
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        this.incrementDimensions(1, 'row')
-                                    }}
-                                    className="increment-button up"
-                                >
-                                    +
-                                </button>
-                            </section>
-                        </label>
-
-                        <label htmlFor="increment-columns">
-                            Change columns
-                            <section className="increment-layout">
-                                <button
-                                    disabled={layout[0].length === 3}
-                                    onClick={() => {
-                                        this.incrementDimensions(-1, 'column')
-                                    }}
-                                    className="increment-button down"
-                                >
-                                    -
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        this.incrementDimensions(1, 'column')
-                                    }}
-                                    className="increment-button up"
-                                >
-                                    +
-                                </button>
-                            </section>
-                        </label>
+                        </h4>
+                        <div className="sizeControl">
+                            <div className="button">
+                                <label htmlFor="increment-rows">
+                                    Change Rows <br />
+                                    <button
+                                        disabled={layout.length === 2}
+                                        onClick={() => {
+                                            this.incrementDimensions(-1, 'row')
+                                        }}
+                                        className="increment-button down"
+                                    >
+                                        -
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            this.incrementDimensions(1, 'row')
+                                        }}
+                                        className="increment-button up"
+                                    >
+                                        +
+                                    </button>
+                                </label>
+                            </div>
+                            <div className="button">
+                                <label htmlFor="increment-columns">
+                                    Change columns <br></br>
+                                    <button
+                                        disabled={layout[0].length === 3}
+                                        onClick={() => {
+                                            this.incrementDimensions(
+                                                -1,
+                                                'column'
+                                            )
+                                        }}
+                                        className="increment-button down"
+                                    >
+                                        -
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            this.incrementDimensions(
+                                                1,
+                                                'column'
+                                            )
+                                        }}
+                                        className="increment-button up"
+                                    >
+                                        +
+                                    </button>
+                                </label>
+                            </div>
+                        </div>
                     </section>
+                    <h4 className="formsubtitle">
+                        Assign Categories To Aisles
+                    </h4>
                     <section className="category-lookup-input-container">
-                        <h4>Assign Categories To Aisles</h4>
                         <CategoryAisleSelectCard
                             className="aisle-category-dropdown"
                             categories={categories}
@@ -143,6 +157,8 @@ export class SupermarketCreator extends Component {
                             updateCurrent={this.updateCurrent}
                             currentCategory={this.state.currentAisle}
                         />
+                    </section>
+                    <div className="button">
                         <Button
                             className="add-to-lookup-button"
                             variant="contained"
@@ -156,40 +172,58 @@ export class SupermarketCreator extends Component {
                         >
                             Add
                         </Button>
-                    </section>
+                    </div>
+                    <ul className="category-aisle-assignment-list">
+                        {sortAisleItems(categoryLookupArr).map((entry) => {
+                            return (
+                                <li>
+                                    <strong>Aisle {entry.number}</strong>
+                                    <br></br>
 
-                    <Button
-                        id="newSupermarket-submit-button"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleSubmit}
-                    >
-                        Submit
-                    </Button>
-                    <Button
-                        id="newSupermarket-clear-button"
-                        variant="contained"
-                        color="secondary"
-                        onClick={() =>
-                            this.updateCategoryLookup(
-                                currentAisle,
-                                currentCategory
+                                    {entry.categories.map((category) => {
+                                        return <p>{category}</p>
+                                    })}
+                                </li>
                             )
-                        }
-                    >
-                        Clear
-                    </Button>
+                        })}
+                    </ul>
+                    <div className="button-container">
+                        <Button
+                            id="newSupermarket-clear-button"
+                            variant="contained"
+                            color="secondary"
+                            onClick={() =>
+                                this.setState({
+                                    name: '',
+                                    categoryLookup: {},
+                                    aisleInfo: {
+                                        1: { type: 'tl', x: 0, y: 0, num: 1 },
+                                        2: { type: 'tm', x: 1, y: 0, num: 2 },
+                                        3: { type: 'tr', x: 2, y: 0, num: 3 },
+                                        4: { type: 'cl', x: 3, y: 0, num: 4 },
+                                        5: { type: 'cm', x: 4, y: 0, num: 5 },
+                                        6: { type: 'cr', x: 5, y: 0, num: 6 },
+                                    },
+                                    layout: [
+                                        [1, 2, 3],
+                                        [4, 5, 6],
+                                    ],
+                                    location: '',
+                                })
+                            }
+                        >
+                            Clear
+                        </Button>
+                        <Button
+                            id="newSupermarket-submit-button"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSubmit}
+                        >
+                            Submit
+                        </Button>
+                    </div>
                 </form>
-                <ul className="category-aisle-assignment-list">
-                    {categoryLookupArr.map((entry) => {
-                        return (
-                            <li>
-                                <strong>Aisle</strong> {entry[1]},
-                                <strong>Category:</strong> {entry[0]}
-                            </li>
-                        )
-                    })}
-                </ul>
             </main>
         )
     }
@@ -248,8 +282,9 @@ export class SupermarketCreator extends Component {
                 }
             },
             () => {
-                this.setState({ currentCategory: '' })
-                console.log(this.state.categoryLookup)
+                this.setState({ currentCategory: '' }, () => {
+                    console.log(this.state.categoryLookup)
+                })
             }
         )
     }

@@ -257,7 +257,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         }
         //execute turns at top of column if next two same level or going down
 
-        if (nextNext) {
+        /*         if (nextNext) {
             if (
                 prevY < currY &&
                 currX < nextX &&
@@ -267,7 +267,7 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
                 ent = pathLookup[prevY - currY + 1][prevX - currX + 1]
                 exit = pathLookup[nextY - currY + 1][nextX - currX + 1]
             }
-        }
+        } */
 
         //execute turns at top of column if next is final waypoint
 

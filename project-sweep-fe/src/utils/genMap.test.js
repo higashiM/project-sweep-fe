@@ -1,5 +1,8 @@
 import * as genMap from './genMap'
-
+import React from 'react'
+import { cleanup, fireEvent, render } from '@testing-library/react'
+import CreateMap from '../components/CreateMap'
+import ReactDOM from 'react-dom'
 const shoplayout = [
     [1, 2, 3, 4, 5, 6],
     [7, 8, 9, 10, 11, 12],
@@ -63,7 +66,7 @@ test('4  -aisleinfo - assignSVGtoPath- all aisles have defined SVG path for sing
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -76,7 +79,7 @@ test('5 -aisleinfo - assignSVGtoPath- all aisles have defined SVG path for singl
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -84,11 +87,10 @@ test('6 - aisleinfo - assignSVGtoPath- all aisles have defined SVG path for sing
     const input = [1, 2, 7, 5, 9, 11, 17, 12, 14, 18]
     const path = genMap.genPath(input, shoplayout, aisleInfo)
     const actual = genMap.assignSVGtoPath(path)
-
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -164,7 +166,7 @@ test('10 - aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for si
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -177,7 +179,7 @@ test('11 -aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for sin
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -190,7 +192,7 @@ test('12- aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for sin
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -203,7 +205,7 @@ test('13 - aisleinfo2 - assignSVGtoPath- all aisles have defined SVG path for si
     for (const key in actual) {
         if (key !== 'waypoints') {
             const element = actual[key]
-            expect(typeof element.path).toBe('object')
+            expect(typeof element.path).toBe('string')
         }
     }
 })
@@ -214,5 +216,4 @@ test('14 - new svgPath function', () => {
     const actual = genMap.assignSVGtoPath(path)
 
     const result = genMap.genPathSVG(path, actual, shoplayout2, aisleInfo)
-    console.log(actual)
 })
