@@ -171,10 +171,23 @@ export class SupermarketCreator extends Component {
                         variant="contained"
                         color="secondary"
                         onClick={() =>
-                            this.updateCategoryLookup(
-                                currentAisle,
-                                currentCategory
-                            )
+                            this.setState({
+                                name: '',
+                                categoryLookup: {},
+                                aisleInfo: {
+                                    1: { type: 'tl', x: 0, y: 0, num: 1 },
+                                    2: { type: 'tm', x: 1, y: 0, num: 2 },
+                                    3: { type: 'tr', x: 2, y: 0, num: 3 },
+                                    4: { type: 'cl', x: 3, y: 0, num: 4 },
+                                    5: { type: 'cm', x: 4, y: 0, num: 5 },
+                                    6: { type: 'cr', x: 5, y: 0, num: 6 },
+                                },
+                                layout: [
+                                    [1, 2, 3],
+                                    [4, 5, 6],
+                                ],
+                                location: '',
+                            })
                         }
                     >
                         Clear
@@ -248,8 +261,9 @@ export class SupermarketCreator extends Component {
                 }
             },
             () => {
-                this.setState({ currentAisle: '', currentCategory: '' })
-                console.log(this.state.categoryLookup)
+                this.setState({ currentCategory: '' }, () => {
+                    console.log(this.state.categoryLookup)
+                })
             }
         )
     }
