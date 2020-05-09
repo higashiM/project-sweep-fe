@@ -52,7 +52,7 @@ export const postSupermarkets = (
     layout,
     location
 ) => {
-    console.log(location)
+    console.log(name, aisleInfo, categoryLookup, layout, location)
     return request.post('/supermarkets', {
         name,
         aisleInfo,
