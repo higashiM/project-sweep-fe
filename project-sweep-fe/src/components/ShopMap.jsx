@@ -98,9 +98,10 @@ export default class ShopMap extends Component {
                     aisleListCat={aisleListCat}
                     listItems={listItems}
                 />
-                <Button variant="contained" color="primary">
-                    <Link to="/aisleMap">Get Started...</Link>
-                </Button>
+                <Link to="/aisleMap">
+                    Get Started...
+                    <Button variant="contained" color="primary"></Button>
+                </Link>
             </div>
         )
     }

@@ -31,6 +31,7 @@ export default function CreateMap(props) {
 
     return (
         <svg
+            xmlns="http://www.w3.org/2000/svg"
             className="shopMapSVG"
             width={layout[0].length * 80}
             height={200 * layout.length}
@@ -107,7 +108,6 @@ export default function CreateMap(props) {
                         return null
                 }
             })}
-
             {layout.flat().map((aisleNum) => {
                 const aisleData = aisleInfo[aisleNum]
 
@@ -145,7 +145,6 @@ export default function CreateMap(props) {
                     </>
                 )
             })}
-
             {istrolleyAisle === 'start' ? (
                 <Trolley x={15} y={200 + (layout.length - 2) * 160 + 120} />
             ) : null}
