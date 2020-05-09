@@ -16,8 +16,8 @@
 .MuiPaper-root {
     background-color: red;
 }
-.foodList {
-    color: red;
+.foodlist {
+    padding: 5px;
 }
 
 .path {
@@ -40,9 +40,9 @@
 }
 
 #waypointCircle:hover {
-    fill: blue;
+    fill: rgb(249, 138, 3);
     stroke: black;
-    stroke-width: 0.1;
+    stroke-width: 1;
     cursor: pointer;
 }
 

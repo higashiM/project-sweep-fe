@@ -33,8 +33,9 @@ export default class SupermarketList extends Component {
 
     render() {
         console.log(this.state.supermarkets)
-        const { userLocation } = this.props
+        const { userLocation, listItems } = this.props
         const { supermarkets, isLoading, showMap } = this.state
+        console.log(listItems)
         if (isLoading) return <Loader />
         return (
             <div className="notepad">
@@ -67,6 +68,19 @@ export default class SupermarketList extends Component {
                         })
                         .map((supermarket) => {
                             console.log(this.props)
+                            const missingCategoryItems = listItems.filter(
+                                (item) => {
+                                    return (
+                                        Object.keys(
+                                            supermarket.categoryLookup
+                                        ).indexOf(item.category.name) === -1
+                                    )
+                                }
+                            )
+                            const nextLink = missingCategoryItems.length
+                                ? '/itemcheck'
+                                : '/shopmap'
+                            console.log(nextLink)
                             return (
                                 <div className="button supermarketButton">
                                     <Button variant="contained" color="primary">
@@ -75,7 +89,7 @@ export default class SupermarketList extends Component {
                                                 this.handleClick(supermarket)
                                             }
                                             key={supermarket._id}
-                                            to="/itemcheck"
+                                            to={nextLink}
                                         >
                                             <div className="superMarketName">
                                                 {supermarket.name}
@@ -95,11 +109,13 @@ export default class SupermarketList extends Component {
                             )
                         })
                 )}
-                <Link to="/createSupermarket">
-                    <Button variant="contained" color="secondary">
-                        Add New Supermarket
-                    </Button>
-                </Link>
+                <div className="button">
+                    <Link to="/createSupermarket">
+                        <Button variant="contained" color="secondary">
+                            Add New Supermarket
+                        </Button>
+                    </Link>
+                </div>
             </div>
         )
     }

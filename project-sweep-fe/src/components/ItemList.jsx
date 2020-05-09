@@ -22,8 +22,17 @@ export class ItemList extends Component {
                 return a.name > b.name ? 1 : -1
             })
 
-            this.setState({ categories: newCats, isLoading: false })
+            this.setState({
+                categories: newCats,
+                isLoading: false,
+            })
         })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.supermarket) {
+            this.props.clearPath()
+        }
     }
 
     render() {
@@ -84,9 +93,11 @@ export class ItemList extends Component {
                             >
                                 Clear
                             </Button>
-                            <Button variant="contained" color="primary">
-                                <Link to="/supermarketlist">Go shop...</Link>
-                            </Button>
+                            <Link to="/supermarketlist">
+                                <Button variant="contained" color="primary">
+                                    Go shop...
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 )}

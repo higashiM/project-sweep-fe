@@ -25,7 +25,6 @@ class AisleList extends Component {
 
     componentDidMount() {
         const { listItems, categories, aisleOrder, aisleCount } = this.props
-        console.log(listItems)
 
         this.setState({
             isLoading: false,
@@ -105,21 +104,21 @@ class AisleList extends Component {
                     })}
                 </main>
                 <div className="button">
-                    <Button variant="contained" color="primary">
-                        <Link
-                            to={
-                                aisleCount === aisleOrder.length - 1
-                                    ? '/summaryPage'
-                                    : '/aisleMap'
-                            }
-                            onClick={() => {
-                                increaseAisleCount()
-                                removeListItems(checkedItems)
-                            }}
-                        >
+                    <Link
+                        to={
+                            aisleCount === aisleOrder.length - 1
+                                ? '/summaryPage'
+                                : '/aisleMap'
+                        }
+                        onClick={() => {
+                            increaseAisleCount()
+                            removeListItems(checkedItems)
+                        }}
+                    >
+                        <Button variant="contained" color="primary">
                             Next aisle...
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 </div>
             </div>
         )
