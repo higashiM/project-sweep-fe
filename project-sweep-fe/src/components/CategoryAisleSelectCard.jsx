@@ -31,7 +31,6 @@ class CategoryAisleSelectCard extends Component {
     render() {
         const { open } = this.state
         const { categories, aisles, currentCategory, currentAisle } = this.props
-        console.log(aisles)
 
         return (
             <div className="aisle-category-dropdown">
