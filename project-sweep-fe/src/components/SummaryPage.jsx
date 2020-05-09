@@ -33,29 +33,29 @@ const SummaryPage = (props) => {
                         )}
                     </div>
                     <div className="button">
-                        <Button variant="contained" color="primary">
-                            <Link
-                                to="/"
-                                onClick={() => {
-                                    props.clearPath()
-                                }}
-                            >
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                props.clearPath()
+                            }}
+                        >
+                            <Button variant="contained" color="primary">
                                 Keep items for next time
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                     </div>
                     <div className="button">
-                        <Button variant="contained" color="primary">
-                            <Link
-                                to="/"
-                                onClick={() => {
-                                    props.clearList()
-                                    props.clearPath()
-                                }}
-                            >
+                        <Link
+                            to="/"
+                            onClick={() => {
+                                props.clearList()
+                                props.clearPath()
+                            }}
+                        >
+                            <Button variant="contained" color="primary">
                                 Clear list
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                     </div>
                 </>
             ) : (

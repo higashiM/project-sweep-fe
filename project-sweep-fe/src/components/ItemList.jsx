@@ -93,9 +93,11 @@ export class ItemList extends Component {
                             >
                                 Clear
                             </Button>
-                            <Button variant="contained" color="primary">
-                                <Link to="/supermarketlist">Go shop...</Link>
-                            </Button>
+                            <Link to="/supermarketlist">
+                                <Button variant="contained" color="primary">
+                                    Go shop...
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 )}
