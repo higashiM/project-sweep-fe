@@ -83,5 +83,12 @@ for (let i = 1; i < 1000; i++) {
         expect(point.y).toBeLessThanOrEqual(
             200 + (lastStopY - 1) * 160 + 85 + 10
         )
+
+        for (const key in route) {
+            if (key !== 'waypoints') {
+                const element = route[key]
+                expect(typeof element.path).toBe('string')
+            }
+        }
     })
 }
