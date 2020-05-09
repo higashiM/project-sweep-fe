@@ -76,3 +76,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.category-aisle-assignment-list {
+    text-align: left;
+}

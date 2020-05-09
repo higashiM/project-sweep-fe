@@ -180,11 +180,11 @@ export class SupermarketCreator extends Component {
                         Clear
                     </Button>
                 </form>
-                <ul className="category/aisle-assignment-list">
+                <ul className="category-aisle-assignment-list">
                     {categoryLookupArr.map((entry) => {
                         return (
                             <li>
-                                <strong>Aisle</strong> {entry[1]},{' '}
+                                <strong>Aisle</strong> {entry[1]},
                                 <strong>Category:</strong> {entry[0]}
                             </li>
                         )
@@ -248,7 +248,7 @@ export class SupermarketCreator extends Component {
                 }
             },
             () => {
-                this.setState({ currentAisle: '', currentCategory: '' })
+                this.setState({ currentCategory: '' })
                 console.log(this.state.categoryLookup)
             }
         )
