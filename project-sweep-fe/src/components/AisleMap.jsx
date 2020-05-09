@@ -20,13 +20,13 @@ class AisleMap extends Component {
         const svgSnip = this.svgSnip(pathOfAisles, thisAisle, nextAisle)
 
         const newAislesToVisit = genMap.assignSVGtoPath(svgSnip)
-
         const newSVGPath = genMap.genPathSVG(
             svgSnip,
             newAislesToVisit,
             true,
             layout.length
         )
+        console.log(newAislesToVisit, svgSnip)
 
         this.setState({ newAislesToVisit, newSVGPath, isloading: false })
     }
@@ -59,7 +59,7 @@ class AisleMap extends Component {
                     'finish',
                 ]
                 pathSnip.push(finish)
-                //      console.log(pathSnip)
+                console.log(pathSnip)
                 return pathSnip
             }
         }

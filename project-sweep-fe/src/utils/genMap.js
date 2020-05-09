@@ -104,8 +104,8 @@ export const genPath = (aislesToVisit, layout, ai) => {
 
         const readyToTurnForNextColumn =
             columnsToTraverse[x + 1] &&
-            (columnsToTraverse[x + 1].minY >= y && goingUp) |
-                (columnsToTraverse[x + 1].maxY <= y && !goingUp)
+            (columnsToTraverse[x + 1].minY >= y && goingUp | (y === maxRow)) |
+                (columnsToTraverse[x + 1].maxY <= y && !goingUp | (y === 0))
 
         const nothingToGetThisColumn = !columnsToTraverse[x]
         const nothingToGetNextColumn = !columnsToTraverse[x + 1]

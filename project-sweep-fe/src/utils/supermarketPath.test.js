@@ -49,9 +49,9 @@ test(`0 - createMap path [7,9,15,4,6,18] that ends in the right place, goes thro
     const lastStopY = path[path.length - 2][1]
     expect(point.x).toBe(80 * lastStopX + 45)
     expect(point.y).toBeGreaterThanOrEqual(
-        200 + (lastStopY - 1) * 160 + 85 - 10
+        200 + (lastStopY - 1) * 160 + 85 - 20
     )
-    expect(point.y).toBeLessThanOrEqual(200 + (lastStopY - 1) * 160 + 85 + 10)
+    expect(point.y).toBeLessThanOrEqual(200 + (lastStopY - 1) * 160 + 85 + 20)
 })
 
 for (let i = 1; i < 1000; i++) {
@@ -76,10 +76,10 @@ for (let i = 1; i < 1000; i++) {
     test(`${i} - createMap path ${input.join()} for that ends in the right place`, () => {
         expect(point.x).toBe(80 * lastStopX + 45)
         expect(point.y).toBeGreaterThanOrEqual(
-            200 + (lastStopY - 1) * 160 + 85 - 15
+            200 + (lastStopY - 1) * 160 + 85 - 20
         )
         expect(point.y).toBeLessThanOrEqual(
-            200 + (lastStopY - 1) * 160 + 85 + 15
+            200 + (lastStopY - 1) * 160 + 85 + 20
         )
 
         for (const key in route) {
