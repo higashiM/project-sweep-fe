@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-// import InputLabel from '@material-ui/core/InputLabel'
+import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
@@ -35,9 +35,9 @@ class CategoryAisleSelectCard extends Component {
         return (
             <div className="aisle-category-dropdown">
                 <FormControl>
-                    <label htmlFor="">
+                    <InputLabel id="dropdown">
                         {categories ? 'Category' : 'Aisle'}
-                    </label>
+                    </InputLabel>
                     <Select
                         labelId={`${
                             categories ? 'category' : 'aisle'
@@ -57,7 +57,6 @@ class CategoryAisleSelectCard extends Component {
                                       <MenuItem
                                           value={category.name.toLowerCase()}
                                           key={`${category.id} ${i}`}
-                                          onClick={() => {}}
                                       >
                                           {category.name}
                                       </MenuItem>
@@ -68,7 +67,6 @@ class CategoryAisleSelectCard extends Component {
                                       <MenuItem
                                           value={aisle}
                                           key={`${aisle} ${i}`}
-                                          onClick={() => {}}
                                       >
                                           {aisle}
                                       </MenuItem>
