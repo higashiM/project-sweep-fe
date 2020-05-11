@@ -6,7 +6,7 @@ const Header = (props) => {
         <Link to="/">
             <svg
                 className="header"
-                width="360px"
+                width="396px"
                 height="101px"
                 viewBox="0 0 396 101"
                 version="1.1"
@@ -17,9 +17,9 @@ const Header = (props) => {
                 <defs>
                     <text
                         id="text-1"
-                        fontFamily="Skia-Regular_Bold, Skia"
-                        fontSize="58"
-                        fontWeight="bold"
+                        font-family="Skia-Regular_Bold, Skia"
+                        font-size="58"
+                        font-weight="bold"
                         fill="#F06C00"
                     >
                         <tspan x="129" y="69">
@@ -53,9 +53,9 @@ const Header = (props) => {
                     </filter>
                     <text
                         id="text-3"
-                        fontFamily="Skia-Regular_Bold, Skia"
-                        fontSize="58"
-                        fontWeight="bold"
+                        font-family="Skia-Regular_Bold, Skia"
+                        font-size="58"
+                        font-weight="bold"
                         fill="#F06C00"
                     >
                         <tspan x="5" y="69">
@@ -89,9 +89,9 @@ const Header = (props) => {
                     </filter>
                     <text
                         id="text-5"
-                        fontFamily="Skia-Regular_Bold, Skia"
-                        fontSize="48"
-                        fontWeight="bold"
+                        font-family="Skia-Regular_Bold, Skia"
+                        font-size="48"
+                        font-weight="bold"
                         fill="#F06C00"
                     >
                         <tspan x="45" y="69">
@@ -125,9 +125,9 @@ const Header = (props) => {
                     </filter>
                     <text
                         id="text-7"
-                        fontFamily="Skia-Regular_Bold, Skia"
-                        fontSize="48"
-                        fontWeight="bold"
+                        font-family="Skia-Regular_Bold, Skia"
+                        font-size="48"
+                        font-weight="bold"
                         fill="#F06C00"
                     >
                         <tspan x="173" y="69">
@@ -163,23 +163,23 @@ const Header = (props) => {
                 <g
                     id="Page-2"
                     stroke="none"
-                    strokeWidth="1"
+                    stroke-width="1"
                     fill="none"
-                    fillRule="evenodd"
+                    fill-rule="evenodd"
                 >
                     <g id="Custom-Preset-3">
                         <g id="N" stroke="#000000">
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 filter="url(#filter-2)"
                                 href="#text-1"
                             ></use>
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 href="#text-1"
                             ></use>
                             <use href="#text-1"></use>
@@ -187,15 +187,15 @@ const Header = (props) => {
                         <g id="A" stroke="#000000">
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 filter="url(#filter-4)"
                                 href="#text-3"
                             ></use>
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 href="#text-3"
                             ></use>
                             <use href="#text-3"></use>
@@ -203,15 +203,15 @@ const Header = (props) => {
                         <g id="isle" stroke="#000000">
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 filter="url(#filter-6)"
                                 href="#text-5"
                             ></use>
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 href="#text-5"
                             ></use>
                             <use href="#text-5"></use>
@@ -219,92 +219,112 @@ const Header = (props) => {
                         <g id="avigate" stroke="#000000">
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 filter="url(#filter-8)"
                                 href="#text-7"
                             ></use>
                             <use
                                 fill="#F06C00"
-                                fillOpacity="1"
-                                strokeOpacity="1"
+                                fill-opacity="1"
+                                stroke-opacity="1"
                                 href="#text-7"
                             ></use>
                             <use href="#text-7"></use>
                         </g>
                         <line
-                            x1="340.997841"
-                            y1="31.9801948"
-                            x2="350.5"
-                            y2="24.5"
+                            x1="356.57954"
+                            y1="34.9801948"
+                            x2="366.081699"
+                            y2="27.5"
                             id="Line-2"
                             stroke="#445278"
-                            strokeWidth="5"
-                            strokeLinecap="round"
+                            stroke-width="5"
+                            stroke-linecap="round"
                         ></line>
                         <line
-                            x1="310.166746"
-                            y1="10.8524148"
-                            x2="319.003348"
-                            y2="19.2664164"
+                            x1="325.748445"
+                            y1="13.8524148"
+                            x2="334.585047"
+                            y2="22.2664164"
                             id="Line-2"
                             stroke="#445278"
-                            strokeWidth="5"
-                            strokeLinecap="round"
+                            stroke-width="5"
+                            stroke-linecap="round"
                         ></line>
                         <line
-                            x1="331.999399"
-                            y1="24.9693804"
-                            x2="338.910697"
-                            y2="31.9081413"
+                            x1="347.581098"
+                            y1="27.9693804"
+                            x2="354.492396"
+                            y2="34.9081413"
                             id="Line-2-Copy-5"
                             stroke="#445278"
-                            strokeWidth="5"
-                            strokeLinecap="round"
+                            stroke-width="5"
+                            stroke-linecap="round"
                         ></line>
                         <line
-                            x1="318.999399"
-                            y1="18.9693804"
-                            x2="325.910697"
-                            y2="25.9081413"
+                            x1="334.581098"
+                            y1="21.9693804"
+                            x2="341.492396"
+                            y2="28.9081413"
                             id="Line-2-Copy-5"
                             stroke="#445278"
-                            strokeWidth="5"
-                            strokeLinecap="round"
+                            stroke-width="5"
+                            stroke-linecap="round"
                         ></line>
                         <line
-                            x1="329.045982"
-                            y1="42.0629285"
-                            x2="341.045982"
-                            y2="48.0629285"
+                            x1="348"
+                            y1="50"
+                            x2="348.272991"
+                            y2="63.7185358"
                             id="topleg3"
                             stroke="#445278"
-                            strokeWidth="5"
-                            strokeLinecap="round"
+                            stroke-width="5"
+                            stroke-linecap="round"
                         ></line>
                         <line
-                            x1="342"
-                            y1="50.0081588"
-                            x2="342.5"
-                            y2="63.5"
+                            x1="348.163504"
+                            y1="58.9339173"
+                            x2="348.663504"
+                            y2="72.4257585"
                             id="bottomleg3"
                             stroke="#445278"
-                            strokeWidth="5"
-                            strokeLinecap="round"
+                            stroke-width="5"
+                            stroke-linecap="round"
+                        ></line>
+                        <line
+                            x1="342.613504"
+                            y1="49.1092679"
+                            x2="342.386496"
+                            y2="62.3278037"
+                            id="topleg3"
+                            stroke="#445278"
+                            stroke-width="5"
+                            stroke-linecap="round"
+                        ></line>
+                        <line
+                            x1="342.163504"
+                            y1="58.9339173"
+                            x2="342.663504"
+                            y2="72.4257585"
+                            id="bottomleg3"
+                            stroke="#445278"
+                            stroke-width="5"
+                            stroke-linecap="round"
                         ></line>
                         <ellipse
                             id="Oval"
                             fill="#445278"
-                            cx="329.5"
-                            cy="12"
+                            cx="345.5"
+                            cy="17"
                             rx="7.5"
                             ry="7"
                         ></ellipse>
                         <rect
                             id="Rectangle"
                             fill="#445278"
-                            x="324"
-                            y="19"
+                            x="340"
+                            y="25"
                             width="10"
                             height="26"
                             rx="5"
@@ -316,9 +336,9 @@ const Header = (props) => {
                             y2="63.6389925"
                             id="Line"
                             stroke="#666A74"
-                            strokeWidth="3"
-                            strokeLinecap="square"
-                            strokeLinejoin="round"
+                            stroke-width="3"
+                            stroke-linecap="square"
+                            stroke-linejoin="round"
                         ></line>
                         <line
                             x1="368.926724"
@@ -327,9 +347,9 @@ const Header = (props) => {
                             y2="63.6389925"
                             id="Line"
                             stroke="#666A74"
-                            strokeWidth="3"
-                            strokeLinecap="square"
-                            strokeLinejoin="round"
+                            stroke-width="3"
+                            stroke-linecap="square"
+                            stroke-linejoin="round"
                         ></line>
                         <line
                             x1="374.926724"
@@ -338,9 +358,9 @@ const Header = (props) => {
                             y2="63.6389925"
                             id="Line"
                             stroke="#666A74"
-                            strokeWidth="3"
-                            strokeLinecap="square"
-                            strokeLinejoin="round"
+                            stroke-width="3"
+                            stroke-linecap="square"
+                            stroke-linejoin="round"
                         ></line>
                         <line
                             x1="380.926724"
@@ -349,14 +369,14 @@ const Header = (props) => {
                             y2="63.6389925"
                             id="Line"
                             stroke="#666A74"
-                            strokeWidth="3"
-                            strokeLinecap="square"
-                            strokeLinejoin="round"
+                            stroke-width="3"
+                            stroke-linecap="square"
+                            stroke-linejoin="round"
                         ></line>
                         <circle
                             id="Oval"
                             stroke="#33353B"
-                            strokeWidth="2"
+                            stroke-width="2"
                             cx="362"
                             cy="72"
                             r="3"
@@ -364,7 +384,7 @@ const Header = (props) => {
                         <circle
                             id="Oval"
                             stroke="#33353B"
-                            strokeWidth="2"
+                            stroke-width="2"
                             cx="382"
                             cy="72"
                             r="3"
@@ -372,9 +392,9 @@ const Header = (props) => {
                         <polyline
                             id="Path"
                             stroke="#666A74"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
                             points="351 48 354.766318 48 356.398184 50.2965116 359.092968 65 384.865412 65 389 50.2965116 357.432818 50.2965116"
                         ></polyline>
                     </g>

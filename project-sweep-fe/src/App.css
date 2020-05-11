@@ -42,7 +42,7 @@ h1 {
     max-width: 100%;
 }
 
-#bottomleg3 {
+/* #bottomleg3 {
     animation: bottomleg3 2s linear 0s infinite;
     transform-origin: left;
     transform-box: fill-box;
@@ -57,7 +57,7 @@ h1 {
     }
     100% {
     }
-}
+} */
 
 h2 {
     font-size: 28px;
@@ -93,7 +93,7 @@ h2 {
     background-color: #faf3dd;
     align-items: center;
     border: 20px solid #faf3dd;
-    box-shadow: gray -5px 5px 5px;
+
     min-height: 400px;
 }
 
@@ -297,7 +297,6 @@ a {
 }
 
 .supermarketButton {
-    text-align: left;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -318,4 +317,15 @@ a {
 
 .MuiFormControl-root {
     width: 200px;
+}
+
+.supermarketcard {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.MuiButtonBase-root.button {
+    width: 100%;
 }
