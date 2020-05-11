@@ -16,7 +16,6 @@ class SupermarketsMap extends Component {
     componentDidMount() {
         this.setState({ isLoading: false })
     }
-
     render() {
         const { isLoading } = this.state
 

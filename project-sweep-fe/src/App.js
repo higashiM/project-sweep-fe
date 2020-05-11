@@ -33,9 +33,34 @@ class App extends Component {
 
     componentDidMount() {
         api.getProducts().then((data) => {
-            this.setState({ products: data, isLoading: false })
+            this.setState({ products: data }, this.setLocation())
         })
     }
+
+    setLocation = () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const latlng = [
+                    position.coords.latitude,
+                    position.coords.longitude,
+                ]
+
+                this.setState({ userLocation: latlng, isloading: false })
+            },
+            (error) => {
+                alert(
+                    'location not found defaulting home to NC HQ: lon: -2.24 lat: 53.47'
+                )
+                console.log(error)
+                this.setState({
+                    userLocation: [53.47, -2.0665093],
+                    isloading: false,
+                })
+            },
+            { timeout: 5000 }
+        )
+    }
+
     componentDidUpdate() {
         // Remember state for the next mount
         localStorage.setItem('appState', JSON.stringify(this.state))

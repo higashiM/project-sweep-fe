@@ -48,6 +48,7 @@ export default class SupermarketList extends Component {
                         supermarkets={supermarkets}
                         handleClick={this.handleClick}
                         listItems={listItems}
+                        userLocation={userLocation}
                     />
                 ) : (
                     supermarkets
