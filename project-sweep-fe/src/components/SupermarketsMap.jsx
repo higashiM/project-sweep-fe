@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import { geolocated } from 'react-geolocated'
 import L from 'leaflet'
 import { Link } from '@reach/router'
+import { Button } from '@material-ui/core'
 
 L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.5.0/dist/images/'
 
@@ -66,18 +67,24 @@ class SupermarketsMap extends Component {
                                     key={supermarket._id}
                                 >
                                     <Popup>
-                                        <button>
-                                            <Link
-                                                onClick={() =>
-                                                    this.props.handleClick(
-                                                        supermarket
-                                                    )
-                                                }
-                                                to={nextLink}
-                                            >
-                                                {supermarket.name}
-                                            </Link>
-                                        </button>
+                                        <Link
+                                            onClick={() =>
+                                                this.props.handleClick(
+                                                    supermarket
+                                                )
+                                            }
+                                            to={nextLink}
+                                        >
+                                            <div className="button">
+                                                <Button
+                                                    className="button"
+                                                    variant="contained"
+                                                    color="primary"
+                                                >
+                                                    {supermarket.name}{' '}
+                                                </Button>
+                                            </div>
+                                        </Link>
                                     </Popup>
                                 </Marker>
                             )

@@ -94,20 +94,23 @@ export default class SupermarketList extends Component {
                                         to={nextLink}
                                     >
                                         <Button
+                                            className="button"
                                             variant="contained"
                                             color="primary"
                                         >
-                                            <div className="superMarketName">
-                                                {supermarket.name}
-                                            </div>
-                                            <div>
-                                                {`Distance: ${distance(
-                                                    userLocation[0],
-                                                    userLocation[1],
-                                                    supermarket.location[0],
-                                                    supermarket.location[1],
-                                                    'K'
-                                                ).toFixed(2)}km`}
+                                            <div className="supermarketcard">
+                                                <div className="superMarketName">
+                                                    {supermarket.name}
+                                                </div>
+                                                <div>
+                                                    {`Distance: ${distance(
+                                                        userLocation[0],
+                                                        userLocation[1],
+                                                        supermarket.location[0],
+                                                        supermarket.location[1],
+                                                        'K'
+                                                    ).toFixed(2)}km`}
+                                                </div>
                                             </div>
                                         </Button>
                                     </Link>
