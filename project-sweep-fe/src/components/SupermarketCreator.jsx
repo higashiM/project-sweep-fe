@@ -51,6 +51,7 @@ export class SupermarketCreator extends Component {
             categoryLookup,
         } = this.state
         let categoryLookupArr = Object.entries(categoryLookup)
+        console.log(location)
 
         return (
             <main className="supermarketCreatorContainer">
@@ -207,9 +208,9 @@ export class SupermarketCreator extends Component {
                                         1: { type: 'tl', x: 0, y: 0, num: 1 },
                                         2: { type: 'tm', x: 1, y: 0, num: 2 },
                                         3: { type: 'tr', x: 2, y: 0, num: 3 },
-                                        4: { type: 'cl', x: 3, y: 0, num: 4 },
-                                        5: { type: 'cm', x: 4, y: 0, num: 5 },
-                                        6: { type: 'cr', x: 5, y: 0, num: 6 },
+                                        4: { type: 'cl', x: 0, y: 1, num: 4 },
+                                        5: { type: 'cm', x: 1, y: 1, num: 5 },
+                                        6: { type: 'cr', x: 2, y: 1, num: 6 },
                                     },
                                     layout: [
                                         [1, 2, 3],
@@ -241,35 +242,37 @@ export class SupermarketCreator extends Component {
         api.getLongLat(location)
             .then((res) => {
                 console.log(res)
-                newLocation = res
+                newLocation = [res[1], res[0]]
                 return newLocation
             })
             .then((newLocation) => {
-                api.postSupermarkets(
-                    name,
-                    aisleInfo,
-                    categoryLookup,
-                    layout,
-                    newLocation
-                ).then(() => {
-                    this.setState({
-                        name: '',
-                        categoryLookup: {},
-                        aisleInfo: {
-                            1: { type: 'tl', x: 0, y: 0, num: 1 },
-                            2: { type: 'tm', x: 1, y: 0, num: 2 },
-                            3: { type: 'tr', x: 2, y: 0, num: 3 },
-                            4: { type: 'cl', x: 3, y: 0, num: 4 },
-                            5: { type: 'cm', x: 4, y: 0, num: 5 },
-                            6: { type: 'cr', x: 5, y: 0, num: 6 },
-                        },
-                        layout: [
-                            [1, 2, 3],
-                            [4, 5, 6],
-                        ],
-                        location: '',
+                if (categoryLookup) {
+                    api.postSupermarkets(
+                        name,
+                        aisleInfo,
+                        categoryLookup,
+                        layout,
+                        newLocation
+                    ).then(() => {
+                        this.setState({
+                            name: '',
+                            categoryLookup: {},
+                            aisleInfo: {
+                                1: { type: 'tl', x: 0, y: 0, num: 1 },
+                                2: { type: 'tm', x: 1, y: 0, num: 2 },
+                                3: { type: 'tr', x: 2, y: 0, num: 3 },
+                                4: { type: 'cl', x: 0, y: 1, num: 4 },
+                                5: { type: 'cm', x: 1, y: 1, num: 5 },
+                                6: { type: 'cr', x: 2, y: 1, num: 6 },
+                            },
+                            layout: [
+                                [1, 2, 3],
+                                [4, 5, 6],
+                            ],
+                            location: '',
+                        })
                     })
-                })
+                }
             })
     }
     handleChange = (event) => {
