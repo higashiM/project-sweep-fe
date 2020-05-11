@@ -17,13 +17,25 @@ const request = axios.create({
 
 export const getProducts = () => {
     return request.get('/products').then(({ data }) => {
-        data.products.forEach(
+        console.log(data.products)
+        const productsData = data.products
+        productsData.forEach(
             (product) =>
                 (product.foodName =
                     product.foodName.charAt(0).toUpperCase() +
                     product.foodName.substring(1).toLowerCase())
         )
-        return data.products
+
+        console.log(productsData[0].foodName)
+        const sortedData = productsData.sort((a, b) => {
+            if (a.foodName > b.foodName) {
+                return 1
+            } else if (b.foodName > a.foodName) {
+                return -1
+            }
+        })
+
+        return sortedData
     })
 }
 
