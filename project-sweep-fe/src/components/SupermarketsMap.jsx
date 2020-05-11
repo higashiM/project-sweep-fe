@@ -1,9 +1,12 @@
 import React, { Component, createRef } from 'react'
 import Loader from './Loader'
-// import * as api from '../utils/api'
-import { Map, TileLayer, Marker } from 'react-leaflet'
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { geolocated } from 'react-geolocated'
+import L from 'leaflet'
+import { Link } from '@reach/router'
+
+L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.5.0/dist/images/'
 
 class SupermarketsMap extends Component {
     state = { isLoading: true }
@@ -13,14 +16,7 @@ class SupermarketsMap extends Component {
         this.setState({ isLoading: false })
     }
 
-    handleClick = (supermarket) => {
-        this.props.setSupermarket(supermarket)
-    }
-
     render() {
-        console.log(this.props)
-        console.log(this.props.coords)
-
         const { isLoading } = this.state
 
         if (isLoading) return <Loader />
@@ -36,7 +32,7 @@ class SupermarketsMap extends Component {
                         }}
                         length={4}
                         ref={this.mapRef}
-                        zoom={15}
+                        zoom={12}
                     >
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -47,7 +43,45 @@ class SupermarketsMap extends Component {
                                 this.props.coords.latitude,
                                 this.props.coords.longitude,
                             ]}
-                        />
+                        >
+                            <Popup>You are here</Popup>
+                        </Marker>
+
+                        {this.props.supermarkets.map((supermarket) => {
+                            const missingCategoryItems = this.props.listItems.filter(
+                                (item) => {
+                                    return (
+                                        Object.keys(
+                                            supermarket.categoryLookup
+                                        ).indexOf(item.category.name) === -1
+                                    )
+                                }
+                            )
+                            const nextLink = missingCategoryItems.length
+                                ? '/itemcheck'
+                                : '/shopmap'
+                            return (
+                                <Marker
+                                    position={supermarket.location}
+                                    key={supermarket._id}
+                                >
+                                    <Popup>
+                                        <button>
+                                            <Link
+                                                onClick={() =>
+                                                    this.props.handleClick(
+                                                        supermarket
+                                                    )
+                                                }
+                                                to={nextLink}
+                                            >
+                                                {supermarket.name}
+                                            </Link>
+                                        </button>
+                                    </Popup>
+                                </Marker>
+                            )
+                        })}
                     </Map>
                 ) : (
                     <Loader />
