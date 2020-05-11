@@ -20,7 +20,8 @@ export default class ShopMap extends Component {
         const ai = this.props.supermarket.aisleInfo
         const layout = this.props.supermarket.layout
         const pathOfAisles = genMap.genPath(arrayAisles, layout, ai)
-        const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles)
+
+        const aislesToVisit = genMap.assignSVGtoPath(pathOfAisles, layout)
 
         const svgPath = genMap.genPathSVG(
             pathOfAisles,
@@ -75,8 +76,7 @@ export default class ShopMap extends Component {
         const listItems = this.props.listItems
         const ai = this.props.supermarket.aisleInfo
         const layout = this.props.supermarket.layout
-        console.log(svgPath, aislesToVisit, aisleListCat)
-        console.log(this.props.supermarket.layout)
+        // console.log(svgPath, aislesToVisit, aisleListCat)
 
         if (isLoading | isMapLoading) {
             return <Loader />
@@ -84,7 +84,7 @@ export default class ShopMap extends Component {
         return (
             <div className="shopMap">
                 <h2 className="mapTitle">
-                    Your Optimal Route @ {supermarketname}
+                    Your Shopping Route @ {supermarketname}
                     <p className="mapHelp">
                         click on a waypoint to view details
                     </p>

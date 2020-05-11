@@ -32,10 +32,8 @@ export default class SupermarketList extends Component {
     }
 
     render() {
-        console.log(this.state.supermarkets)
         const { userLocation, listItems } = this.props
         const { supermarkets, isLoading, showMap } = this.state
-        console.log(listItems)
         if (isLoading) return <Loader />
         return (
             <div className="notepad">
@@ -46,7 +44,11 @@ export default class SupermarketList extends Component {
                 />
                 <h2>Choose your supermarket:</h2>
                 {showMap ? (
-                    <SupermarketsMap supermarkets={supermarkets} />
+                    <SupermarketsMap
+                        supermarkets={supermarkets}
+                        handleClick={this.handleClick}
+                        listItems={listItems}
+                    />
                 ) : (
                     supermarkets
                         .sort((a, b) => {
@@ -67,7 +69,6 @@ export default class SupermarketList extends Component {
                             return a - b
                         })
                         .map((supermarket) => {
-                            console.log(this.props)
                             const missingCategoryItems = listItems.filter(
                                 (item) => {
                                     return (
@@ -80,9 +81,11 @@ export default class SupermarketList extends Component {
                             const nextLink = missingCategoryItems.length
                                 ? '/itemcheck'
                                 : '/shopmap'
-                            console.log(nextLink)
                             return (
-                                <div className="button supermarketButton">
+                                <div
+                                    className="button supermarketButton"
+                                    key={supermarket._id}
+                                >
                                     <Link
                                         onClick={() =>
                                             this.handleClick(supermarket)

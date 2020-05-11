@@ -72,7 +72,7 @@ export const genPath = (aislesToVisit, layout, ai) => {
         aislePath
     ) => {
         const ref = 'xy'.concat(x, y)
-        console.log(goingUp, x, y, aislePath, columnsToTraverse, aisleTickOff)
+        //console.log(goingUp, x, y, aislePath, columnsToTraverse, aisleTickOff)
 
         //add current location to the path - if aisle need to visit delete from checklist
         if (aisleTickOff[ref]) {
@@ -125,7 +125,7 @@ export const genPath = (aislesToVisit, layout, ai) => {
                     y === maxRow &&
                     goingUp)
             ) {
-                console.log('switch')
+                //console.log('switch')
                 goingUp = !goingUp
             }
 
@@ -180,7 +180,8 @@ export const genPath = (aislesToVisit, layout, ai) => {
     )
 }
 
-export const assignSVGtoPath = (aislePath, maxRow) => {
+export const assignSVGtoPath = (aislePath, layout) => {
+    const maxY = layout.length - 1
     //object look up constructed for rendering
     const aislestoVisit = {}
 
@@ -276,6 +277,12 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
         ) {
             exit = turningUpLookup[nextY - currY + 1][nextX - currX + 1]
         }
+        //  fixes traversing exception
+
+        if (currY === maxY && nextY === currY && nextPos) {
+            exit = traversingBottom[nextY - currY + 1][nextX - currX + 1]
+        }
+
         //execute turns at top of column if next two same level or going down
 
         /*         if (nextNext) {
@@ -338,15 +345,13 @@ export const assignSVGtoPath = (aislePath, maxRow) => {
 
         if (waypoint) aislestoVisit.waypoints.push(waypoint)
     }
-    console.log(aislePath, aislestoVisit)
+    //  console.log(aislePath, aislestoVisit)
 
     return aislestoVisit
 }
 
-export const genPathSVG = (path, aislestoVisit, aisleMap, layoutLength) => {
-    //  console.log(layoutLength)
-
-    const moveY = -80 + (path[1][1] - (layoutLength - 1)) * 160
+export const genPathSVG = (path, aislestoVisit, aisleMap, layout) => {
+    const moveY = -80 + (path[1][1] - (layout.length - 1)) * 160
     const moveX = 80 * path[1][0]
 
     let concatPath = ' '
@@ -364,6 +369,6 @@ export const genPathSVG = (path, aislestoVisit, aisleMap, layoutLength) => {
 
         concatPath = concatPath.concat(addPath)
     }
-    // console.log(concatPath)
+    //console.log(concatPath)
     return concatPath
 }
