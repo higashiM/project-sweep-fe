@@ -45,7 +45,7 @@ class App extends Component {
                     position.coords.longitude,
                 ]
 
-                this.setState({ userLocation: latlng, isloading: false })
+                this.setState({ userLocation: latlng, isLoading: false })
             },
             (error) => {
                 alert(
@@ -54,7 +54,7 @@ class App extends Component {
                 console.log(error)
                 this.setState({
                     userLocation: [53.47, -2.0665093],
-                    isloading: false,
+                    isLoading: false,
                 })
             },
             { timeout: 5000 }

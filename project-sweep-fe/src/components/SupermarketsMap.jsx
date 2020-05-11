@@ -32,7 +32,7 @@ class SupermarketsMap extends Component {
                         }}
                         length={4}
                         ref={this.mapRef}
-                        zoom={12}
+                        zoom={14}
                     >
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
