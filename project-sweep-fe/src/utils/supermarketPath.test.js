@@ -32,13 +32,13 @@ const aisleInfo = {
     18: { type: 'cr', x: 5, y: 2, num: 18 },
 }
 
-test(`0 - createMap path [7,9,15,4,6,18] that ends in the right place, goes through all waypoints and generates an pathtext`, () => {
-    const input = [15, 4, 9]
+test(`x - createMap path [9,11,15,15,9,1,9,6,13] that ends in the right place, goes through all waypoints and generates an pathtext`, () => {
+    const input = [9, 11, 15, 15, 9, 1, 9, 6, 13]
     const path = genMap.genPath(input, shoplayout, aisleInfo)
-    const route = genMap.assignSVGtoPath(path)
-
+    const route = genMap.assignSVGtoPath(path, shoplayout)
     const svgPath = genMap.genPathSVG(path, route, shoplayout, aisleInfo)
 
+    console.log(path, route, svgPath)
     const teststring = `M45 ${
         200 + (shoplayout.length - 2) * 160 + 165
     } ${svgPath} `
@@ -47,21 +47,35 @@ test(`0 - createMap path [7,9,15,4,6,18] that ends in the right place, goes thro
     const point = properties.getPointAtLength(length)
     const lastStopX = path[path.length - 2][0]
     const lastStopY = path[path.length - 2][1]
+
     expect(point.x).toBe(80 * lastStopX + 45)
     expect(point.y).toBeGreaterThanOrEqual(
         200 + (lastStopY - 1) * 160 + 85 - 20
     )
     expect(point.y).toBeLessThanOrEqual(200 + (lastStopY - 1) * 160 + 85 + 20)
+
+    for (const key in route) {
+        if (key !== 'waypoints') {
+            const element = route[key]
+            expect(typeof element.path).toBe('string')
+        }
+    }
+
+    const waypoints = path.map((aisle) => aisle[2])
+
+    input.forEach((aisle) => {
+        expect(waypoints.includes(aisle)).toBe(true)
+    })
 })
 
-for (let i = 1; i < 1000; i++) {
+for (let i = 1; i < 2; i++) {
     const numVisits = Math.ceil(Math.random() * 16)
     const inputArray = []
     inputArray.length = numVisits
     inputArray.fill(0)
     const input = inputArray.map((num) => Math.ceil(Math.random() * 16))
     const path = genMap.genPath(input, shoplayout, aisleInfo)
-    const route = genMap.assignSVGtoPath(path)
+    const route = genMap.assignSVGtoPath(path, shoplayout)
     const svgPath = genMap.genPathSVG(path, route, shoplayout, aisleInfo)
 
     const teststring = `M45 ${

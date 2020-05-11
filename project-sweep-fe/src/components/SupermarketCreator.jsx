@@ -3,6 +3,7 @@ import * as api from '../utils/api'
 import CategoryAisleSelectCard from './CategoryAisleSelectCard'
 import Button from '@material-ui/core/Button'
 import sortAisleItems from '../utils/sortAisleInput'
+import SupermarketLayout from './SupermarketLayout'
 const typeAssigner = require('../utils/typeAssigner')
 
 export class SupermarketCreator extends Component {
@@ -23,9 +24,9 @@ export class SupermarketCreator extends Component {
             1: { type: 'tl', x: 0, y: 0, num: 1 },
             2: { type: 'tm', x: 1, y: 0, num: 2 },
             3: { type: 'tr', x: 2, y: 0, num: 3 },
-            4: { type: 'cl', x: 3, y: 0, num: 4 },
-            5: { type: 'cm', x: 4, y: 0, num: 5 },
-            6: { type: 'cr', x: 5, y: 0, num: 6 },
+            4: { type: 'cl', x: 0, y: 1, num: 4 },
+            5: { type: 'cm', x: 1, y: 1, num: 5 },
+            6: { type: 'cr', x: 2, y: 1, num: 6 },
         },
     }
     componentDidMount() {
@@ -50,7 +51,7 @@ export class SupermarketCreator extends Component {
             categoryLookup,
         } = this.state
         let categoryLookupArr = Object.entries(categoryLookup)
-        console.log(categoryLookupArr)
+        console.log(aisleInfo, layout)
         return (
             <main className="supermarketCreatorContainer">
                 <h2>Supermarket input form</h2>
@@ -141,6 +142,8 @@ export class SupermarketCreator extends Component {
                             </div>
                         </div>
                     </section>
+                    <SupermarketLayout layout={layout} aisleInfo={aisleInfo} />
+
                     <h4 className="formsubtitle">
                         Assign Categories To Aisles
                     </h4>

@@ -16,17 +16,18 @@ class AisleMap extends Component {
             thisAisle = 'start'
         }
         const pathOfAisles = this.props.pathMaps.pathOfAisles
-        const layout = this.props.pathMaps.layout
-        const svgSnip = this.svgSnip(pathOfAisles, thisAisle, nextAisle)
 
-        const newAislesToVisit = genMap.assignSVGtoPath(svgSnip)
+        const layout = this.props.pathMaps.layout
+
+        const svgSnip = this.svgSnip(pathOfAisles, thisAisle, nextAisle)
+        const newAislesToVisit = genMap.assignSVGtoPath(svgSnip, layout)
         const newSVGPath = genMap.genPathSVG(
             svgSnip,
             newAislesToVisit,
             true,
-            layout.length
+            layout
         )
-        console.log(newAislesToVisit, svgSnip)
+        //console.log(newAislesToVisit, svgSnip, layout)
 
         this.setState({ newAislesToVisit, newSVGPath, isloading: false })
     }
@@ -59,7 +60,7 @@ class AisleMap extends Component {
                     'finish',
                 ]
                 pathSnip.push(finish)
-                console.log(pathSnip)
+                //console.log(pathSnip)
                 return pathSnip
             }
         }
