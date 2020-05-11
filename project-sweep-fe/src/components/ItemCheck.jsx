@@ -67,7 +67,7 @@ class ItemCheck extends React.Component {
                     items.
                 </p>
 
-                <p>Please reassign based on categories in this supermarket.</p>
+                <p>Please reassign or choose "go shop..." to skip.</p>
 
                 {listItems
                     .filter((item) => {

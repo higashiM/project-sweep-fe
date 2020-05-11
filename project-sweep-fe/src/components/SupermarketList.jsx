@@ -83,13 +83,16 @@ export default class SupermarketList extends Component {
                             console.log(nextLink)
                             return (
                                 <div className="button supermarketButton">
-                                    <Button variant="contained" color="primary">
-                                        <Link
-                                            onClick={() =>
-                                                this.handleClick(supermarket)
-                                            }
-                                            key={supermarket._id}
-                                            to={nextLink}
+                                    <Link
+                                        onClick={() =>
+                                            this.handleClick(supermarket)
+                                        }
+                                        key={supermarket._id}
+                                        to={nextLink}
+                                    >
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
                                         >
                                             <div className="superMarketName">
                                                 {supermarket.name}
@@ -103,8 +106,8 @@ export default class SupermarketList extends Component {
                                                     'K'
                                                 ).toFixed(2)}km`}
                                             </div>
-                                        </Link>
-                                    </Button>
+                                        </Button>
+                                    </Link>
                                 </div>
                             )
                         })
