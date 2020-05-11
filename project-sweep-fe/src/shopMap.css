@@ -9,6 +9,18 @@
     border: 20px solid #faf3dd;
     box-shadow: gray -5px 5px 5px;
 }
+
+.shopMap_creator {
+    width: 300px;
+    align-items: center;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #faf3dd;
+    align-items: center;
+    border: 20px solid #faf3dd;
+}
+
 .mapHelp {
     font-size: large;
 }
