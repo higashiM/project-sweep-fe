@@ -12,9 +12,10 @@ import {
     Trolley,
 } from '../resources/maplayout/index'
 import { showAisle } from '../resources/maplayout/pathsSVG'
+import Waypoint from './Waypoint'
 
 export default function SupermarketLayout(props) {
-    const { layout, aisleInfo } = props
+    const { layout, aisleInfo, categoryLookup } = props
 
     return (
         <svg
@@ -95,7 +96,28 @@ export default function SupermarketLayout(props) {
                 const posx = x * 80
 
                 const xy = 'xy' + x.toString() + y.toString()
-                return showAisle(aisleNum, posx + 45, posy + 80)
+                return (
+                    <>
+                        {showAisle(aisleNum, posx + 45, posy + 80)}
+                        <Waypoint
+                            cy={posy + 80}
+                            cx={posx}
+                            num={aisleNum}
+                            food={
+                                categoryLookup
+                                    ? Object.entries(categoryLookup)
+                                          .filter(
+                                              (entry) =>
+                                                  entry[1] ===
+                                                  aisleNum.toString()
+                                          )
+                                          .map((entry) => entry[0])
+                                    : ['none']
+                            }
+                            listItems={['none']}
+                        />
+                    </>
+                )
             })}
             <Trolley x={15} y={200 + (layout.length - 2) * 160 + 120} />
         </svg>

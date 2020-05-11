@@ -51,7 +51,7 @@ export class SupermarketCreator extends Component {
             categoryLookup,
         } = this.state
         let categoryLookupArr = Object.entries(categoryLookup)
-        console.log(aisleInfo, layout)
+
         return (
             <main className="supermarketCreatorContainer">
                 <h2>Supermarket input form</h2>
@@ -142,7 +142,11 @@ export class SupermarketCreator extends Component {
                             </div>
                         </div>
                     </section>
-                    <SupermarketLayout layout={layout} aisleInfo={aisleInfo} />
+                    <SupermarketLayout
+                        layout={layout}
+                        aisleInfo={aisleInfo}
+                        categoryLookup={categoryLookup}
+                    />
 
                     <h4 className="formsubtitle">
                         Assign Categories To Aisles
